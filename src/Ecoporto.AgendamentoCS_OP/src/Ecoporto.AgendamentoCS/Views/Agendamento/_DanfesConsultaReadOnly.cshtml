@@ -1,0 +1,30 @@
+﻿@model  IEnumerable<Ecoporto.AgendamentoCS.Models.NotaFiscal>
+
+<div class="table-responsive">
+    <table id="tblDanfes" class="table table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="td-icone">&nbsp;</th>
+                <th scope="col">Reserva</th>
+                <th scope="col">Item</th>
+                <th scope="col">DANFE</th>
+                <th scope="col">CFOP</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="td-icone">
+                    <img src="@Url.Content("~/Content/img/icone-nf.png")" />
+                </td>
+                <td>@item.Reserva</td>
+                <td>@item.BookingCsItemId</td>
+                <td>@item.Danfe</td>
+                <td>@item.CFOP</td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

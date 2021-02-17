@@ -1,0 +1,401 @@
+﻿html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, 
+blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, 
+img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, 
+dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption {margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}
+body{line-height: 1;}
+ol,ul{list-style: none;}
+blockquote,q{quotes: none;}
+blockquote:before, blockquote:after,q:before, q:after{content: '';content: none;}
+:focus {outline: 0;}
+ins{text-decoration: none;}
+del {text-decoration: line-through;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+body
+{       
+    font:normal 11px Verdana;
+}
+
+/* INÍCIO DO GERAL */
+.Geral
+{
+    width:100%;
+    height:auto;
+    overflow:hidden;
+}
+/* FIM DO GERAL */
+
+/* INÍCIO DO TOP */
+.BgTop
+{
+    display:block;
+    height:100px;
+    width:auto;
+}
+    .Header
+    {
+        width:100%;
+        height:100px;
+        padding:5px;
+        position:relative;
+    }
+        .Header h1
+        {
+            background: url("img/LogoTop.png") no-repeat scroll 0 0 transparent;
+            display:block;
+            width:169px;
+            height:88px;
+            margin-top:3px;
+            *margin-top:8px;
+            cursor:pointer;
+        }
+            .Header h1 a
+			{
+                display:block;
+                width:155px;
+                height:84px;
+                text-indent:-9999px;
+            }
+/* FIM DO TOP */                
+
+/* INÍCIO DO MENU */
+.Menu
+{
+    color:white;
+    height:25px;
+    line-height:25px;
+    margin-top:1px;
+    width:950px;
+    z-index:1;
+}
+    ul.menu  {margin:0 10px;}
+
+        ul.menu ul{
+	        margin: 0;
+	        padding: 0;
+    	    width: 233px; 
+	        text-decoration:none;
+        }
+        
+            ul.menu li
+            {
+	        position: relative;
+	        z-index:2;
+	        list-style: none;
+	        float:left;
+	        padding:0 6px;
+	        margin:0 auto;
+	        height:24px;
+	        *height:25px;
+	        *top:-1px;
+            }
+                ul.menu li a
+                {
+	                display: block;
+	                text-decoration: none;
+	                color: #fff;
+	                font-weight:bold;
+	                height:23px;
+	                line-height:26px;
+	                *line-height:25px;
+	                padding:0 15px;
+                }
+	                ul.menu li ul li a
+	                {
+	                    font-size:12px;
+	                    font-weight:normal;
+	                    color:#fff !important;
+	                }
+	                ul.menu li ul li ul li a
+	                {
+		                display: block;
+		                text-decoration: none;
+		                font-size:11px;
+		                color: #fff;
+		                padding: 5px;
+		                border-bottom: 0;
+	                }
+
+/* Fix IE. Hide from IE Mac \*/
+* html ul.menu li { float: left; height: 2%; }
+* html ul.menu li a { height: 2%; }
+/* End */
+
+    ul.menu ul {
+	    position:absolute;
+	    display: none;
+	    left:-1px; /* Set 1px less than menu width */
+	    top:24px;
+	    background-color:#f8ffde;
+	    border-bottom:1px solid White;
+	    border-left:1px solid White;
+	    border-right:1px solid White;
+        /*border-top:1px solid White;*/
+    }
+        ul.menu ul ul
+        {
+	        position:absolute;
+	        display:none;
+	        left:220px; /* Set 1px less than menu width */
+	        top:0px;
+        }
+    
+ul.menu li a:hover {color:#002d52; background:#f8ffde;top:20px;}
+ul.menu li ul li ul li ul li a,
+ul.menu li ul li ul li a,
+ul.menu li ul li a {margin:0; padding:0 0 0 10px; color:#fff; font-size:10px; height:24px; line-height:24px; background:none !important;color:#697810 !important;} /* Sub Menu Styles */
+ul.menu li ul li a:hover {background:none !important; color:#ff6600 !important;} /* Sub Menu Styles */
+ul.menu li ul li{clear:both; width:220px; margin-top:0 !important; height:24px !important; line-height:24px;}
+ul.menu li ul li:hover{background-color:#f8ffde;}
+ul.menu li:hover ul ul,
+ul.menu li:hover ul ul ul,
+ul.menu li:hover ul ul ul ul,
+ul.menu li.over ul ul,
+ul.menu li.over ul ul ul,
+ul.menu li.over ul ul ul ul {display: none;} /* Hide sub-menus initially */
+ul.menu li:hover ul,
+ul.menu li li:hover ul,
+ul.menu li li li:hover ul,
+ul.menu li li li li:hover ul,
+ul.menu li.over ul,
+ul.menu li li.over ul,
+ul.menu li li li.over ul,
+ul.menu li li li li.over ul { display: block; } /* The magic */
+ul.menu li.menuparent:hover,
+ul.menu li.over 
+{
+	background-color:#f8ffde;
+	border-top:1px solid White;
+	border-left:1px solid White;
+	border-right:1px solid White;
+	padding:0 5px;
+}
+ul.menu li.menuparent:hover a {color:#002d52}
+ul.menu li.over a:link,
+ul.menu li.over a:visited,
+ul.menu li.over a:active,
+ul.menu li.over a:hover {color:#fff;}
+ul.menu ul li.menuparent:hover,
+ul.menu ul li.over {background-color: #e6f0ff;}
+/* FIM DO MENU */
+
+/* INÍCIO DO CONTEÚDO */ 
+.ContentPlaceHolder
+{
+    margin:0px 0px 10px 8px;
+}
+/* FIM DO CONTEÚDO */
+
+/* INÍCIO DO FOOTER */     
+.Footer
+{
+    background: url("img/BgFooter.gif") repeat scroll center top;
+    color:White;
+    height:5px;
+    clear:both;
+    padding:10px;
+    position:relative;
+}
+/* FIM DO FOOTER */  
+
+/* INÍCIO DO BOX */
+    .Box
+    {
+        width:auto;
+        height:auto;
+        position:relative;
+        overflow:hidden;
+    }
+        .Box .BoxTitle
+        {
+            background:url("img/bgTitle.png") no-repeat scroll 0 6px transparent;
+            width:auto;
+            height:28px;
+        }
+            .Box .BoxTitle label
+            {
+                font-size:12px;
+                font-weight:bold;
+                display:inline-block;
+                width:auto;
+                height:29px;
+                line-height:29px; 
+                float:left;
+                margin-left:25px;
+            }
+                        .Box .BoxTitle label img
+                        {
+                            vertical-align:2px;
+                            margin-right:2px;
+                        }
+            .Box span.BgBoxCanBottomRight
+            {
+                background:url("img/BgBoxCanBottomRight.gif") no-repeat scroll center 0 transparent;
+                width:8px;
+                height:16px;
+                display:inline-block;
+                position:absolute;
+                Right:0;
+                bottom:0;
+            }
+                            
+        .Box .BoxConteudo
+        {
+            width:auto;
+            position:relative;
+            top: 0px;
+            left: -1px;
+        }
+            .Box .BoxConteudo div.BdConteudo
+            {
+                padding:5px 15px;
+                display:inline-block;
+                
+            }
+/* FIM DO BOX */
+
+.ContentBoxFull
+{
+    width:100%;
+    height:auto;
+    float:left;
+}
+    .ContentBoxFull span.bgBoxUp
+    {
+        display:block;
+        width:100%;
+        height:19px;
+    }
+    .ContentBoxFull span.bgBoxBottom
+    {
+        background:url("img/bgBoxBottom.png") no-repeat scroll center 0 transparent;
+        display:block;
+        width:100%;
+        height:19px;
+    }
+
+
+.CorPadrao {
+    background: #002D52;
+}
+
+.autocomplete_completionListElement {
+border:solid 1px #444444;
+margin:0px;
+padding:2px;
+height: 100px;
+overflow:auto;
+background-color: #FFFFFF;
+}
+
+.autocomplete_listItem {
+color: #1C1C1C;
+font-size:11px;
+}
+
+.autocomplete_highlightedListItem {
+background-color: #ffc0c0;
+}
+
+.uppercase
+{
+    text-transform: uppercase;
+}
+
+@media print
+{
+    body{background: #FFF; color: #000; font: 12pt serif;}
+
+    .NoPrint {display: none;}
+    .BoxTitle label{font-size:20px;}
+    .ContentPlaceHolder { margin:0;}
+}
+
+body
+{
+    background:url("img/Bg.jpg") repeat-x  scroll 0 0;
+    color:#002342;
+    font:normal 11px Verdana;
+}
+
+/* INÍCIO MODAL POPUP */
+#ModalPopUpMask
+{
+  position:absolute;
+  left:0;
+  top:0;
+  background-color:#000;
+  display:none;
+  z-index:2;
+}
+.ModalPopUp
+{
+    background-color: #FFF;
+    position:fixed !important;
+    left:0;
+    top:0;
+    display:none;
+    z-index:10 !important;
+}
+.CloseModalPopUp{}
+/* FIM MODAL POPUP */
+
+
+/* INICIO BOX LOADING */
+#BoxLoading
+{
+    background-color: #FFF;
+    border: 2px solid #b3d800;
+    display: none;
+    height: 182px;
+    left: 50%;
+    margin-left: -155px;
+    margin-top: -91px;
+    position: fixed;
+    top: 50%;
+    width: 309px;
+    z-index: 999;
+    
+    box-shadow: 0 0 15px #999;
+    -moz-box-shadow: 0 0 15px #999;
+    -webkit-box-shadow: 0 0 15px #999;
+}
+    #BoxLoading span
+    {
+        background:url("images/BgLoading.gif") no-repeat scroll 0 0 transparent;
+        display:block;
+        height:95px;
+        line-height:130px;
+        margin:50px auto 0;
+        width:50px;
+    }
+  .modalBackground {
+            background-color: Gray;
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+
+        .pnlBackGround {
+            position: fixed;
+            text-align: center;
+            background-color: #FAFAD2;
+            border: solid 3px black;
+        }
+
+        #ModalPopUpMask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #000;
+            display: none;
+            z-index: 2;
+        }
+
+        .modalPopup {
+            background-color: #FFF;
+            position: fixed !important;
+            left: 0;
+            top: 0;
+            display: none;
+            z-index: 10 !important;
+        }

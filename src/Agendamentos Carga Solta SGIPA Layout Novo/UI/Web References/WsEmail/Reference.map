@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://10.1.50.4:9876/Email.svc?xsd=xsd2" filename="Email.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://10.1.50.4:9876/Email.svc?xsd=xsd0" filename="Email0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://10.1.50.4:9876/Email.svc?disco" filename="Email.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://10.1.50.4:9876/Email.svc?wsdl" filename="Email.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://10.1.50.4:9876/Email.svc?xsd=xsd1" filename="Email1.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

@@ -1,0 +1,41 @@
+﻿@using Ecoporto.Posicionamento.Config
+
+<header>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+
+                    @if (AppConfig.HabilitaMenuConteiner())
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Consultar", "AgendamentoConteiner")"><i class="fas fa-ship"></i>Contêiner</a>
+                        </li>
+                    }
+
+                    @if (AppConfig.HabilitaMenuCargaSolta())
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Consultar", "AgendamentoCargaSolta")"><i class="fas fa-boxes"></i>Carga Solta</a>
+                        </li>
+                    }
+
+                    @if (AppConfig.HabilitaMenuVeiculos())
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Consultar", "AgendamentoVeiculos")"><i class="fas fa-car"></i>Veículos</a>
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>

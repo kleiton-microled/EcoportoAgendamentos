@@ -1,0 +1,224 @@
+obter lotes para testes:
+
+select max(tiaid) from internet.tb_int_acesso 
+where tiacnpj in (select cgc from operador.tb_cad_transportadoras where autonum IN(
+ SELECT  TRANSPORTADORA                
+FROM   (SELECT E.TRANSPORTADORA,TD.descr                                        AS TIPO_DOCUMENTO 
+               , 
+               D.num_documento, 
+               To_char(A.dt_fim_periodo, 'DD/MM/YYYY HH24:MI') AS DATA_FREE_TIME 
+               , 
+               D.lote 
+               AS LOTE, 
+               C.numero, 
+               Min(F.averbou)                                  AS AVERBOU, 
+               Min(F.icms_sefaz)                               AS DI_ICMS_SEFAZ, 
+               Min(F.desembaracado)                            AS 
+               DI_DESEMBARACADA, 
+               CASE 
+                 WHEN Min(F.flag_certificado) = 0 THEN '---' 
+                 ELSE Min(F.mapa) 
+               END                                             AS 
+               MAPA_DE_MADEIRA, 
+               CASE 
+                 WHEN Min(F.forma_pagamento) = 3 THEN 'FAT' 
+                 ELSE Min(F.gr_paga) 
+               END                                             AS GR_PAGA, 
+               Min(F.siscarga)                                 AS SISCARGA, 
+               Min(F.bloqueio_bl)                              AS BLOQUEIO_BL, 
+               Min(F.bloqueio_cntr)                            AS BLOQUEIO_CNTR, 
+               Min(F.forma_pagamento)                          AS 
+               FORMA_PAGAMENTO, 
+               Min(F.flag_certificado)                         AS 
+               FLAG_CERTIFICADO, 
+               C.tipo_documento                                AS TIPO_DOC 
+        FROM   sgipa.tb_carga_solta A, 
+               sgipa.tb_bl C 
+               inner join operador.tb_patios P 
+                       ON C.patio = P.autonum, 
+               sgipa.tb_av_online D, 
+               sgipa.tb_av_online_transp E, 
+               sgipa.tb_tipos_documentos TD, 
+               sgipa.vw_etapas_av_bl_cntr F 
+        WHERE  A.bl = C.autonum 
+               AND C.autonum = F.lote 
+               AND C.flag_ativo = 1 
+               AND C.autonum = D.lote 
+               AND D.autonum = E.tb_av_online 
+               AND C.tipo_documento = TD.code 
+               AND A.flag_terminal = 1 
+               AND A.flag_historico = 0 
+               AND ( A.quantidade_real - Nvl((SELECT SUM(NF.qtde) 
+                                              FROM   sgipa.tb_ag_cs_nf NF, 
+                                                     sgipa.tb_ag_cs AG 
+                                              WHERE 
+                                         NF.autonum_agendamento = AG.autonum 
+                                         AND AG.autonum_transportadora > 0 
+                                         AND AG.autonum_veiculo > 0 
+                                         AND NF.autonum_cs = A.autonum), 0) > 0 
+                   ) 
+               AND C.patio <> 5 
+        GROUP  BY E.TRANSPORTADORA,TD.descr, 
+                  D.num_documento, 
+                  A.dt_fim_periodo, 
+                  D.lote, 
+                  C.tipo_documento, 
+                  C.numero) 
+WHERE  ( averbou = 'SIM' 
+         AND di_icms_sefaz = 'SIM' 
+         AND bloqueio_bl = 'NAO' 
+         AND bloqueio_cntr = 'NAO' 
+         AND di_desembaracada = 'SIM' 
+         AND siscarga = 'SIM' 
+         AND ( mapa_de_madeira = 'SIM' 
+                OR flag_certificado = 0 ) 
+         AND ( gr_paga = 'SIM' 
+                OR gr_paga = 'FAT' 
+                OR forma_pagamento = 3 ) 
+         AND ( tipo_doc < 7 
+                OR tipo_doc > 13 ) ) 
+        OR ( averbou = 'SIM' 
+             AND bloqueio_bl = 'NAO' 
+             AND bloqueio_cntr = 'NAO' 
+             AND ( gr_paga = 'SIM' 
+                    OR gr_paga = 'FAT' 
+                    OR forma_pagamento = 3 ) 
+             AND ( tipo_doc >= 7 
+                   AND tipo_doc <= 13 ) )  ))
+
+obter conteineres teste:
+
+select max(tiaid) from internet.tb_int_acesso 
+where tiacnpj in (select cgc from operador.tb_cad_transportadoras where autonum IN(
+SELECT transportadora 
+FROM   (SELECT E.transportadora,Nvl(K.flag_retirada_vip, 0)                   AS VIP, 
+               A.patio, 
+               A.id_conteiner, 
+               A.autonum, 
+               TD.descr                                      AS TIPO_DOCUMENTO, 
+               D.num_documento, 
+               Nvl(V.peso_entrada, 0) - Nvl(V.peso_saida, 0) AS PESO_APURADO, 
+               TC.descr                                      AS TIPOCONTEINER, 
+               A.tamanho, 
+               ( Nvl(A.imo1, '') 
+                 || ' ' 
+                 || Nvl(A.imo2, '') 
+                 || ' ' 
+                 || Nvl(A.imo3, '') 
+                 || ' ' 
+                 || Nvl(A.imo4, '') )                        AS IMO, 
+               ( Nvl(A.undg, '') 
+                 || ' ' 
+                 || Nvl(A.undg2, '') 
+                 || ' ' 
+                 || Nvl(A.undg3, '') 
+                 || ' ' 
+                 || Nvl(A.undg4, '') )                       AS ONU, 
+               To_char(P.validade_gr, 'DD/MM/YYYY')          AS DATA_FREE_TIME, 
+               Nvl(A.yard, '') 
+               ||'-' 
+               || Nvl(RE.temp_remocoes, 0) 
+               || ' ' 
+               ||Nvl(RE.temp_rua, '')                        AS REMOCAO, 
+               D.lote                                        AS LOTE, 
+               Min(F.averbou)                                AS AVERBOU, 
+               Min(F.icms_sefaz)                             AS DI_ICMS_SEFAZ, 
+               Min(F.desembaracado)                          AS DI_DESEMBARACADA 
+               , 
+               CASE 
+                 WHEN Min(F.flag_certificado) = 0 THEN '---' 
+                 ELSE Min(F.mapa) 
+               END                                           AS MAPA_DE_MADEIRA, 
+               CASE 
+                 WHEN Min(F.forma_pagamento) = 3 THEN 'FAT' 
+                 ELSE Min(F.gr_paga) 
+               END                                           AS GR_PAGA, 
+               Min(F.siscarga)                               AS SISCARGA, 
+               Min(F.bloqueio_bl)                            AS BLOQUEIO_BL, 
+               Min(F.bloqueio_cntr)                          AS BLOQUEIO_CNTR, 
+               Min(F.forma_pagamento)                        AS FORMA_PAGAMENTO, 
+               Min(F.flag_certificado)                       AS FLAG_CERTIFICADO 
+               , 
+               C.tipo_documento                              AS 
+               TIPO_DOC 
+        FROM   sgipa.tb_cntr_bl A 
+               inner join sgipa.tb_amr_cntr_bl B 
+                       ON A.autonum = B.cntr 
+               inner join sgipa.tb_bl C 
+                       ON B.bl = C.autonum 
+               inner join sgipa.tb_av_online D 
+                       ON C.autonum = D.lote 
+               inner join sgipa.tb_av_online_transp E 
+                       ON D.autonum = E.tb_av_online 
+               inner join sgipa.tb_tipos_documentos TD 
+                       ON C.tipo_documento = TD.code 
+               left join operador.vw_dados_ei V 
+                      ON A.autonum = V.cntr_ipa 
+               inner join sgipa.dte_tb_tipos_conteiner TC 
+                       ON A.tipo = TC.code 
+               left join (SELECT autonum, 
+                                 temp_remocoes, 
+                                 temp_rua 
+                          FROM   operador.tb_remocao 
+                          WHERE  sistema = 'I') RE 
+                      ON A.autonum = RE.autonum 
+               inner join sgipa.vw_etapas_av_bl_cntr F 
+                       ON C.autonum = F.lote 
+               inner join sgipa.tb_gr_pre_calculo P 
+                       ON C.autonum = P.bl 
+               inner join sgipa.tb_cad_parceiros K 
+                       ON C.importador = K.autonum 
+               left join sgipa.tb_carga_solta CS 
+                      ON A.autonum = CS.cntr 
+        WHERE  C.flag_ativo = 1 
+               AND Nvl(CS.usuario_ddc, 0) = 0  
+               AND A.flag_desovado = 0 
+               AND A.flag_terminal = 1 
+               AND A.flag_historico = 0 
+               AND A.patio <> 5 
+--and a.autonum_gd_reserva is null
+        GROUP  BY E.transportadora,K.flag_retirada_vip, 
+                  A.patio, 
+                  A.id_conteiner, 
+                  A.autonum, 
+                  TD.descr, 
+                  D.num_documento, 
+                  V.peso_entrada, 
+                  V.peso_saida, 
+                  TC.descr, 
+                  A.tamanho, 
+                  A.imo1, 
+                  A.imo2, 
+                  A.imo3, 
+                  A.imo4, 
+                  A.undg, 
+                  A.undg2, 
+                  A.undg3, 
+                  A.undg4, 
+                  P.validade_gr, 
+                  A.yard, 
+                  RE.temp_remocoes, 
+                  RE.temp_rua, 
+                  D.lote, 
+                  C.tipo_documento) 
+WHERE  ( averbou = 'SIM' 
+         AND di_icms_sefaz = 'SIM' 
+         AND bloqueio_bl = 'NAO' 
+         AND bloqueio_cntr = 'NAO' 
+         AND di_desembaracada = 'SIM' 
+         AND siscarga = 'SIM' 
+         AND ( mapa_de_madeira = 'SIM' 
+                OR flag_certificado = 0 ) 
+         AND ( gr_paga = 'SIM' 
+                OR gr_paga = 'FAT' 
+                OR forma_pagamento = 3 ) 
+         AND ( tipo_doc < 7 
+                OR tipo_doc > 13 ) ) 
+        OR ( averbou = 'SIM' 
+             AND bloqueio_bl = 'NAO' 
+             AND bloqueio_cntr = 'NAO' 
+             AND ( gr_paga = 'SIM' 
+                    OR gr_paga = 'FAT' 
+                    OR forma_pagamento = 3 ) 
+             AND ( tipo_doc >= 7 
+                   AND tipo_doc <= 13 ) ) ));

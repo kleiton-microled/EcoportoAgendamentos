@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{B0E612DE-DA15-48BD-A179-0AEB1CE12D56}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AgendamentoCargaSoltaSGIPA</RootNamespace>
+    <AssemblyName>AgendamentoCargaSoltaSGIPA</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>3.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>AgendamentoCargaSoltaSGIPA.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>AgendamentoCargaSoltaSGIPA.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\GPD\GPD\GPD\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.SharePoint.Client, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SharePoint.Client.14.0.4762.1000\lib\Microsoft.SharePoint.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SharePoint.Client.14.0.4762.1000\lib\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Acesso.aspx" />
+    <Content Include="AlterarMotoristas.aspx" />
+    <Content Include="AlterarVeiculos.aspx" />
+    <Content Include="CadastrarAgendamentos.aspx" />
+    <Content Include="AgendamentoRecusado.aspx" />
+    <Content Include="CadastrarMotoristas.aspx" />
+    <Content Include="CadastrarVeiculos.aspx" />
+    <Content Include="CNHVencida.aspx" />
+    <Content Include="ConsultarLotesImportacao.aspx" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\brands.css" />
+    <Content Include="Content\brands.min.css" />
+    <Content Include="Content\buttons.dataTables.min.css" />
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\estilos.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\plugins\bootstrap4-toggle\bootstrap4-toggle.min.css" />
+    <Content Include="Content\plugins\bootstrap4-toggle\bootstrap4-toggle.min.js" />
+    <Content Include="Content\plugins\easyAutocomplete\easy-autocomplete.css" />
+    <Content Include="Content\plugins\easyAutocomplete\jquery.easy-autocomplete.js" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.gitignore" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard.min.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_all.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_all.min.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_arrows.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_arrows.min.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_dark.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_dark.min.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_dots.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\css\smart_wizard_dots.min.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\js\jquery.smartWizard.js" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\dist\js\jquery.smartWizard.min.js" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\examples\ajax.html" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\examples\index.html" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\examples\multiple.html" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\gulpfile.js" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\karma.conf.js" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\css\smart_wizard.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\css\smart_wizard_all.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\css\smart_wizard_arrows.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\css\smart_wizard_dark.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\css\smart_wizard_dots.css" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\js\jquery.smartWizard.js" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\test\test-template.html" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\test\test.js" />
+    <Content Include="Content\plugins\smartWizard\css\smart_wizard.min.css" />
+    <Content Include="Content\plugins\smartWizard\css\smart_wizard_theme_arrows.min.css" />
+    <Content Include="Content\plugins\smartWizard\css\smart_wizard_theme_circles.min.css" />
+    <Content Include="Content\plugins\smartWizard\css\smart_wizard_theme_dots.min.css" />
+    <Content Include="Content\plugins\smartWizard\js\jquery.smartWizard.min.js" />
+    <Content Include="Content\regular.css" />
+    <Content Include="Content\regular.min.css" />
+    <Content Include="Content\select2.css" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\site.css" />
+    <Content Include="Content\solid.css" />
+    <Content Include="Content\solid.min.css" />
+    <Content Include="Content\svg-with-js.css" />
+    <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\v4-shims.css" />
+    <Content Include="Content\v4-shims.min.css" />
+    <Content Include="EtapasCargaSolta.aspx" />
+    <Content Include="ProtocoloNaoLiberado.aspx" />
+    <Content Include="Concluido.aspx" />
+    <Content Include="ConsultarAgendamentos.aspx" />
+    <Content Include="ConsultarMotoristas.aspx" />
+    <Content Include="ConsultarVeiculos.aspx" />
+    <Content Include="css\ibox.css" />
+    <Content Include="css\JQuery-UI.css" />
+    <Content Include="css\ecoporto\images\Bg.jpg" />
+    <Content Include="css\ecoporto\images\bgBoxBottom.png" />
+    <Content Include="css\ecoporto\images\bgBoxMiddle.png" />
+    <Content Include="css\ecoporto\images\bgBoxUp.png" />
+    <Content Include="css\ecoporto\images\BgFooter.gif" />
+    <Content Include="css\ecoporto\images\bgMenuVertical.png" />
+    <Content Include="css\ecoporto\images\bgTitle.png" />
+    <Content Include="css\ecoporto\images\BulletBoxTitle.gif" />
+    <Content Include="css\ecoporto\images\favicon.ico" />
+    <Content Include="css\ecoporto\images\LinhaMenuUp.gif" />
+    <Content Include="css\ecoporto\images\LogoTop.png" />
+    <Content Include="css\ecoporto\ecoporto.css" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="css\temas\ecoporto\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="css\temas\ecoporto\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="css\temas\ecoporto\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\temas\ecoporto\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="css\temas\ecoporto\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="css\temas\ecoporto\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\temas\ecoporto\ecoporto.css" />
+    <Content Include="css\temas\termares\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="css\temas\termares\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="css\temas\termares\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="css\temas\termares\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="css\temas\termares\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="css\temas\termares\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="css\temas\termares\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="css\temas\termares\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="css\temas\termares\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="css\temas\termares\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="css\temas\termares\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\temas\termares\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="css\temas\termares\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="css\temas\termares\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\temas\termares\termares.css" />
+    <Content Include="css\termares\images\Bg.jpg" />
+    <Content Include="css\termares\images\bgBoxBottom.png" />
+    <Content Include="css\termares\images\bgBoxMiddle.png" />
+    <Content Include="css\termares\images\bgBoxUp.png" />
+    <Content Include="css\termares\images\BgFooter.gif" />
+    <Content Include="css\termares\images\bgMenuVertical.png" />
+    <Content Include="css\termares\images\bgTitle.png" />
+    <Content Include="css\termares\images\BulletBoxTitle.gif" />
+    <Content Include="css\termares\images\favicon.ico" />
+    <Content Include="css\termares\images\LinhaMenuUp.gif" />
+    <Content Include="css\termares\images\LogoTop.png" />
+    <Content Include="css\termares\termares.css" />
+    <Content Include="imagens\check.png" />
+    <Content Include="imagens\editar.gif" />
+    <Content Include="imagens\excluir.png" />
+    <Content Include="imagens\unchecked.png" />
+    <Content Include="Principal.aspx" />
+    <Content Include="Protocolo.aspx" />
+    <Content Include="scripts\agendamento.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\default.js" />
+    <Content Include="scripts\esm\popper-utils.js" />
+    <Content Include="scripts\esm\popper-utils.min.js" />
+    <Content Include="scripts\esm\popper.js" />
+    <Content Include="scripts\esm\popper.min.js" />
+    <Content Include="scripts\fontawesome\all.js" />
+    <Content Include="scripts\fontawesome\all.min.js" />
+    <Content Include="scripts\fontawesome\brands.js" />
+    <Content Include="scripts\fontawesome\brands.min.js" />
+    <Content Include="scripts\fontawesome\conflict-detection.js" />
+    <Content Include="scripts\fontawesome\conflict-detection.min.js" />
+    <Content Include="scripts\fontawesome\fontawesome.js" />
+    <Content Include="scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="scripts\fontawesome\regular.js" />
+    <Content Include="scripts\fontawesome\regular.min.js" />
+    <Content Include="scripts\fontawesome\solid.js" />
+    <Content Include="scripts\fontawesome\solid.min.js" />
+    <Content Include="scripts\fontawesome\v4-shims.js" />
+    <Content Include="scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="scripts\i18n\af.js" />
+    <Content Include="scripts\i18n\ar.js" />
+    <Content Include="scripts\i18n\az.js" />
+    <Content Include="scripts\i18n\bg.js" />
+    <Content Include="scripts\i18n\bn.js" />
+    <Content Include="scripts\i18n\bs.js" />
+    <Content Include="scripts\i18n\ca.js" />
+    <Content Include="scripts\i18n\cs.js" />
+    <Content Include="scripts\i18n\da.js" />
+    <Content Include="scripts\i18n\de.js" />
+    <Content Include="scripts\i18n\dsb.js" />
+    <Content Include="scripts\i18n\el.js" />
+    <Content Include="scripts\i18n\en.js" />
+    <Content Include="scripts\i18n\es.js" />
+    <Content Include="scripts\i18n\et.js" />
+    <Content Include="scripts\i18n\eu.js" />
+    <Content Include="scripts\i18n\fa.js" />
+    <Content Include="scripts\i18n\fi.js" />
+    <Content Include="scripts\i18n\fr.js" />
+    <Content Include="scripts\i18n\gl.js" />
+    <Content Include="scripts\i18n\he.js" />
+    <Content Include="scripts\i18n\hi.js" />
+    <Content Include="scripts\i18n\hr.js" />
+    <Content Include="scripts\i18n\hsb.js" />
+    <Content Include="scripts\i18n\hu.js" />
+    <Content Include="scripts\i18n\hy.js" />
+    <Content Include="scripts\i18n\id.js" />
+    <Content Include="scripts\i18n\is.js" />
+    <Content Include="scripts\i18n\it.js" />
+    <Content Include="scripts\i18n\ja.js" />
+    <Content Include="scripts\i18n\ka.js" />
+    <Content Include="scripts\i18n\km.js" />
+    <Content Include="scripts\i18n\ko.js" />
+    <Content Include="scripts\i18n\lt.js" />
+    <Content Include="scripts\i18n\lv.js" />
+    <Content Include="scripts\i18n\mk.js" />
+    <Content Include="scripts\i18n\ms.js" />
+    <Content Include="scripts\i18n\nb.js" />
+    <Content Include="scripts\i18n\ne.js" />
+    <Content Include="scripts\i18n\nl.js" />
+    <Content Include="scripts\i18n\pl.js" />
+    <Content Include="scripts\i18n\ps.js" />
+    <Content Include="scripts\i18n\pt-BR.js" />
+    <Content Include="scripts\i18n\pt.js" />
+    <Content Include="scripts\i18n\ro.js" />
+    <Content Include="scripts\i18n\ru.js" />
+    <Content Include="scripts\i18n\sk.js" />
+    <Content Include="scripts\i18n\sl.js" />
+    <Content Include="scripts\i18n\sq.js" />
+    <Content Include="scripts\i18n\sr-Cyrl.js" />
+    <Content Include="scripts\i18n\sr.js" />
+    <Content Include="scripts\i18n\sv.js" />
+    <Content Include="scripts\i18n\th.js" />
+    <Content Include="scripts\i18n\tk.js" />
+    <Content Include="scripts\i18n\tr.js" />
+    <Content Include="scripts\i18n\uk.js" />
+    <Content Include="scripts\i18n\vi.js" />
+    <Content Include="scripts\i18n\zh-CN.js" />
+    <Content Include="scripts\i18n\zh-TW.js" />
+    <Content Include="scripts\ibox.extras.js" />
+    <Content Include="scripts\ibox.js" />
+    <Content Include="scripts\jquery-1.7.1.min.js" />
+    <Content Include="scripts\esm\popper.min.js.map" />
+    <Content Include="scripts\esm\popper.js.map" />
+    <Content Include="scripts\esm\popper-utils.min.js.map" />
+    <Content Include="scripts\esm\popper-utils.js.map" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.github\FUNDING.yml" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.github\ISSUE_TEMPLATE\bug_report.md" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.github\ISSUE_TEMPLATE\feature_request.md" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.github\pull_request_template.md" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.npmignore" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\.travis.yml" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\CODE_OF_CONDUCT.md" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\composer.json" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\CONTRIBUTING.md" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\LICENSE" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\package.json" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\README.md" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\core\_base.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\smart_wizard.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\smart_wizard_all.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\smart_wizard_arrows.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\smart_wizard_dark.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\smart_wizard_dots.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\themes\_arrows.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\themes\_dark.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\themes\_default.scss" />
+    <Content Include="Content\plugins\jquery-smartwizard-master\src\scss\themes\_dots.scss" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\plugins\bootstrap4-toggle\bootstrap4-toggle.min.js.map" />
+    <None Include="scripts\jquery-1.9.1.intellisense.js" />
+    <None Include="scripts\jquery-3.3.1-vsdoc.js" />
+    <Content Include="scripts\jquery-3.3.1.js" />
+    <Content Include="scripts\jquery-3.3.1.min.js" />
+    <Content Include="scripts\jquery-3.3.1.slim.js" />
+    <Content Include="scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="scripts\jquery-ui-1.8.5.custom.min.js" />
+    <Content Include="scripts\jquery.alphanumeric.js" />
+    <Content Include="scripts\jquery.dataTables.min.js" />
+    <Content Include="scripts\jquery.mask.min.js" />
+    <Content Include="scripts\jquery.maskMoney.js" />
+    <Content Include="scripts\jquery.numeric.js" />
+    <Content Include="scripts\jquery.ui.datepicker.js" />
+    <Content Include="packages.config" />
+    <Content Include="scripts\popper-utils.js" />
+    <Content Include="scripts\popper-utils.min.js" />
+    <Content Include="scripts\popper.js" />
+    <Content Include="scripts\popper.min.js" />
+    <Content Include="scripts\select2.js" />
+    <Content Include="scripts\select2.min.js" />
+    <Content Include="scripts\toastr.js" />
+    <Content Include="scripts\umd\popper-utils.js" />
+    <Content Include="scripts\umd\popper-utils.min.js" />
+    <Content Include="scripts\umd\popper.js" />
+    <Content Include="scripts\umd\popper.min.js" />
+    <Content Include="Web References\WsBDCC\BdccAcesso.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\WsBDCC\BdccCnpjEmpresa.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\WsBDCC\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <Content Include="Web References\WsBDCC\TecondiBdccCrachaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\WsBDCC\TecondiBdccResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="scripts\umd\popper.min.js.map" />
+    <Content Include="scripts\umd\popper.js.map" />
+    <Content Include="scripts\umd\popper-utils.min.js.map" />
+    <Content Include="scripts\umd\popper-utils.js.map" />
+    <Content Include="scripts\README.md" />
+    <Content Include="scripts\popper.min.js.map" />
+    <Content Include="scripts\popper.js.map" />
+    <Content Include="scripts\popper-utils.min.js.map" />
+    <Content Include="scripts\popper-utils.js.map" />
+    <Content Include="scripts\pt-br.json" />
+    <Content Include="scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="scripts\jquery-3.3.1.min.map" />
+    <None Include="Web References\WsBDCC\TecondiBdccWs.wsdl" />
+    <None Include="Web References\WsControleSenha\Criptografia.disco" />
+    <Content Include="EmailTransportadora.aspx" />
+    <Content Include="VinculaDocumentos.aspx" />
+    <Content Include="VisualizaDocumentos.aspx" />
+    <None Include="Web References\WsEmail\Email.disco" />
+    <None Include="Web References\WsBDCC\TecondiBdccWs.disco" />
+    <Content Include="Web References\WsSharepoint\ImagemAverbacao.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\WsEmail\Email.wsdl" />
+    <None Include="Web References\WsEmail\Email.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WsEmail\Email0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WsEmail\Email1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web References\WsEmail\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <None Include="Web References\WsSharepoint\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\WsSharepoint\wsiccsharepoint.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web References\WsControleSenha\Criptografia.wsdl" />
+    <None Include="Web References\WsControleSenha\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Web References\WsSharepoint\wsiccsharepoint.wsdl" />
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Acesso.aspx.designer.vb">
+      <DependentUpon>Acesso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acesso.aspx.vb">
+      <DependentUpon>Acesso.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AlterarMotoristas.aspx.designer.vb">
+      <DependentUpon>AlterarMotoristas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlterarMotoristas.aspx.vb">
+      <DependentUpon>AlterarMotoristas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlterarVeiculos.aspx.designer.vb">
+      <DependentUpon>AlterarVeiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlterarVeiculos.aspx.vb">
+      <DependentUpon>AlterarVeiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastrarAgendamentos.aspx.designer.vb">
+      <DependentUpon>CadastrarAgendamentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarAgendamentos.aspx.vb">
+      <DependentUpon>CadastrarAgendamentos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AgendamentoRecusado.aspx.designer.vb">
+      <DependentUpon>AgendamentoRecusado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgendamentoRecusado.aspx.vb">
+      <DependentUpon>AgendamentoRecusado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastrarMotoristas.aspx.designer.vb">
+      <DependentUpon>CadastrarMotoristas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarMotoristas.aspx.vb">
+      <DependentUpon>CadastrarMotoristas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastrarVeiculos.aspx.designer.vb">
+      <DependentUpon>CadastrarVeiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarVeiculos.aspx.vb">
+      <DependentUpon>CadastrarVeiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="classes\Agendamento.vb" />
+    <Compile Include="classes\Banco.vb" />
+    <Compile Include="classes\Documento.vb" />
+    <Compile Include="classes\Email.vb" />
+    <Compile Include="classes\Empresa.vb" />
+    <Compile Include="classes\Cliente.vb" />
+    <Compile Include="classes\FileValidation.vb" />
+    <Compile Include="classes\Fornecedor.vb" />
+    <Compile Include="classes\Login.vb" />
+    <Compile Include="classes\Motorista.vb" />
+    <Compile Include="classes\NotaFiscal.vb" />
+    <Compile Include="classes\NotaFiscalItem.vb" />
+    <Compile Include="classes\Ordem.vb" />
+    <Compile Include="classes\Transportadora.vb" />
+    <Compile Include="classes\Usuario.vb" />
+    <Compile Include="classes\ValidaCPF.vb" />
+    <Compile Include="classes\Veiculo.vb" />
+    <Compile Include="classes\WebService.vb" />
+    <Compile Include="CNHVencida.aspx.designer.vb">
+      <DependentUpon>CNHVencida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CNHVencida.aspx.vb">
+      <DependentUpon>CNHVencida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarLotesImportacao.aspx.designer.vb">
+      <DependentUpon>ConsultarLotesImportacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarLotesImportacao.aspx.vb">
+      <DependentUpon>ConsultarLotesImportacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EtapasCargaSolta.aspx.designer.vb">
+      <DependentUpon>EtapasCargaSolta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EtapasCargaSolta.aspx.vb">
+      <DependentUpon>EtapasCargaSolta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extensions\StringExtensions.vb" />
+    <Compile Include="ProtocoloNaoLiberado.aspx.designer.vb">
+      <DependentUpon>ProtocoloNaoLiberado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocoloNaoLiberado.aspx.vb">
+      <DependentUpon>ProtocoloNaoLiberado.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Concluido.aspx.designer.vb">
+      <DependentUpon>Concluido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Concluido.aspx.vb">
+      <DependentUpon>Concluido.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarAgendamentos.aspx.designer.vb">
+      <DependentUpon>ConsultarAgendamentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarAgendamentos.aspx.vb">
+      <DependentUpon>ConsultarAgendamentos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarMotoristas.aspx.designer.vb">
+      <DependentUpon>ConsultarMotoristas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarMotoristas.aspx.vb">
+      <DependentUpon>ConsultarMotoristas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarVeiculos.aspx.designer.vb">
+      <DependentUpon>ConsultarVeiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarVeiculos.aspx.vb">
+      <DependentUpon>ConsultarVeiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\Consultas.Master.designer.vb">
+      <DependentUpon>Consultas.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\Consultas.Master.vb">
+      <DependentUpon>Consultas.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Principal.aspx.designer.vb">
+      <DependentUpon>Principal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Principal.aspx.vb">
+      <DependentUpon>Principal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Protocolo.aspx.designer.vb">
+      <DependentUpon>Protocolo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Protocolo.aspx.vb">
+      <DependentUpon>Protocolo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EmailTransportadora.aspx.designer.vb">
+      <DependentUpon>EmailTransportadora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTransportadora.aspx.vb">
+      <DependentUpon>EmailTransportadora.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="VinculaDocumentos.aspx.designer.vb">
+      <DependentUpon>VinculaDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VinculaDocumentos.aspx.vb">
+      <DependentUpon>VinculaDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="VisualizaDocumentos.aspx.designer.vb">
+      <DependentUpon>VisualizaDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisualizaDocumentos.aspx.vb">
+      <DependentUpon>VisualizaDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Web References\WsBDCC\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WsControleSenha\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WsEmail\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WsSharepoint\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="master\Consultas.Master" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.1.50.28:134/TecondiBdccWs.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsBDCC\</RelPath>
+      <UpdateFromURL>http://10.1.50.28:134/TecondiBdccWs.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoCargaSoltaSGIPA_WsBDCC_WsSincrono</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.1.50.4:9876/Email.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsEmail\</RelPath>
+      <UpdateFromURL>http://10.1.50.4:9876/Email.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoCargaSoltaSGIPA_WsEmail_Email</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://homop.ecoportosantos.com.br:5055/wsiccsharepoint.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsSharepoint\</RelPath>
+      <UpdateFromURL>http://homop.ecoportosantos.com.br:5055/wsiccsharepoint.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoCargaSoltaSGIPA_WsSharepoint_WsIccSharepoint</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:12650/Criptografia.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsControleSenha\</RelPath>
+      <UpdateFromURL>http://localhost:12650/Criptografia.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoCargaSoltaSGIPA_WsControleSenha_Criptografia</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4308</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:32594/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

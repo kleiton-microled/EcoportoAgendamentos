@@ -1,0 +1,39 @@
+﻿@using Ecoporto.Portal.Extensions
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ecoporto Santos :: Agendamento Carga Solta OP</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="icon" href="@Url.Content("~/Content/img/favicon.ico")" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+    @Styles.Render("~/bundles/css")
+    @RenderSection("Css", required: false)
+</head>
+
+<body class="bg-microled">
+    
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    
+    <script>
+        var urlBase = '@Url.Content("~")';
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-mask")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+﻿@model Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoViewModel
+
+@Html.HiddenFor(model => model.ViagemId)
+
+<div class="row">
+    <div class="form-group col-md-2">
+        @Html.LabelFor(model => model.Reserva)
+        @Html.EditorFor(model => model.Reserva, new { htmlAttributes = new { @class = "form-control form-control-sm pulse", autofocus = "autofocus" } })
+        <small id="validaReserva" class="text-danger invisivel">* Informe a Reserva corretamente</small>
+    </div>
+    <div class="form-group col-md-3">
+        @Html.LabelFor(model => model.NavioViagem)
+        @Html.EditorFor(model => model.NavioViagem, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+    </div>
+    <div class="form-group col-md-2">
+        @Html.LabelFor(model => model.Abertura)
+        @Html.EditorFor(model => model.Abertura, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+    </div>
+    <div class="form-group col-md-2">
+        @Html.LabelFor(model => model.Fechamento)
+        @Html.EditorFor(model => model.Fechamento, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+    </div>
+    <div class="form-group col-md-3">
+        @Html.LabelFor(model => model.Exportador)
+        @Html.EditorFor(model => model.Exportador, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="form-group col-md-2">
+        @Html.LabelFor(model => model.DueDesembaracada, new { @class = "form-check-label label-check-fix ml-4" })
+        @Html.CheckBoxFor(model => model.DueDesembaracada, new { @class = "form-check-input checkbox-due-fix", onclick="AtualizarFlagDue()" })
+    </div>
+</div>

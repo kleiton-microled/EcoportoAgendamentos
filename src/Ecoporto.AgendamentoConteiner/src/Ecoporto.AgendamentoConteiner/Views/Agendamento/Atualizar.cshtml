@@ -1,0 +1,276 @@
+﻿@model Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoConteiner.Helpers
+
+@{
+    ViewBag.Title = "Atualizar Agendamento";
+}
+
+<div class="row">
+
+    <div class="col-xl-12">
+
+        <section class="content-header">
+            <h1>
+                Gerenciamento de Agendamentos
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Agendamentos</a>
+                </li>
+                <li class="active">Atualizar Agendamento</li>
+            </ol>
+        </section>
+
+        @using (Ajax.BeginForm("Atualizar", "Agendamento", null, new AjaxOptions
+        {
+            OnSuccess = "agendamentoMensagemSucesso",
+            OnFailure = "agendamentoMensagemErro",
+            HttpMethod = "POST"
+        }, new { id = "frmCadastroAgendamento" }))
+        {
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-calendar-alt fa-lg"></i>
+                    Detalhes do Agendamento
+                    <div class="float-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.ValidarFormulario(ViewContext.ViewData.ModelState, false)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="msgErro" class="invisivel alert alert-danger" role="alert"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.BookingId)
+                    @Html.HiddenFor(model => model.Tamanho)
+
+                    <div class="tipo-agendamento-container invisivel">
+                        <div class="tipo-agendamento-titulo">
+                            Tipo de Operação
+                        </div>
+                        <div class="tipo-agendamento-opcoes">
+                            <div class="form-check form-check-inline">
+                                @Html.RadioButton("TipoOperacao", "1", true, new { @class = "form-check-input" })
+                                <label class="form-check-label" for="inlineRadio1">Exportação</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                @Html.RadioButton("TipoOperacao", "2", false, new { @class = "form-check-input" })
+                                <label class="form-check-label" for="inlineRadio2">Importação</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="smartwizard">
+                        <ul>
+                            <li><a href="#motorista">Passo 1<br /><small>Escolha do Motorista</small></a></li>
+                            <li><a href="#veiculo">Passo 2<br /><small>Escolha do Veículo</small></a></li>
+                            <li><a href="#carregamento">Passo 3<br /><small>Informações da Carga</small></a></li>
+                            <li><a href="#periodo">Passo 4<br /><small>Escolha do Período</small></a></li>
+                        </ul>
+
+                        <div class="mt-3">
+                            <div id="motorista" class="">
+
+                                @Html.HiddenFor(c => c.Id)
+
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        @Html.LabelFor(model => model.MotoristaId)
+                                        @Html.DropDownListFor(c => c.MotoristaId, new MultiSelectList(Model.Motoristas, "Id", "Nome"), string.Empty, new { @class = "form-control" })
+                                        <small id="validaMotorista" class="text-danger invisivel">* Selecione o Motorista</small>
+                                    </div>
+                                    <div class="form-group col-md-2 pl-0">
+                                        <label for="btnPesquisarMotorista">&nbsp;</label>
+                                        <a id="btnPesquisarMotorista" href="#" class="btn btn-outline-info btn-block btn-as-block"><i class="fas fa-search"></i>&nbsp;&nbsp;Pesquisar</a>
+                                    </div>
+                                </div>
+
+                                <div id="pnlAtualizarMotorista" class="row invisivel">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="alert alert-info" role="alert">
+                                                Deseja atualizar o Motorista para <strong><span id="pnlNovoMotorista"></span></strong>? Clique <strong><a id="lnkAtualizarMotorista" href="#">aqui</a></strong> para <strong>Atualizar</strong>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="pnlMotoristaAtualizado" class="row invisivel">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="alert alert-success" role="alert">
+                                                Motorista atualizado com sucesso!
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="pnlDetalhesMotorista">
+                                    @Html.Partial("_DetalhesMotorista", Model.DetalhesMotorista)
+                                </div>
+
+                            </div>
+                            <div id="veiculo" class="">
+
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        @Html.LabelFor(model => model.VeiculoId)
+                                        @Html.DropDownListFor(c => c.VeiculoId, new MultiSelectList(Model.Veiculos, "Id", "Descricao"), string.Empty, new { @class = "form-control" })
+                                        <small id="validaVeiculo" class="text-danger invisivel">* Selecione o Veículo</small>
+                                    </div>
+                                    <div class="form-group col-md-2 pl-0">
+                                        <label for="btnPesquisarVeiculo">&nbsp;</label>
+                                        <a id="btnPesquisarVeiculo" href="#" class="btn btn-outline-info btn-block btn-as-block"><i class="fas fa-search"></i>&nbsp;&nbsp;Pesquisar</a>
+                                    </div>
+                                </div>
+
+                                <div id="pnlAtualizarVeiculo" class="row invisivel">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="alert alert-info" role="alert">
+                                                Deseja atualizar o Veículo para <strong><span id="pnlNovoVeiculo"></span></strong>? Clique <strong><a id="lnkAtualizarVeiculo" href="#">aqui</a></strong> para <strong>Atualizar</strong>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="pnlVeiculoAtualizado" class="row invisivel">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="alert alert-success" role="alert">
+                                                Veículo atualizado com sucesso!
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="pnlDetalhesVeiculo">
+                                    @Html.Partial("_DetalhesVeiculo", Model.DetalhesVeiculo)
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        @Html.LabelFor(model => model.CTE)
+                                        @Html.EditorFor(model => model.CTE, new { htmlAttributes = new { @class = "form-control", maxlength = "10" } })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="carregamento" class="">
+
+                                @Html.Partial("_DetalhesReserva")
+                                @Html.Partial("_ItensReservaConsulta", Model.ItensReserva)
+                                @Html.Partial("_DetalhesConteiner")
+                                @Html.Partial("_Danfes")
+
+                                <div id="pnlUploads" class="row">
+                                    <div class="form-group col-md-12">
+
+                                        @*@using (Ajax.BeginForm("CadastrarDocumento", "Agendamento", new AjaxOptions
+                                            {
+                                                UpdateTargetId = "_VincularDocumentosConsulta",
+                                                OnSuccess = "mensagemCadastroDocumentoSucesso",
+                                                OnFailure = "mensagemCadastroErro",
+                                                InsertionMode = InsertionMode.Replace,
+                                                HttpMethod = "POST"
+                                            }, new { id = "frmCadastrarDocumentos", enctype = "multipart/form-data" }))
+                                            {
+                                                @Html.Partial("_VincularDocumentos", Model.AgendamentoUploadViewModel)
+                                            }*@
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        @Html.LabelFor(model => model.EmailRegistro)
+                                        @Html.EditorFor(model => model.EmailRegistro, new { htmlAttributes = new { @class = "form-control", maxlength = "400" } })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="periodo" class="">
+
+                                @Html.HiddenFor(model => model.PeriodoId)
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+
+                                        <div id="pnlPeriodos">
+                                            @Html.Partial("_Periodos", Model.Periodos)
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+
+</div>
+
+<br />
+
+@Html.Partial("_PesquisarMotoristas")
+@Html.Partial("_PesquisarVeiculos")
+@Html.Partial("_ModalExclusaoDanfe")
+@Html.Partial("_ModalExclusaoConteiner")
+@Html.Partial("_ModalExclusaoUpload")
+@Html.Partial("_ModalVeiculoInvalido")
+@Html.Partial("_ModalReservaSemSaldo")
+@Html.Partial("_ModalConteinerReefer")
+
+@section Css{
+    @Styles.Render("~/bundles/smartWizardCSS")
+    <link href="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/smartWizard")
+    @Scripts.Render("~/bundles/agendamento")
+
+    <script src="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js"></script>
+
+}

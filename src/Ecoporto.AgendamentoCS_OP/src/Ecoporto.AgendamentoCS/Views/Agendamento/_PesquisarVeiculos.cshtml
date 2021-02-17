@@ -1,0 +1,47 @@
+﻿<div class="modal" tabindex="-1" role="dialog" id="pesquisa-modal-veiculos">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pesquisar Veículos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Digite abaixo a Placa do Cavalo ou Carreta que deseja buscar:</p>
+
+                @using (Ajax.BeginForm("ObterVeiculosPorPlaca", "Agendamento", null, new AjaxOptions
+                {
+                    UpdateTargetId = "ListaVeiculos",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "ListaVeiculosLoader",
+                    HttpMethod = "GET"
+                }, new { id = "frmPesquisaVeiculos" }))
+                {
+
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição...">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-outline-info btn-block btn-as-block">Pesquisar</button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div id="ListaVeiculosLoader" class="text-center progresso">
+                                <img src="@Url.Content("~/Content/img/loading.gif")" />
+                            </div>
+                            <div id="ListaVeiculos">
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>

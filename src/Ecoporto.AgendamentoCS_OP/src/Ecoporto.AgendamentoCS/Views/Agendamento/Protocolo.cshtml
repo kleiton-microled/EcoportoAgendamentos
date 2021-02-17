@@ -1,0 +1,144 @@
+﻿@model Ecoporto.AgendamentoCS.Models.ViewModels.AgendamentoViewModel
+
+@{
+    ViewBag.Title = "Protocolo Agendamento";
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    var imagePath = Server.MapPath("~/Content/img");
+}
+
+<img src="@imagePath\header-pdf.png" />
+
+<div style="text-align: center;">
+    <h2>PROTOCOLO DE AGENDAMENTO <br />Nº @Model.Protocolo </h2>
+    <h3>Período: @Model.PeriodoDescricao</h3>
+</div>
+
+
+<div style="text-align: center; font-size: 18px;">
+    <b>Observação: Apresentar 03 vias deste Protocolo, do CTE e Danfe no Gate.</b>
+</div>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:25px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5; height:26px;">
+            <th scope="col" align="center">TRANSPORTADORA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:24px;">
+            <td align="center">@Model.TransportadoraDescricao - @Model.TransportadoraDocumento</td>
+        </tr>
+    </tbody>
+</table>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:25px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5; height:26px;">
+            <th scope="col" style="width: 40%;" align="center">Navio / Viagem</th>
+            <th scope="col" style="width: 60%;" align="center">CTE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:24px;">
+            <td align="center" valign="middle">@Model.Navio</td>
+            <td align="center">@Model.CTE</td>
+        </tr>
+    </tbody>
+</table>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:15px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5;height:26px;">
+            <th scope="col" style="width: 40%;" align="center">Veículo</th>
+            <th scope="col" style="width: 60%;" align="center">Motorista</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:36px;">
+            <td align="center" valign="middle">@Model.VeiculoDescricao</td>
+            <td align="center" valign="middle">@Model.MotoristaDescricao <br />CPF: @Model.MotoristaCPF - CNH: @Model.MotoristaCNH</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Itens:</h3>
+
+<table cellspacing="0" width="100%" border="1" style="font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5;">
+            <th scope="col" class="td-w-10" align="center">Reserva</th>
+            <th scope="col" class="td-w-10" align="center">Qtde</th>
+            <th scope="col" class="td-w-10" align="right">Qtde Reserva</th>
+            <th scope="col" class="td-w-20">Embalagem</th>
+            <th scope="col" class="td-w-10" align="right">Peso Unit.</th>
+            <th scope="col" class="td-w-20">Marca</th>
+            <th scope="col" class="td-w-20">Contra Marca</th>
+            <th scope="col" class="td-w-20">Class. Carga</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ItensReserva)
+        {
+            <tr>
+                <td align="center">@item.Reserva</td>
+                <td align="center">@item.Qtde</td>
+                <td align="right">@item.QtdeReserva</td>
+                <td>@item.Embalagem</td>
+                <td align="right">@item.PesoUnitario</td>
+                <td>@item.Marca</td>
+                <td>@item.ContraMarca</td>
+                <td>@item.Classificacao</td>
+            </tr>
+
+
+            <tr>
+                <td scope="col" class="td-w-10"></td>
+                <td colspan="7" class="no-padding">
+                    @if (!string.IsNullOrEmpty(item.Chassis))
+                    {
+                        <table cellspacing="0" border="0" width="100%" style="font-size:12px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Chassis's:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var chassi in item.Chassis.Split(','))
+                                {
+                                    <tr>
+                                        <td>@chassi</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    <br />
+                    <table cellspacing="0" border="0" width="100%" style="font-size:12px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">DANFE's:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var notaFiscal in item.NotasFiscais)
+                            {
+                                <tr>
+                                    <td>@notaFiscal.Danfe</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<p style="text-align: center; font-style:italic;">Agendamento realizado em: @Model.DataCadastro.ToString("dd/MM/yyyy HH:mm")</p>
+
+<br />
+<div style="text-align: center; font-size:14px;">
+    FAVOR DIRIGIR-SE A <strong>@Model.Empresa.Endereco, @Model.Empresa.Bairro - @Model.Empresa.Cidade/@Model.Empresa.Estado</strong>
+</div>

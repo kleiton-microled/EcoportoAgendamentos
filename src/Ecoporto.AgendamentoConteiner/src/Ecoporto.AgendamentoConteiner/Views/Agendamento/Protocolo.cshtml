@@ -1,0 +1,206 @@
+﻿@model Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoConteiner.Extensions
+@using Ecoporto.AgendamentoConteiner.Enums
+
+@{
+    ViewBag.Title = "Protocolo Agendamento";
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    var imagePath = Server.MapPath("~/Content/img");
+
+    var tipo = Model.Conteineres.Select(c => c.Reserva.EF).First();
+}
+
+<img src="@imagePath\header-pdf.png" />
+
+<div style="text-align: center;">
+    <h2>PROTOCOLO DE AGENDAMENTO @(tipo == TipoAgendamentoConteiner.Vazio ? "DE VAZIOS" : "") - EXPORTAÇÃO <br />Nº @Model.Protocolo </h2>
+    <h3 style="margin:0px;">Período: @Model.PeriodoDescricao</h3>
+</div>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:5px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5; height:26px;">
+            <th scope="col" align="center">TRANSPORTADORA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:24px;">
+            <td align="center">@Model.TransportadoraDescricao - @Model.TransportadoraDocumento</td>
+        </tr>
+    </tbody>
+</table>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:15px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5; height:26px;">
+            <th scope="col" style="width: 50%;" align="center">NAVIO / VIAGEM</th>
+            <th scope="col" style="width: 50%;" align="center">CTE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:24px;">
+            <td align="center" valign="middle">@Model.Navio</td>
+            <td align="center">@Model.CTE</td>
+        </tr>
+    </tbody>
+</table>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:15px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5;height:26px;">
+            <th scope="col" style="width: 50%;" align="center">VEÍCULO</th>
+            <th scope="col" style="width: 50%;" align="center">MOTORISTA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:36px;">
+            <td align="center" valign="middle">@Model.VeiculoDescricao</td>
+            <td align="center" valign="middle">@Model.MotoristaDescricao <br />CPF: @Model.MotoristaCPF - CNH: @Model.MotoristaCNH</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 style="margin-top: 4px;margin-bottom: 10px;">
+    Contêineres:
+</h3>
+
+@if (tipo == Ecoporto.AgendamentoConteiner.Enums.TipoAgendamentoConteiner.Cheio)
+{
+    foreach (var conteiner in Model.Conteineres)
+    {
+        <table id="tblConteineres" cellspacing="0" width="100%" border="1" style="font-size:12px;margin-bottom:10px;">
+            <thead>
+                <tr style="background-color: #F5F5F5;height:26px;">
+                    <th scope="col" align="center">RESERVA</th>
+                    <th scope="col" align="center">SIGLA</th>
+                    <th scope="col" align="center">TIPO</th>
+                    <th scope="col" align="center">TAMANHO</th>
+                    <th scope="col" align="center">EF</th>
+                    <th scope="col" align="center">TARA</th>
+                    <th scope="col" align="center">P.LIQUIDO</th>
+                    <th scope="col" align="center">P.BRUTO</th>
+                    <th scope="col" align="center">VOLUMES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="height: 26px;">
+                    <td align="center">@conteiner.Reserva.Descricao</td>
+                    <td align="center">@conteiner.Sigla</td>
+                    <td align="center">@conteiner.Reserva.Tipo</td>
+                    <td align="center">@conteiner.Reserva.Tamanho</td>
+                    <td align="center">@conteiner.Reserva.EF.ToName()</td>
+                    <td align="center">@conteiner.Tara</td>
+                    <td align="center">@conteiner.PesoLiquido</td>
+                    <td align="center">@conteiner.Bruto</td>
+                    <td align="center">@conteiner.Volumes</td>                    
+                </tr>
+                <tr style="background-color: #F5F5F5;height:26px;">
+                    <th scope="col" align="center">ISO</th>
+                    <th scope="col" align="center">LIGADO</th>
+                    <th scope="col" align="center">TEMP</th>
+                    <th scope="col" align="center">UMIDADE</th>
+                    <th scope="col" align="center">VENTILAÇÃO</th>
+                    <th scope="col" align="center">ESCALA</th>
+                    <th scope="col" align="center" colspan="3">IMO/ONU</th>
+                </tr>
+                <tr style="height: 26px;">
+                    <td align="center">@conteiner.ISO</td>
+                    <td align="center">@conteiner.ReeferLigado.ToSimOuNao()</td>
+                    <td align="center">@conteiner.Temp</td>
+                    <td align="center">@conteiner.Umidade</td>
+                    <td align="center">@conteiner.Ventilacao</td>
+                    <td align="center">@conteiner.Escala</td>
+                    <td align="center" colspan="3">
+                        @conteiner.IMO1 @conteiner.IMO2 @conteiner.IMO3 @conteiner.IMO4
+                        @conteiner.ONU1 @conteiner.ONU2 @conteiner.ONU3 @conteiner.ONU4
+                    </td>
+                </tr>
+                <tr style="background-color: #F5F5F5;height:26px;">
+                    <th scope="col" align="center" colspan="2">EXCESSOS</th>
+                    <th scope="col" align="center">LACRE ARMADOR</th>
+                    <th scope="col" align="center">LACRE EXPORTADOR</th>
+                    <th scope="col" align="center">TRÂNSITO</th>
+                    <th scope="col" align="center" colspan="2">Nº DOC TRÂNSITO</th>
+                    <th scope="col" align="center" colspan="2">DATA DOC TRÂNSITO</th>
+                </tr>
+                <tr style="height: 26px;">
+                    <td align="center" colspan="2">
+
+                        @if (conteiner.Altura > 0)
+                        {
+                            @Html.Raw("OH: " + conteiner.Altura.ToString())
+                        }
+
+                        @if (conteiner.Comprimento > 0)
+                        {
+                            @Html.Raw("OL: " + conteiner.Comprimento.ToString())
+                        }
+
+                        @if (conteiner.LateralDireita > 0)
+                        {
+                            @Html.Raw("OW: " + conteiner.LateralDireita.ToString())
+                        }
+
+                        @if (conteiner.LateralEsquerda > 0)
+                        {
+                            @Html.Raw("OWL: " + conteiner.LateralEsquerda.ToString())
+                        }
+
+                    </td>
+                    <td align="center">@conteiner.LacreArmador1 / @conteiner.LacreArmador2</td>
+                    <td align="center">@conteiner.LacreExportador</td>
+                    <td align="center">@conteiner.TipoDocTransitoDescricao</td>
+                    <td align="center" colspan="2">@conteiner.NumDocTransitoDUE</td>
+                    <td align="center" colspan="2">@conteiner.DataDocTransitoDUE</td>
+                </tr>
+
+                <tr style="background-color: #F5F5F5;height:26px; text-align:center;">
+                    <td scope="col" colspan="9" class="text-right"><strong>DANFE's:</strong></td>
+                </tr>
+                <tr style="height: 26px; text-align:center;">
+                    <td colspan="9" class="no-padding">
+
+                        @foreach (var notaFiscal in conteiner.NotasFiscais)
+                        {
+                            @notaFiscal.Danfe <br />
+                        }
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <table cellspacing="0" width="100%" border="1" style="font-size:14px;">
+        <thead>
+            <tr style="background-color: #F5F5F5;">
+                <th scope="col" style="width: 40%;" align="center">Reserva</th>
+                <th scope="col" style="width: 20%;" align="center">Tipo</th>
+                <th scope="col" style="width: 20%;" align="center">Tamanho</th>
+                <th scope="col" style="width: 20%;" align="center">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var conteiner in Model.Conteineres)
+            {
+                <tr>
+                    <td align="center">@conteiner.Reserva.Descricao</td>
+                    <td align="center">@conteiner.Reserva.Tipo</td>
+                    <td align="center">@conteiner.Reserva.Tamanho</td>
+                    <td align="center">@conteiner.QuantidadeVazios</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+
+<p style="text-align: center; font-style:italic;">Agendamento realizado em: @Model.DataCadastro.ToString("dd/MM/yyyy HH:mm")</p>
+
+<div style="text-align: center; font-size:14px;">
+    FAVOR DIRIGIR-SE A <strong>@Model.Empresa.Endereco, @Model.Empresa.Bairro - @Model.Empresa.Cidade/@Model.Empresa.Estado</strong>
+</div>

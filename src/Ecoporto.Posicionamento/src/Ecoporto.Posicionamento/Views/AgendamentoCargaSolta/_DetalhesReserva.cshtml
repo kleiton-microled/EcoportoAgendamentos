@@ -1,0 +1,48 @@
+﻿@model Ecoporto.Posicionamento.Models.ViewModels.AgendamentoCargaSoltaViewModel
+
+<div class="row">
+    <div class="form-group col-md-3">
+        @Html.LabelFor(model => model.NavioViagem)
+        @Html.EditorFor(model => model.NavioViagem, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+    </div>
+    <div class="form-group col-md-6">
+        @Html.LabelFor(model => model.Exportador)
+        @Html.EditorFor(model => model.Exportador, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+    </div>
+    <div class="form-group col-md-3">
+        @Html.LabelFor(model => model.Porto)
+        @Html.EditorFor(model => model.Porto, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+    </div>
+</div>
+
+<label class="mb-3">Selecione o(s) Item(s) de Carga Solta</label>
+
+<small class="float-right mr-0 pt-1">
+    <a href="#" onclick="selecionarTodosItensCargaSolta()"><i class="fa fa-check"></i> Selecionar todos</a>
+</small>
+
+<div class="row" id="pnlItensCargaSolta">
+
+    @for (int i = 0; i < Model.ItensCargaSolta.Count; i++)
+    {
+        var icone = "icone-cs.png";
+
+        <div class="form-group col-md-4 mb-0">
+            <div class="chk-image-container">
+                @Html.HiddenFor(c => c.ItensCargaSolta[i].BookingCsItemId)
+                @Html.HiddenFor(c => c.ItensCargaSolta[i].Quantidade)
+                @Html.CheckBoxFor(c => c.ItensCargaSolta[i].Selecionado, new { @class = "chk-image" })
+                <img src="@Url.Content("~/Content/img/" + icone)" />
+            </div>
+            <div class="sem-quebra">
+                @Html.EditorFor(c => c.ItensCargaSolta[i].QuantidadeAgendada, new { htmlAttributes = new { @class = "form-control form-control-sm campo-qtde-cs", Value = Model.ItensCargaSolta[i].Quantidade } })
+                @Model.ItensCargaSolta[i].Embalagem
+            </div>
+            <small style="position: absolute; top: 21px; color: #778899;">
+                @Model.ItensCargaSolta[i].Marca
+            </small>
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,31 @@
+﻿@model Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoUploadViewModel
+
+@Html.HiddenFor(model => model.AgendamentoId)
+
+<div class="row mt-2">
+    <div class="form-group col-sm-12">
+        <small class="text-danger">* São permitidos PDF - GIF - JPEG - PNG com tamanho máximo de 3MB</small>
+    </div>
+</div>
+
+@Html.HiddenFor(c => c.UploadSiglaConteiner)
+<div class="row">
+    <div class="form-group col-sm-3">
+        @Html.LabelFor(model => model.TiposDocumentos)
+        @Html.EnumDropDownListFor(c => c.TiposDocumentos, new { @class = "form-control" })
+    </div>
+    <div class="form-group col-sm-8">
+        @Html.LabelFor(model => model.Upload)
+        @Html.EditorFor(model => model.Upload, new { htmlAttributes = new { @class = "form-control form-control-sm", type = "file" } })
+    </div>
+    <div class="form-group col-sm-1">
+        <label>&nbsp;</label>
+        <button type="button" id="btnAdicionarUpload" class="btn btn-sm btn-outline-info btn-block btn-as-block"><i class="fas fa-plus"></i></button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-12 col-lg-12">
+        @Html.Partial("_VincularDocumentosConsulta", Model.Uploads)
+    </div>
+</div>

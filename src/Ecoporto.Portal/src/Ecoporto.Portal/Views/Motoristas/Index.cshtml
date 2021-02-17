@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Ecoporto.Portal.Models.Motorista>
+@using Ecoporto.Portal.Extensions
+
+@{
+    ViewBag.Title = "Consultar Motoristas";
+}
+
+<section class="content-header">
+    <h1>
+        Consultar Motoristas
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>Home
+            </a>
+        </li>
+        <li>
+            <a href="#">Consultar Motoristas</a>
+        </li>
+    </ol>
+</section>
+
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-table fa-lg"></i>
+        Motoristas
+
+        <div class="float-right">
+            <a href="@Url.Action("Cadastrar", "Motoristas")" class="btn btn-info btn-sm btn-novo"><i class="fa fa-edit"></i>&nbsp;Cadastrar Motorista</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="datatables" class="table table-hover table-sm" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="td-icone">&nbsp;</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CNH</th>
+                        <th scope="col">Validade CNH</th>
+                        <th scope="col">RG</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Nextel</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var cnhVencida = item.CNHVencida;
+                        var classeLinha = cnhVencida ? "class=linha-invalida" : "";
+
+                        <tr id="linha-@item.Id" @classeLinha>
+
+                            <td class="td-icone">
+                                @if (cnhVencida)
+                                {
+                                    <img src="@Url.Content("~/Content/img/usuario-invalido.png")" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/img/usuario-valido.png")" />
+                                }
+                            </td>
+
+                            <td>@item.Nome</td>
+                            <td>@item.CNH</td>
+
+                            @if (cnhVencida)
+                            {
+                                <td class="text-danger negrito">@item.ValidadeCNH.DataFormatada()</td>
+                            }
+                            else
+                            {
+                                <td>@item.ValidadeCNH.DataFormatada()</td>
+                            }
+
+                            <td>@item.RG</td>
+                            <td>@item.CPF</td>
+                            <td>@item.Celular</td>
+                            <td>@item.Nextel</td>
+                            <td class="campo-acao">
+                                <a href="@Url.Action("Atualizar","Motoristas")/@item.Id" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                <a href="#" onclick="Excluir(@item.Id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("_ModalExclusao")
+
+@section Css{
+    @Styles.Render("~/bundles/datatablesCSS")
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+
+         $(document).ready(function () {
+
+            var langUrl = "@Url.Content("~/Content/plugins/datatables/language/pt-br.json")";
+
+             $('#datatables').DataTable({
+                "language": {
+                    "url": langUrl
+                }
+            });
+         });
+
+        function Excluir(id) {
+            $('#modal-mensagem').text('Confirma a exclusão do Motorista?');
+            $('#del-modal').data('id', id).modal('show');
+        }
+
+        function ConfirmarExclusao() {
+
+            var _url = '@Url.Action("Excluir")';
+
+            var _id = $('#del-modal')
+                .data('id');
+
+            $.post(_url, { id: _id })
+                .done(function (data, statusText, xhr) {
+                    toastr.success('Motorista excluído com sucesso!', 'Agendamento');
+                    $('#linha-' + _id).remove();
+                }).fail(function () {
+                    toastr.error('O motorista não pode ser excluído', 'Agendamento');
+                }).always(function () {
+                    $('#del-modal')
+                        .data('id', '0')
+                        .modal('hide');
+                });
+        }
+
+    </script>
+}

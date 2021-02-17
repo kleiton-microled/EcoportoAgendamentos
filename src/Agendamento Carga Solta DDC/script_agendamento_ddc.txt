@@ -1,0 +1,57 @@
+CREATE OR REPLACE FORCE VIEW SGIPA.VW_AGENDA_CS
+(AUTONUM_AG_CS, PROTOCOLO, NOME_MOTORISTA, CNH, PLACA_CAVALO, 
+ PLACA_CARRETA, PERIODO, IMPRESSO, STATUS, NUM_DOC_SAIDA, 
+ NUMERO_BL, NUM_DOCUMENTO, DESCR_DOCUMENTO, DT_FREE_TIME, DT_CHEGADA, 
+ COD_TRANSPORTADORA, AUTONUM_CS, EMISSAO_DOC_SAIDA, SERIE_DOC_SAIDA, TIPO_DOC_SAIDA, 
+ COR, MODELO, RENAVAM, LOTE, QTDE, 
+ EMISSAO, SERIE, NOTAFISCAL, AUTONUM_GD_RESERVA, USUARIO_DDC, 
+ ID_CONTEINER,CNTR)
+AS 
+SELECT DISTINCT a.autonum,
+                   a.num_protocolo || '/' || a.ano_protocolo AS protocolo,
+                   b.nome, b.cnh, c.placa_cavalo, c.placa_carreta,
+                      TO_CHAR (d.periodo_inicial,
+                               'DD/MM/YYYY HH24:MI'
+                              )
+                   || ' - '
+                   || TO_CHAR (d.periodo_final, 'DD/MM/YYYY HH24:MI')
+                                                                   AS periodo,
+                   DECODE (a.impresso, 0, 'Não', 1, 'Sim') impresso,
+                   DECODE (a.status, 1, 'Pendente', 0, 'Concluído') status,
+                   a.num_doc_saida, bl.numero, bl.num_documento, td.descr,
+                   cs.dt_fim_periodo AS free_time,
+                   TO_CHAR (oc.data_ordem,
+                            'DD/MM/YYYY HH24:MI'
+                           ) AS data_chegada,
+                   a.autonum_transportadora, nf.autonum_cs,
+                   a.emissao_doc_saida, a.serie_doc_saida, a.tipo_doc_saida,
+                   c.cor, c.modelo, c.renavam, bl.autonum AS lote, nf.qtde,
+                   nf.emissao, nf.serie, nf.notafiscal, a.autonum_gd_reserva, cs.usuario_ddc, cntr.id_conteiner, a.cntr
+              FROM sgipa.tb_ag_cs a LEFT JOIN operador.tb_ag_motoristas b
+                   ON a.autonum_motorista = b.autonum
+                   LEFT JOIN operador.tb_ag_veiculos c
+                   ON a.autonum_veiculo = c.autonum
+                   LEFT JOIN operador.tb_gd_reserva d
+                   ON a.autonum_gd_reserva = d.autonum_gd_reserva
+                   LEFT JOIN sgipa.tb_ag_cs_nf nf
+                   ON nf.autonum_agendamento = a.autonum
+                   LEFT JOIN sgipa.tb_carga_solta cs
+                   ON cs.autonum = nf.autonum_cs
+                   LEFT JOIN sgipa.tb_bl bl ON bl.autonum = CS.BL
+                   LEFT JOIN sgipa.tb_tipos_documentos td
+                   ON bl.tipo_documento = td.code
+                   LEFT JOIN
+                   (SELECT   MAX (ordem_carreg) ordem, cs
+                        FROM sgipa.tb_registro_saida_cs
+                    GROUP BY cs) rcs ON cs.autonum = rcs.cs
+                   LEFT JOIN sgipa.tb_ordem_carregamento oc
+                   ON rcs.ordem = oc.autonum
+                   left join tb_cntr_bl cntr on a.cntr = cntr.autonum
+             WHERE bl.ultima_saida IS NULL
+             AND
+             (nf.autonum is not null or b.nome is not null);
+
+
+INSERT INTO TB_MOTIVO_POSICAO (CODE,DESCR) VALUES (52,'RETIRADA (GPDI – DDC)')
+    ALTER TABLE SGIPA.TB_PARAMETROS_SISTEMA ADD MOTIVO_RETIRADA_DDC NUMBER;
+    UPDATE SGIPA.TB_PARAMETROS_SISTEMA SET MOTIVO_RETIRADA_DDC = 52;

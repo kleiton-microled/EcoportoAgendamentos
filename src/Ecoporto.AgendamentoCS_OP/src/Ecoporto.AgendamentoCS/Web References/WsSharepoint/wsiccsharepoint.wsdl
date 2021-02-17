@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="EnviarImagemDocAverbacao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="averbacaoDocumento" type="tns:ImagemAverbacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ImagemAverbacao">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Autonum" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Lote" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AutonumAgendamento" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DataInclusao" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CaminhoImagem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NomeImagem" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdTipoDocUpload" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescrTipoDocUpload" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocAgendamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_byteArrayImagem" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EnviarImagemDocAverbacaoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnviarImagemDocAverbacaoRetID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="averbacaoDocumento" type="tns:ImagemAverbacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarImagemDocAverbacaoRetIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnviarImagemDocAverbacaoRetIDResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemDocAverbacaoPorLote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lote" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemDocAverbacaoPorLoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterImagemDocAverbacaoPorLoteResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemDocAverbacaoPorLoteEautonum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lote" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemDocAverbacaoPorLoteEautonumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterImagemDocAverbacaoPorLoteEautonumResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirImagemDocAverbacaoPorLoteEautonum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lote" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirImagemDocAverbacaoPorLoteEautonumResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterInformacaoDasImagensGravadasNoSharepoint">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="lote" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterInformacaoDasImagensGravadasNoSharepointResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterInformacaoDasImagensGravadasNoSharepointResult" type="tns:ArrayOfImagemAverbacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfImagemAverbacao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ImagemAverbacao" nillable="true" type="tns:ImagemAverbacao" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObterInformacaoDasImagensGravadasNoSharepointPorData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataInicio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataFinal" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterInformacaoDasImagensGravadasNoSharepointPorDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterInformacaoDasImagensGravadasNoSharepointPorDataResult" type="tns:ArrayOfImagemAverbacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarAnexoCE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="anexo" type="tns:ImagemRedestinacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ImagemRedestinacao">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Autonum" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="CE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DataInclusao" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CaminhoImagem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NomeArquivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_byteArrayImagem" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID_FILE" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EnviarAnexoCEResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnviarAnexoDesconsolidacaoCE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="anexo" type="tns:ImagemRedestinacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarAnexoDesconsolidacaoCEResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterListaDeArquivosEnviadosParaSharepointPorCE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterListaDeArquivosEnviadosParaSharepointPorCEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterListaDeArquivosEnviadosParaSharepointPorCEResult" type="tns:ArrayOfImagemRedestinacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfImagemRedestinacao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ImagemRedestinacao" nillable="true" type="tns:ImagemRedestinacao" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObterListaDesconsolidacaoPorCE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterListaDesconsolidacaoPorCEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterListaDesconsolidacaoPorCEResult" type="tns:ArrayOfImagemRedestinacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterListaImagensDesconsolidacaoPorCE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterListaImagensDesconsolidacaoPorCEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterListaImagensDesconsolidacaoPorCEResult" type="tns:ArrayOfImagemRedestinacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemRedestinacaoPorAutonum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemRedestinacaoPorAutonumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterImagemRedestinacaoPorAutonumResult" type="tns:FileSharePoint" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FileSharePoint">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileArray" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileExtension" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObterImagemDesconsolidacaoPorAutonum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemDesconsolidacaoPorAutonumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterImagemDesconsolidacaoPorAutonumResult" type="tns:File" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="File">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Path" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="System" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dataArray" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsError" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ExcluirImagemRedestinacaoPorAutonum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirImagemRedestinacaoPorAutonumResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExcluirImagemDesconsolidacaoPorAutonum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirImagemDesconsolidacaoPorAutonumResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnviarImagemGR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="imagemGR" type="tns:ImagemPagamentoGR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ImagemPagamentoGR">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Autonum" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Lote" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SeqGR" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="DataInclusao" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="NomeImagem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="_byteArrayImagem" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdUser" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EnviarImagemGRResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObterImagemPagSeqGRPorAutonumImagem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="seqGR" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="idImagem" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterImagemPagSeqGRPorAutonumImagemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterImagemPagSeqGRPorAutonumImagemResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirImagemPagSeqGRPorAutonumImagem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="seqGR" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="autonum" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirImagemPagSeqGRPorAutonumImagemResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EnviarImagemDocAverbacaoSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarImagemDocAverbacao" />
+  </wsdl:message>
+  <wsdl:message name="EnviarImagemDocAverbacaoSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarImagemDocAverbacaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarImagemDocAverbacaoRetIDSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarImagemDocAverbacaoRetID" />
+  </wsdl:message>
+  <wsdl:message name="EnviarImagemDocAverbacaoRetIDSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarImagemDocAverbacaoRetIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemDocAverbacaoPorLoteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterImagemDocAverbacaoPorLote" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemDocAverbacaoPorLoteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterImagemDocAverbacaoPorLoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemDocAverbacaoPorLoteEautonumSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterImagemDocAverbacaoPorLoteEautonum" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemDocAverbacaoPorLoteEautonumSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterImagemDocAverbacaoPorLoteEautonumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemDocAverbacaoPorLoteEautonumSoapIn">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemDocAverbacaoPorLoteEautonum" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemDocAverbacaoPorLoteEautonumSoapOut">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemDocAverbacaoPorLoteEautonumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterInformacaoDasImagensGravadasNoSharepointSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterInformacaoDasImagensGravadasNoSharepoint" />
+  </wsdl:message>
+  <wsdl:message name="ObterInformacaoDasImagensGravadasNoSharepointSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterInformacaoDasImagensGravadasNoSharepointResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterInformacaoDasImagensGravadasNoSharepointPorDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterInformacaoDasImagensGravadasNoSharepointPorData" />
+  </wsdl:message>
+  <wsdl:message name="ObterInformacaoDasImagensGravadasNoSharepointPorDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterInformacaoDasImagensGravadasNoSharepointPorDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarAnexoCESoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarAnexoCE" />
+  </wsdl:message>
+  <wsdl:message name="EnviarAnexoCESoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarAnexoCEResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarAnexoDesconsolidacaoCESoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarAnexoDesconsolidacaoCE" />
+  </wsdl:message>
+  <wsdl:message name="EnviarAnexoDesconsolidacaoCESoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarAnexoDesconsolidacaoCEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterListaDeArquivosEnviadosParaSharepointPorCESoapIn">
+    <wsdl:part name="parameters" element="tns:ObterListaDeArquivosEnviadosParaSharepointPorCE" />
+  </wsdl:message>
+  <wsdl:message name="ObterListaDeArquivosEnviadosParaSharepointPorCESoapOut">
+    <wsdl:part name="parameters" element="tns:ObterListaDeArquivosEnviadosParaSharepointPorCEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterListaDesconsolidacaoPorCESoapIn">
+    <wsdl:part name="parameters" element="tns:ObterListaDesconsolidacaoPorCE" />
+  </wsdl:message>
+  <wsdl:message name="ObterListaDesconsolidacaoPorCESoapOut">
+    <wsdl:part name="parameters" element="tns:ObterListaDesconsolidacaoPorCEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterListaImagensDesconsolidacaoPorCESoapIn">
+    <wsdl:part name="parameters" element="tns:ObterListaImagensDesconsolidacaoPorCE" />
+  </wsdl:message>
+  <wsdl:message name="ObterListaImagensDesconsolidacaoPorCESoapOut">
+    <wsdl:part name="parameters" element="tns:ObterListaImagensDesconsolidacaoPorCEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemRedestinacaoPorAutonumSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterImagemRedestinacaoPorAutonum" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemRedestinacaoPorAutonumSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterImagemRedestinacaoPorAutonumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemDesconsolidacaoPorAutonumSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterImagemDesconsolidacaoPorAutonum" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemDesconsolidacaoPorAutonumSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterImagemDesconsolidacaoPorAutonumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemRedestinacaoPorAutonumSoapIn">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemRedestinacaoPorAutonum" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemRedestinacaoPorAutonumSoapOut">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemRedestinacaoPorAutonumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemDesconsolidacaoPorAutonumSoapIn">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemDesconsolidacaoPorAutonum" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemDesconsolidacaoPorAutonumSoapOut">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemDesconsolidacaoPorAutonumResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarImagemGRSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarImagemGR" />
+  </wsdl:message>
+  <wsdl:message name="EnviarImagemGRSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarImagemGRResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemPagSeqGRPorAutonumImagemSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterImagemPagSeqGRPorAutonumImagem" />
+  </wsdl:message>
+  <wsdl:message name="ObterImagemPagSeqGRPorAutonumImagemSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterImagemPagSeqGRPorAutonumImagemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemPagSeqGRPorAutonumImagemSoapIn">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemPagSeqGRPorAutonumImagem" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirImagemPagSeqGRPorAutonumImagemSoapOut">
+    <wsdl:part name="parameters" element="tns:ExcluirImagemPagSeqGRPorAutonumImagemResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WsIccSharepointSoap">
+    <wsdl:operation name="EnviarImagemDocAverbacao">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Grava os dados da Imagem na TB_AV_IMAGEM e grava as imagens no GED - Sharepoint</wsdl:documentation>
+      <wsdl:input message="tns:EnviarImagemDocAverbacaoSoapIn" />
+      <wsdl:output message="tns:EnviarImagemDocAverbacaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarImagemDocAverbacaoRetID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Grava os dados da Imagem na TB_AV_IMAGEM e grava as imagens no GED - Sharepoint - Retorna ID criado</wsdl:documentation>
+      <wsdl:input message="tns:EnviarImagemDocAverbacaoRetIDSoapIn" />
+      <wsdl:output message="tns:EnviarImagemDocAverbacaoRetIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDocAverbacaoPorLote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna a imagem do documento de acordo com o lote da tabela TB_AV_IMAGEM</wsdl:documentation>
+      <wsdl:input message="tns:ObterImagemDocAverbacaoPorLoteSoapIn" />
+      <wsdl:output message="tns:ObterImagemDocAverbacaoPorLoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDocAverbacaoPorLoteEautonum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna a imagem do documento de acordo com o lote e autonum da imagem da tabela TB_AV_IMAGEM</wsdl:documentation>
+      <wsdl:input message="tns:ObterImagemDocAverbacaoPorLoteEautonumSoapIn" />
+      <wsdl:output message="tns:ObterImagemDocAverbacaoPorLoteEautonumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemDocAverbacaoPorLoteEautonum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deleta a imagem do documento de acordo com o lote e autonum da imagem da tabela TB_AV_IMAGEM</wsdl:documentation>
+      <wsdl:input message="tns:ExcluirImagemDocAverbacaoPorLoteEautonumSoapIn" />
+      <wsdl:output message="tns:ExcluirImagemDocAverbacaoPorLoteEautonumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterInformacaoDasImagensGravadasNoSharepoint">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna o Lista com os dados das imagens gravadas no sharepoint de acordo com o lote</wsdl:documentation>
+      <wsdl:input message="tns:ObterInformacaoDasImagensGravadasNoSharepointSoapIn" />
+      <wsdl:output message="tns:ObterInformacaoDasImagensGravadasNoSharepointSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterInformacaoDasImagensGravadasNoSharepointPorData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna o Lista com os dados das imagens gravadas no sharepoint de acordo com o lote</wsdl:documentation>
+      <wsdl:input message="tns:ObterInformacaoDasImagensGravadasNoSharepointPorDataSoapIn" />
+      <wsdl:output message="tns:ObterInformacaoDasImagensGravadasNoSharepointPorDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarAnexoCE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Grava os dados da Imagem na TB_CAP_ANEXO e grava as imagens no GED - Sharepoint</wsdl:documentation>
+      <wsdl:input message="tns:EnviarAnexoCESoapIn" />
+      <wsdl:output message="tns:EnviarAnexoCESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarAnexoDesconsolidacaoCE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Grava os dados da Imagem na TB_CAP_DESC_ANEXO e grava as imagens no GED - Sharepoint</wsdl:documentation>
+      <wsdl:input message="tns:EnviarAnexoDesconsolidacaoCESoapIn" />
+      <wsdl:output message="tns:EnviarAnexoDesconsolidacaoCESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaDeArquivosEnviadosParaSharepointPorCE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna o Lista com os dados das imagens gravadas no sharepoint de acordo com o CE</wsdl:documentation>
+      <wsdl:input message="tns:ObterListaDeArquivosEnviadosParaSharepointPorCESoapIn" />
+      <wsdl:output message="tns:ObterListaDeArquivosEnviadosParaSharepointPorCESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaDesconsolidacaoPorCE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna o Lista com os dados das imagens gravadas no sharepoint de acordo com o CE</wsdl:documentation>
+      <wsdl:input message="tns:ObterListaDesconsolidacaoPorCESoapIn" />
+      <wsdl:output message="tns:ObterListaDesconsolidacaoPorCESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaImagensDesconsolidacaoPorCE">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna o Lista das imagens gravadas no sharepoint de acordo com o CE</wsdl:documentation>
+      <wsdl:input message="tns:ObterListaImagensDesconsolidacaoPorCESoapIn" />
+      <wsdl:output message="tns:ObterListaImagensDesconsolidacaoPorCESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemRedestinacaoPorAutonum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna a imagem do documento de acordo com o autonum da imagem da tabela TB_CAP_ANEXO</wsdl:documentation>
+      <wsdl:input message="tns:ObterImagemRedestinacaoPorAutonumSoapIn" />
+      <wsdl:output message="tns:ObterImagemRedestinacaoPorAutonumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDesconsolidacaoPorAutonum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna a imagem do documento de acordo com o autonum da imagem da tabela TB_CAP_DESC_ANEXO</wsdl:documentation>
+      <wsdl:input message="tns:ObterImagemDesconsolidacaoPorAutonumSoapIn" />
+      <wsdl:output message="tns:ObterImagemDesconsolidacaoPorAutonumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemRedestinacaoPorAutonum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deleta a imagem do documento de acordo com o autonum da imagem da tabela TB_CAP_ANEXO</wsdl:documentation>
+      <wsdl:input message="tns:ExcluirImagemRedestinacaoPorAutonumSoapIn" />
+      <wsdl:output message="tns:ExcluirImagemRedestinacaoPorAutonumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemDesconsolidacaoPorAutonum">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deleta a imagem do documento de acordo com o autonum da imagem da tabela TB_CAP_DESC_ANEXO</wsdl:documentation>
+      <wsdl:input message="tns:ExcluirImagemDesconsolidacaoPorAutonumSoapIn" />
+      <wsdl:output message="tns:ExcluirImagemDesconsolidacaoPorAutonumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarImagemGR">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Grava Imagens de pagamento da GR - Sharepoint</wsdl:documentation>
+      <wsdl:input message="tns:EnviarImagemGRSoapIn" />
+      <wsdl:output message="tns:EnviarImagemGRSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemPagSeqGRPorAutonumImagem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna a imagem de pagamento da GR pelo autonum da imagem</wsdl:documentation>
+      <wsdl:input message="tns:ObterImagemPagSeqGRPorAutonumImagemSoapIn" />
+      <wsdl:output message="tns:ObterImagemPagSeqGRPorAutonumImagemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemPagSeqGRPorAutonumImagem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deleta a imagem de pagamento da GR de acordo com o seqGR e autonum da imagem da tabela TB_IMAGEM_PAG_GR</wsdl:documentation>
+      <wsdl:input message="tns:ExcluirImagemPagSeqGRPorAutonumImagemSoapIn" />
+      <wsdl:output message="tns:ExcluirImagemPagSeqGRPorAutonumImagemSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsIccSharepointSoap" type="tns:WsIccSharepointSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarImagemDocAverbacao">
+      <soap:operation soapAction="http://tempuri.org/EnviarImagemDocAverbacao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarImagemDocAverbacaoRetID">
+      <soap:operation soapAction="http://tempuri.org/EnviarImagemDocAverbacaoRetID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDocAverbacaoPorLote">
+      <soap:operation soapAction="http://tempuri.org/ObterImagemDocAverbacaoPorLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDocAverbacaoPorLoteEautonum">
+      <soap:operation soapAction="http://tempuri.org/ObterImagemDocAverbacaoPorLoteEautonum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemDocAverbacaoPorLoteEautonum">
+      <soap:operation soapAction="http://tempuri.org/ExcluirImagemDocAverbacaoPorLoteEautonum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterInformacaoDasImagensGravadasNoSharepoint">
+      <soap:operation soapAction="http://tempuri.org/ObterInformacaoDasImagensGravadasNoSharepoint" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterInformacaoDasImagensGravadasNoSharepointPorData">
+      <soap:operation soapAction="http://tempuri.org/ObterInformacaoDasImagensGravadasNoSharepointPorData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarAnexoCE">
+      <soap:operation soapAction="http://tempuri.org/EnviarAnexoCE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarAnexoDesconsolidacaoCE">
+      <soap:operation soapAction="http://tempuri.org/EnviarAnexoDesconsolidacaoCE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaDeArquivosEnviadosParaSharepointPorCE">
+      <soap:operation soapAction="http://tempuri.org/ObterListaDeArquivosEnviadosParaSharepointPorCE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaDesconsolidacaoPorCE">
+      <soap:operation soapAction="http://tempuri.org/ObterListaDesconsolidacaoPorCE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaImagensDesconsolidacaoPorCE">
+      <soap:operation soapAction="http://tempuri.org/ObterListaImagensDesconsolidacaoPorCE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemRedestinacaoPorAutonum">
+      <soap:operation soapAction="http://tempuri.org/ObterImagemRedestinacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDesconsolidacaoPorAutonum">
+      <soap:operation soapAction="http://tempuri.org/ObterImagemDesconsolidacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemRedestinacaoPorAutonum">
+      <soap:operation soapAction="http://tempuri.org/ExcluirImagemRedestinacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemDesconsolidacaoPorAutonum">
+      <soap:operation soapAction="http://tempuri.org/ExcluirImagemDesconsolidacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarImagemGR">
+      <soap:operation soapAction="http://tempuri.org/EnviarImagemGR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemPagSeqGRPorAutonumImagem">
+      <soap:operation soapAction="http://tempuri.org/ObterImagemPagSeqGRPorAutonumImagem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemPagSeqGRPorAutonumImagem">
+      <soap:operation soapAction="http://tempuri.org/ExcluirImagemPagSeqGRPorAutonumImagem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsIccSharepointSoap12" type="tns:WsIccSharepointSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarImagemDocAverbacao">
+      <soap12:operation soapAction="http://tempuri.org/EnviarImagemDocAverbacao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarImagemDocAverbacaoRetID">
+      <soap12:operation soapAction="http://tempuri.org/EnviarImagemDocAverbacaoRetID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDocAverbacaoPorLote">
+      <soap12:operation soapAction="http://tempuri.org/ObterImagemDocAverbacaoPorLote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDocAverbacaoPorLoteEautonum">
+      <soap12:operation soapAction="http://tempuri.org/ObterImagemDocAverbacaoPorLoteEautonum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemDocAverbacaoPorLoteEautonum">
+      <soap12:operation soapAction="http://tempuri.org/ExcluirImagemDocAverbacaoPorLoteEautonum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterInformacaoDasImagensGravadasNoSharepoint">
+      <soap12:operation soapAction="http://tempuri.org/ObterInformacaoDasImagensGravadasNoSharepoint" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterInformacaoDasImagensGravadasNoSharepointPorData">
+      <soap12:operation soapAction="http://tempuri.org/ObterInformacaoDasImagensGravadasNoSharepointPorData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarAnexoCE">
+      <soap12:operation soapAction="http://tempuri.org/EnviarAnexoCE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarAnexoDesconsolidacaoCE">
+      <soap12:operation soapAction="http://tempuri.org/EnviarAnexoDesconsolidacaoCE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaDeArquivosEnviadosParaSharepointPorCE">
+      <soap12:operation soapAction="http://tempuri.org/ObterListaDeArquivosEnviadosParaSharepointPorCE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaDesconsolidacaoPorCE">
+      <soap12:operation soapAction="http://tempuri.org/ObterListaDesconsolidacaoPorCE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterListaImagensDesconsolidacaoPorCE">
+      <soap12:operation soapAction="http://tempuri.org/ObterListaImagensDesconsolidacaoPorCE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemRedestinacaoPorAutonum">
+      <soap12:operation soapAction="http://tempuri.org/ObterImagemRedestinacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemDesconsolidacaoPorAutonum">
+      <soap12:operation soapAction="http://tempuri.org/ObterImagemDesconsolidacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemRedestinacaoPorAutonum">
+      <soap12:operation soapAction="http://tempuri.org/ExcluirImagemRedestinacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemDesconsolidacaoPorAutonum">
+      <soap12:operation soapAction="http://tempuri.org/ExcluirImagemDesconsolidacaoPorAutonum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarImagemGR">
+      <soap12:operation soapAction="http://tempuri.org/EnviarImagemGR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterImagemPagSeqGRPorAutonumImagem">
+      <soap12:operation soapAction="http://tempuri.org/ObterImagemPagSeqGRPorAutonumImagem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExcluirImagemPagSeqGRPorAutonumImagem">
+      <soap12:operation soapAction="http://tempuri.org/ExcluirImagemPagSeqGRPorAutonumImagem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsIccSharepoint">
+    <wsdl:port name="WsIccSharepointSoap" binding="tns:WsIccSharepointSoap">
+      <soap:address location="http://homop.ecoportosantos.com.br:5055/wsiccsharepoint.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsIccSharepointSoap12" binding="tns:WsIccSharepointSoap12">
+      <soap12:address location="http://homop.ecoportosantos.com.br:5055/wsiccsharepoint.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

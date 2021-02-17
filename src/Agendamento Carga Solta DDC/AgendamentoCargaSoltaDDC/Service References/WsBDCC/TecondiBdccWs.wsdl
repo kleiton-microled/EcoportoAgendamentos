@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tecondi.com.br/services/TecondiBdccWs" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tecondi.com.br/services/TecondiBdccWs" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tecondi.com.br/services/TecondiBdccWs">
+      <s:element name="ConsultaCpf">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cpf" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="registraEntradaSemCracha" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="cnpj" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="autonomo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCpfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaCpfResult" type="tns:TecondiBdccResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TecondiBdccResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoRetorno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescricaoRetorno" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultaRenavam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="renavam" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="registraEntradaSemCracha" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaRenavamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaRenavamResult" type="tns:TecondiBdccResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCracha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cracha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCrachaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaCrachaResult" type="tns:TecondiBdccCrachaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TecondiBdccCrachaResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoRetorno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescricaoRetorno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoCracha" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SituacaoCracha" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RegistraEntrada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="numeroCracha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipoDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="local" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuarioLogado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraEntradaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="VerificacaoSGBDCC">
+        <s:complexType />
+      </s:element>
+      <s:element name="VerificacaoSGBDCCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerificacaoSGBDCCResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListaAcessos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataInicial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataFinal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="local" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListaAcessosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListaAcessosResult" type="tns:ArrayOfBdccAcesso" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBdccAcesso">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BdccAcesso" nillable="true" type="tns:BdccAcesso" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BdccAcesso">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroCracha" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoDocumento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DataAcesso" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Localizacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UsuarioLogado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ip" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConsultaCpfIntranet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cpf" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="registraEntradaSemCracha" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCpfIntranetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaCpfIntranetResult" type="tns:TecondiBdccResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCNPJIntranet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cnpj" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="autonomo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaCNPJIntranetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaCNPJIntranetResult" type="tns:TecondiBdccResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaEmpresaPorCnpj">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cnpj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaEmpresaPorCnpjResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaEmpresaPorCnpjResult" type="tns:BdccCnpjEmpresa" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BdccCnpjEmpresa">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Cnpj" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Situacao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaCpfSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaCpf" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCpfSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaCpfResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaRenavamSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaRenavam" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaRenavamSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaRenavamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCrachaSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaCracha" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCrachaSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaCrachaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistraEntradaSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistraEntrada" />
+  </wsdl:message>
+  <wsdl:message name="RegistraEntradaSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistraEntradaResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerificacaoSGBDCCSoapIn">
+    <wsdl:part name="parameters" element="tns:VerificacaoSGBDCC" />
+  </wsdl:message>
+  <wsdl:message name="VerificacaoSGBDCCSoapOut">
+    <wsdl:part name="parameters" element="tns:VerificacaoSGBDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListaAcessosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListaAcessos" />
+  </wsdl:message>
+  <wsdl:message name="ListaAcessosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListaAcessosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCpfIntranetSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaCpfIntranet" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCpfIntranetSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaCpfIntranetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCNPJIntranetSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaCNPJIntranet" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaCNPJIntranetSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaCNPJIntranetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaEmpresaPorCnpjSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaEmpresaPorCnpj" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaEmpresaPorCnpjSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaEmpresaPorCnpjResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WsSincronoSoap">
+    <wsdl:operation name="ConsultaCpf">
+      <wsdl:input message="tns:ConsultaCpfSoapIn" />
+      <wsdl:output message="tns:ConsultaCpfSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaRenavam">
+      <wsdl:input message="tns:ConsultaRenavamSoapIn" />
+      <wsdl:output message="tns:ConsultaRenavamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCracha">
+      <wsdl:input message="tns:ConsultaCrachaSoapIn" />
+      <wsdl:output message="tns:ConsultaCrachaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistraEntrada">
+      <wsdl:input message="tns:RegistraEntradaSoapIn" />
+      <wsdl:output message="tns:RegistraEntradaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerificacaoSGBDCC">
+      <wsdl:input message="tns:VerificacaoSGBDCCSoapIn" />
+      <wsdl:output message="tns:VerificacaoSGBDCCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListaAcessos">
+      <wsdl:input message="tns:ListaAcessosSoapIn" />
+      <wsdl:output message="tns:ListaAcessosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCpfIntranet">
+      <wsdl:input message="tns:ConsultaCpfIntranetSoapIn" />
+      <wsdl:output message="tns:ConsultaCpfIntranetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCNPJIntranet">
+      <wsdl:input message="tns:ConsultaCNPJIntranetSoapIn" />
+      <wsdl:output message="tns:ConsultaCNPJIntranetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaEmpresaPorCnpj">
+      <wsdl:input message="tns:ConsultaEmpresaPorCnpjSoapIn" />
+      <wsdl:output message="tns:ConsultaEmpresaPorCnpjSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsSincronoSoap" type="tns:WsSincronoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaCpf">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCpf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaRenavam">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaRenavam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCracha">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCracha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraEntrada">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/RegistraEntrada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificacaoSGBDCC">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/VerificacaoSGBDCC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaAcessos">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ListaAcessos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCpfIntranet">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCpfIntranet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCNPJIntranet">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCNPJIntranet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaEmpresaPorCnpj">
+      <soap:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaEmpresaPorCnpj" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsSincronoSoap12" type="tns:WsSincronoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaCpf">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCpf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaRenavam">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaRenavam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCracha">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCracha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraEntrada">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/RegistraEntrada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerificacaoSGBDCC">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/VerificacaoSGBDCC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaAcessos">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ListaAcessos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCpfIntranet">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCpfIntranet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaCNPJIntranet">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaCNPJIntranet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaEmpresaPorCnpj">
+      <soap12:operation soapAction="http://tecondi.com.br/services/TecondiBdccWs/ConsultaEmpresaPorCnpj" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsSincrono">
+    <wsdl:port name="WsSincronoSoap" binding="tns:WsSincronoSoap">
+      <soap:address location="http://10.1.50.28:134/TecondiBdccWs.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsSincronoSoap12" binding="tns:WsSincronoSoap12">
+      <soap12:address location="http://10.1.50.28:134/TecondiBdccWs.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

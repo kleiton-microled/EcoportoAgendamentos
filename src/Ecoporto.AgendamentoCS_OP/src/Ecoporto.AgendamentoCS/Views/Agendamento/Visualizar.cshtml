@@ -1,0 +1,407 @@
+﻿@model Ecoporto.AgendamentoCS.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoCS.Extensions
+
+@{
+    ViewBag.Title = "Visualizar Agendamento";
+}
+
+<div class="row">
+
+    <div class="col-md-10 offset-md-1">
+
+        <section class="content-header">
+            <h1>
+                Gerenciamento de Agendamentos
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Agendamentos</a>
+                </li>
+                <li class="active">Visualizar Agendamento</li>
+            </ol>
+        </section>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-calendar-alt fa-lg"></i>
+                Detalhes do Agendamento
+                <div class="float-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div id="msgErro" class="invisivel alert alert-danger" role="alert"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="smartwizard">
+                    <ul>
+                        <li><a href="#motorista">Passo 1<br /><small>Informações do Motorista</small></a></li>
+                        <li><a href="#veiculo">Passo 2<br /><small>Informações do Veículo</small></a></li>
+                        <li><a href="#carregamento">Passo 3<br /><small>Informações da Carga</small></a></li>
+                        <li><a href="#periodo">Passo 4<br /><small>Período Agendado</small></a></li>
+                    </ul>
+                    
+                    @Html.HiddenFor(c => c.Id)
+
+                    <div class="mt-3">
+                        <div id="motorista" class="">
+                            <div class="form-group col-md-12">
+                                @Html.Partial("_DetalhesMotorista", Model.DetalhesMotorista)
+                            </div>
+                        </div>
+                        <div id="veiculo" class="">
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.Partial("_DetalhesVeiculo", Model.DetalhesVeiculo)
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    @Html.LabelFor(model => model.CTE)
+                                    @Html.EditorFor(model => model.CTE, new { htmlAttributes = new { @class = "form-control", maxlength = "10", @disabled = "disabled" } })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="carregamento" class="">
+
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    @Html.LabelFor(model => model.BookingCsId)
+                                    @Html.EditorFor(model => model.Reserva, new { htmlAttributes = new { @class = "form-control form-control-sm", @disabled = "disabled" } })
+                                    <small id="validaReserva" class="text-danger invisivel">* Informe a Reserva corretamente</small>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.Navio)
+                                    @Html.EditorFor(model => model.Navio, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+                                </div>
+                                <div class="form-group col-md-2">
+                                    @Html.LabelFor(model => model.Abertura)
+                                    @Html.EditorFor(model => model.Abertura, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+                                </div>
+                                <div class="form-group col-md-2">
+                                    @Html.LabelFor(model => model.Fechamento)
+                                    @Html.EditorFor(model => model.Fechamento, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+                                </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.Exportador)
+                                    @Html.EditorFor(model => model.Exportador, new { htmlAttributes = new { @class = "form-control-plaintext form-control-sm", @disabled = "disabled" } })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-11 mb-1">
+                                    @Html.LabelFor(model => model.ItemReservaId)
+                                    @Html.DropDownListFor(c => c.ItemReservaId, new MultiSelectList(Model.ItensReserva, "Id", "Descricao"), string.Empty, new { @class = "form-control form-control-sm select-readonly" })
+                                </div>
+                                <div class="form-group col-md-1 mb-1">
+                                    @Html.LabelFor(model => model.QuantidadeItemReserva)
+                                    @Html.EditorFor(model => model.QuantidadeItemReserva, new { htmlAttributes = new { @class = "form-control form-control-sm", @disabled = "disabled" } })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(model => model.Chassis)
+                                    @Html.TextAreaFor(model => model.Chassis, new { @class = "form-control form-control-sm", @disabled = "disabled", @rows = "4" })
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="tblItensReserva" class="table table-sm">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col" class="td-icone">&nbsp;</th>
+                                            <th scope="col">Item</th>
+                                            <th scope="col">Reserva</th>
+                                            <th scope="col">Embalagem</th>
+                                            <th scope="col">Marca</th>
+                                            <th scope="col" class="campo-acao text-center">Qtde</th>
+                                            <th scope="col" class="campo-acao text-center">Peso Unit.</th>
+                                            <th scope="col" class="campo-acao text-center">Class.</th>
+                                            <th scope="col" class="campo-acao text-center">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.ItensReserva)
+                                        {
+                                            <tr id="linha-item-reserva-@item.Id">
+                                                <td class="td-icone">
+                                                    <img src="@Url.Content("~/Content/img/icone-cs.png")" />
+                                                </td>
+                                                <td>@item.BookingCsItemId</td>
+                                                <td>@item.Reserva</td>
+                                                <td>@item.Embalagem</td>
+                                                <td>@item.Marca</td>
+                                                <td class="campo-acao text-center">@item.Qtde</td>
+                                                <td class="campo-acao text-center">@item.PesoUnitario</td>
+                                                <td class="campo-acao text-center carga-projeto">@item.Classificacao</td>
+                                                <td class="campo-acao"><a href="#" onclick="selecionarItem(@item.BookingCsItemId, @item.Qtde, '@item.Chassis')" class="btn btn-info btn-sm btn-acao"><i class="fa fa-search"></i>&nbsp;&nbsp;Visualizar Danfes</a></td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="tblDanfes" class="table table-sm">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col" class="td-icone">&nbsp;</th>
+                                            <th scope="col">Reserva</th>
+                                            <th scope="col">Item</th>
+                                            <th scope="col">DANFE</th>
+                                            <th scope="col">CFOP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.NotasFiscais)
+                                        {
+                                            <tr>
+                                                <td class="td-icone">
+                                                    <img src="@Url.Content("~/Content/img/icone-nf.png")" />
+                                                </td>
+                                                <td>@item.Reserva</td>
+                                                <td>@item.BookingCsItemId</td>
+                                                <td>@item.Danfe</td>
+                                                <td>@item.CFOP</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+
+
+                                    <div id="_VincularDocumentosConsulta" class="table-responsive">
+                                        <table id="tblDocumentos" class="table table-hover table-sm" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Tipo Documento</th>
+                                                    <th scope="col">Arquivo</th>
+                                                    <th scope="col">Data Envio</th>
+                                                    <th class="campo-acao">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var linha in Model.AgendamentoUploadViewModel.Uploads)
+                                                {
+                                                    <tr id="linha-documento-@linha.Id">
+                                                        <td>@linha.TipoDocumento</td>
+                                                        <td>
+                                                            @if (linha.Sharepoint)
+                                                            {
+                                                                <a href="@Url.Action("Download","Arquivos")?bookingCsItemId=@linha.BookingCsItemId&arquivoId=@linha.Id" target="_blank">@linha.Arquivo</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                @linha.Arquivo
+                                                            }
+                                                        </td>
+                                                        <td>@linha.DataEnvio.DataHoraFormatada()</td>
+                                                        <td class="campo-acao">
+                                                            @if (linha.Liberado == false)
+                                                            {
+                                                                <a href="#" onclick="excluirUpload(@linha.Id)" class="btn btn-danger btn-sm btn-acao"><i class="fa fa-trash"></i></a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="#" class="btn btn-secondary btn-sm btn-acao disabled"><i class="fa fa-trash"></i></a>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(model => model.EmailRegistro)
+                                    @Html.EditorFor(model => model.EmailRegistro, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="periodo" class="">
+
+                            @Html.HiddenFor(model => model.PeriodoId)
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+
+                                    @Html.Partial("_Periodos", Model.Periodos)
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-2 offset-md-10">
+                                    @if (Model.PossuiEntrada == false)
+                                    {
+                                        <button type="submit" class="btn btn-info btn-block">Concluir</button>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+@section Css{
+    @Styles.Render("~/bundles/smartWizardCSS")
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/smartWizard")
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                theme: 'arrows',
+                transitionEffect: 'fade',
+                showStepURLhash: true,
+                enableAllSteps: true,
+                toolbarSettings: {
+                    toolbarPosition: 'bottom',
+                    toolbarButtonPosition: 'end'
+                },
+                lang: {
+                    next: 'Próximo',
+                    previous: 'Anterior'
+                }
+            });
+        });
+
+        function selecionarItem(bookingCsItemId, qtde, chassis) {
+
+            event.preventDefault();
+
+            limparCamposItem();
+
+            $.get(urlBase + 'Agendamento/ObterItemReservaPorId?bookingCsItemId=' + bookingCsItemId, function (resultado) {
+
+                if (resultado) {
+
+                    if ($("#ItemReservaId option[value='" + bookingCsItemId + "']").val() === undefined) {
+                        $('#ItemReservaId').append($('<option>', {
+                            value: resultado.BookingCsItemId,
+                            text: resultado.Descricao
+                        }));
+                    } else {
+                        $('#ItemReservaId').val(bookingCsItemId);
+                    }
+
+                    $('#Reserva').val(resultado.Reserva);
+                    $('#QuantidadeItemReserva').val(qtde);
+                    $('#Chassis').val(chassis);
+
+                    $('#TiposDocumentos').empty();
+
+                    if (resultado.PackingList) {
+
+                        $('#TiposDocumentos').append($('<option>', {
+                            value: 1,
+                            text: 'Packing List'
+                        }));
+                    }
+
+                    if (resultado.DesenhoTecnico) {
+
+                        $('#TiposDocumentos').append($('<option>', {
+                            value: 2,
+                            text: 'Desenho Técnico'
+                        }));
+                    }
+
+                    if (resultado.ImagemCarga) {
+
+                        $('#TiposDocumentos').append($('<option>', {
+                            value: 3,
+                            text: 'Imagem Carga'
+                        }));
+                    }
+
+                    obterDanfesPorItem($('#Id').val(), bookingCsItemId);
+                    obterUploadsPorItem(bookingCsItemId);
+
+                    $('#Danfe').focus();
+                }
+            }).fail(function (data) {
+                toastr.error(data.statusText, 'Agendamento');
+            });
+        }
+
+        function limparCamposItem() {
+
+            $('#QuantidadeItemReserva').val('');
+            $('#Chassis').val('');
+        }
+
+        function obterDanfesPorItem(agendamentoId, bookingCsItemId) {
+
+            $.get(urlBase + 'Agendamento/ObterDanfesReadOnlyPorItemId?agendamentoId=' + agendamentoId + '&bookingCsItemId=' + bookingCsItemId, function (resultado) {
+
+                if (resultado) {
+
+                    $('#tblDanfes').html(resultado);
+                }
+            }).fail(function (data) {
+                toastr.error(data.statusText, 'Agendamento');
+            });
+        }
+
+        function obterUploadsPorItem(bookingCsItemId) {
+
+            $.get(urlBase + 'Agendamento/ObterUploadsPorItemId?bookingCsItemId=' + bookingCsItemId, function (resultado) {
+
+                if (resultado) {
+
+                    $('#tblDocumentos').html(resultado);
+                }
+            }).fail(function (data) {
+                toastr.error(data.statusText, 'Agendamento');
+            });
+        }
+
+    </script>
+
+}

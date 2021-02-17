@@ -1,0 +1,25 @@
+﻿@model Ecoporto.Portal.Models.ViewModels.MenuViewModel
+@{
+    Layout = null;
+}
+@foreach (var menu in Model.Menus)
+{
+    if (menu.SubMenus.Any())
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-edit"></i> @menu.Descricao
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                @foreach (var subMenu in menu.SubMenus)
+                {
+                    <li><a class="dropdown-item" href="#" onclick="NavegarMenu(@subMenu.MenuId, @subMenu.Id)">@subMenu.Descricao</a></li>
+                }
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li><a class="nav-link" href="#" onclick="NavegarMenu(@menu.Id)"><i class="fas fa-user-plus"></i>@menu.Descricao</a></li>
+    }
+}

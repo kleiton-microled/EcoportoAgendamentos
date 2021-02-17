@@ -1,0 +1,173 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Site.master.vb" Inherits="AgendamentoREDEX.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <title>Agendamento REDEX</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="content-language" content="pt-BR" />
+    <!-- CSS -->
+    <link href="jqueryUI/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="css/ecoporto.css" rel="stylesheet" type="text/css" />
+    <link href="css/_CssReset.css" type="text/css" rel="stylesheet">
+    <link href="css/Botoes.css" type="text/css" rel="stylesheet">
+    <link href="css/Default.Master.css" type="text/css" rel="stylesheet">
+    <!-- JS -->
+    <script src="jqueryUI/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="jqueryUI/jquery-ui.js" type="text/javascript"></script>
+    <script src="js/jquery.mask.js"></script>
+    <script type="text/javascript" src="js/Master.js"></script>
+    <link href="css/botoes.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".ContentPlaceHolder").css("height", ($(window).height() - 176) + "px");
+        });
+        //        $(function () {
+        //            $(".calendario").datepicker();
+        //        });
+
+        $(function () {
+            $(".calendario").datepicker({
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior'
+            });
+        });
+
+        function exibeMensagem(msg, url) {
+            $(function () {
+                //dialog-message
+                $("#dialog-message-text").text(msg);
+                $("#dialog-message").dialog({
+                    modal: true,
+                    dialogClass: 'no-close',
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                            if (url != "" && url != undefined) {
+                                document.location.href = url;
+                            }
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+    <style type="text/css">
+        .modalBackground
+        {
+            background-color: Gray;
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+        .pnlBackGround
+        {
+            position: fixed;
+            text-align: center;
+            background-color: #FAFAD2;            
+            border: solid 3px black;
+        }
+        * INÍCIO MODAL POPUP */
+#ModalPopUpMask
+{
+  position:absolute;
+  left:0;
+  top:0;
+  background-color:#000;
+  display:none;
+  z-index:2;
+}
+.modalPopup
+{
+    background-color: #FFF;
+    position:fixed !important;
+    left:0;
+    top:0;
+    display:none;
+    z-index:10 !important;
+}
+
+.MsgSalvar
+{
+    
+}
+
+    </style>
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <div class="Geral">
+        <div class="BgTop">
+            <div class="Header">
+                <table width="100%">
+                    <tr>
+                        <td width="200px">
+                            <h1>
+                                <a id="lnkHome" href="http://op.ecoportosantos.com.br/icc/">Ecoporto :: Agendamento
+                                    REDEX</a>
+                            </h1>
+                        </td>
+                        <td>
+                            <center>
+                                <asp:Label ID="Label1" runat="server" Text="AGENDAMENTO REDEX" Font-Bold="True" Font-Names="Arial"
+                                    Font-Size="14pt"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="12pt"><%= Session("SIS_CNPJ") %></asp:Label>
+                            </center>
+                        </td>
+                        <td style="width: 250px; text-align: center;">
+                            <asp:Label ID="Label4" runat="server" Font-Bold="True" Font-Names="Arial" Font-Size="14px"><%= Session("SIS_RAZAO") %></asp:Label><br />
+                            <asp:Label ID="lblVersao" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="Menu">
+            <ul class="menu">
+                <li class="menuparent"><a href="Default.aspx">Início</a> </li>
+                <li class="menuparent"><a href="CadastroReservas.aspx">Cadastros</a>
+                    <ul>
+                        <li><a href="CadastroReservas.aspx">Cadastro de Reservas</a></li>
+                        <li><a href="ConsultarMotoristas.aspx">Cadastro de Motoristas</a></li>
+                        <li><a href="ConsultarVeiculos.aspx">Catastro de Veículos</a></li>
+                    </ul>
+                </li>
+                <li class="menuparent"><a href="#">Agendamento Carga Solta</a>
+                    <ul>
+                        <li><a href="ConsultarAgendamentosCargaSoltaCarregamento.aspx">Agendamento Carregamento</a></li>
+                        <li><a href="ConsultarAgendamentosCargaSolta.aspx">Agendamento Descarga</a></li>
+                    </ul>
+                </li>
+                <li class="menuparent"><a href="#">Agendamento Contêiner Cheio (Pré-Stacking)</a>
+                    <ul>
+                        <li><a href="ConsultarAgendamentosCNTRCarregamento.aspx">Agendamento Carregamento</a></li>
+                        <li><a href="ConsultarAgendamentosCNTR.aspx">Agendamento Descarga</a></li>
+                    </ul>
+                </li>
+                <li class="menuparent"><a href="Sair.aspx">Sair</a></li>
+            </ul>
+        </div>
+        <div class="ContentPlaceHolder">
+            <div class="ContentBoxFull">
+                <span class="bgBoxUp"></span>
+                <div class="Box">
+                    <div class="BoxConteudo">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div id="dialog-message" title="Agendamento REDEX">
+        <p id="dialog-message-text">
+        </p>
+    </div>
+</body>
+</html>

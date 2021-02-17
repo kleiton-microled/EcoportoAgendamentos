@@ -1,0 +1,260 @@
+ALTER TABLE SGIPA.TB_AGENDAMENTO_POSICAO ADD PROTOCOLO_UNIFICADO INT;
+
+CREATE SEQUENCE SGIPA.TB_AGENDA_POSICAO_PROTO_UNIF MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE ;
+
+DROP VIEW SGIPA.VW_AGENDA_POSICAO_WEB;
+
+CREATE OR REPLACE VIEW SGIPA.VW_AGENDA_POSICAO_WEB (TIPOCNTR, MOTIVOPOS, TAMANHO, PATIO, YARD, ID_CONTEINER, DT_PREVISTA, IMPORTADOR, DESPACHANTE, CAPTADOR, EXPORTADOR, EXPORTADOR_FANTASIA, STATUS, LOTE, SOLICITANTE, VIAGEM, BOOKING, DESCR_STATUS, TIPO, NUM_OS, ANO_OS, LACRE_1, LACRE_2, LACRE_3, LACRE_4, DATA_EXECUCAO, USUARIO, FLAG_DESOVA_TOTAL, FLAG_MANUAL, MOTIVO_POSICAO, AUTONUM, POD, DT_ENTRADA, LINE, DATA_ATUALIZA, AUTONUMVIAGEM, AUTONUMEXPORTADOR, DATA_CANCELAMENTO, DESCR_PATIO, REMOCOES, AUTONUM_CLIENTE, NOME, CLIENTE_FATURA, AUTONUM_FATURA, VIAGEM_NOVA, AUTONUMVIAGEM_NOVA, MINUTA, FATOR_POSICIONAMENTO, CANCELADO, PROTOCOLO_UNIFICADO) AS 
+  SELECT tb_patio.tipobasico AS tipocntr,
+          tb_motivo_posicao.descr AS motivopos, tb_patio.tamanho AS tamanho,
+          tb_patio.patio AS patio, tb_patio.yard AS yard,
+          tb_patio.id_conteiner AS id_conteiner,
+          tb_agendamento_posicao.dt_prevista, '' AS importador,
+          '' AS despachante, '' AS captador, exportador.razao AS exportador,exportador.fantasia AS exportador_fantasia,
+          tb_agendamento_posicao.id_status_agendamento AS status, 0 AS lote,
+          solicitante.fantasia AS solicitante,
+          tb_cad_navios.nome || ' - ' || tb_viagens.viagem AS viagem,
+          tb_patio.REFERENCE AS booking,
+          tb_status_agendamento.descr_status_agendamento AS descr_status,
+          'OPER' AS tipo, sgipa.tb_agendamento_posicao.num_os,
+          tb_agendamento_posicao.ano_os, tb_agendamento_posicao.lacre_1,
+          tb_agendamento_posicao.lacre_2, tb_agendamento_posicao.lacre_3,
+          tb_agendamento_posicao.lacre_4,
+          tb_agenda_posicao_motivo.data_execucao,
+          tb_agenda_posicao_motivo.usuario,
+          tb_agenda_posicao_motivo.flag_desova_total,
+          tb_agenda_posicao_motivo.flag_manual,
+          tb_agenda_posicao_motivo.motivo_posicao,
+          tb_agendamento_posicao.autonum, tb_patio.pod AS pod,
+          tb_patio.data_ent_temp AS dt_entrada, tb_patio.line AS line,
+          tb_agendamento_posicao.data_atualiza,
+          tb_patio.autonumviagem AS autonumviagem,
+          exportador.autonum AS autonumexportador,
+          tb_agendamento_posicao.data_cancelamento,
+          tb_patios.descr_resumido AS descr_patio,
+             NVL (operador.tb_remocao.temp_remocoes, '')
+          || ' '
+          || NVL (operador.tb_remocao.temp_rua, '') AS remocoes,
+          tb_agendamento_posicao.autonum_cliente, tb_cad_usuarios.nome,
+          tb_cad_fatura.razao AS cliente_fatura,
+          tb_agendamento_posicao.autonum_fatura,
+          navionovo.nome || ' - ' || viagemnova.viagem AS viagem_nova,
+          viagemnova.autonum AS autonumviagem_nova, minuta,
+          tb_cad_fatura.fator_posicionamento, tb_agendamento_posicao.cancelado, tb_agendamento_posicao.PROTOCOLO_UNIFICADO
+     FROM sgipa.tb_agendamento_posicao,
+          sgipa.tb_agenda_posicao_motivo,
+          operador.tb_patio,
+          operador.tb_viagens,
+          operador.tb_cad_navios,
+          operador.tb_cad_clientes exportador,
+          operador.tb_cad_clientes solicitante,
+          sgipa.tb_motivo_posicao,
+          sgipa.tb_status_agendamento,
+          operador.tb_patios tb_patios,
+          operador.tb_remocao tb_remocao,
+          sgipa.tb_cad_usuarios,
+          operador.tb_cad_clientes tb_cad_fatura,
+          operador.tb_viagens viagemnova,
+          operador.tb_cad_navios navionovo
+    WHERE tb_agendamento_posicao.autonum =
+                               tb_agenda_posicao_motivo.autonum_agenda_posicao
+      AND tb_agendamento_posicao.autonumpatio = tb_patio.autonum
+      AND tb_agendamento_posicao.autonum_cliente = solicitante.autonum(+)
+      AND tb_patio.shipper = exportador.autonum(+)
+      AND tb_viagens.navio = tb_cad_navios.autonum(+)
+      AND tb_patio.autonumviagem = tb_viagens.autonum
+      AND tb_agenda_posicao_motivo.motivo_posicao = tb_motivo_posicao.code
+      AND tb_agendamento_posicao.id_status_agendamento =
+                                   tb_status_agendamento.id_status_agendamento
+      AND tb_patio.patio = tb_patios.autonum
+      AND tb_patio.autonum = tb_remocao.autonum(+)
+      AND NVL (tb_remocao.sistema, 'O') = 'O'
+      AND tb_agenda_posicao_motivo.usuario = tb_cad_usuarios.autonum(+)
+      AND tb_agendamento_posicao.autonum_fatura = tb_cad_fatura.autonum(+)
+      AND tb_agendamento_posicao.viagem_nova = viagemnova.autonum(+)
+      AND viagemnova.navio = navionovo.autonum(+) ;
+
+   COMMENT ON TABLE SGIPA.VW_AGENDA_POSICAO_WEB  IS 'V_318822_11022013';
+   
+   
+CREATE OR REPLACE FORCE VIEW SGIPA.VW_AGENDA_POSICAO_WEB_CS (AUTONUM, BOOKING, QUANTIDADE, AGENDADO, EMBALAGEM, MARCA, MODELO, POD, PORTO, NAVIO, VIAGEM, EXPORTADOR, LINE, MOTIVO, AUTONUM_CLIENTE, CANCELADO, DATA_CANCELAMENTO, DT_PREVISTA, STATUS, PROTOCOLO_UNIFICADO) AS 
+  SELECT 
+    C.AUTONUM, 
+    A.REFERENCE AS Booking,
+    SUM(A.QUANTIDADE) As Quantidade,
+    C.QUANTIDADE As Agendado,
+    E.DESCR AS EMBALAGEM,
+    A.MARCA,
+    A.MODELO,
+    A.POD,
+    G.NOME AS PORTO,
+    I.NOME As Navio,
+    H.VIAGEM,
+    J.RAZAO AS EXPORTADOR,
+    A.LINE,
+    E.DESCR As MOTIVO,
+    C.AUTONUM_CLIENTE,
+    C.CANCELADO,
+    C.DATA_CANCELAMENTO,
+    C.DT_PREVISTA,
+    C.ID_STATUS_AGENDAMENTO AS Status,
+    C.PROTOCOLO_UNIFICADO
+FROM 
+    OPERADOR.TB_CS_PATIO A
+INNER JOIN 
+    OPERADOR.TB_CS_BOOKING_ITEM B ON A.AUTONUM_CS_BOOKING_ITEM = B.AUTONUM        
+INNER JOIN
+    SGIPA.TB_AGENDAMENTO_POSICAO C ON B.AUTONUM = C.AUTONUM_CSPATIO
+INNER JOIN
+    SGIPA.TB_AGENDA_POSICAO_MOTIVO D ON C.AUTONUM = D.AUTONUM_AGENDA_POSICAO
+INNER JOIN
+    SGIPA.TB_MOTIVO_POSICAO E ON D.MOTIVO_POSICAO = E.CODE
+LEFT JOIN
+    OPERADOR.DTE_TB_EMBALAGENS F ON A.AUTONUM_CS_EMBALAGEM = F.CODE
+LEFT JOIN 
+    OPERADOR.TB_CAD_PORTOS G ON A.POD = G.CODIGO
+LEFT JOIN 
+    OPERADOR.TB_VIAGENS H ON A.AUTONUMVIAGEM = H.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_NAVIOS I ON H.NAVIO = I.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_CLIENTES J ON A.SHIPPER = J.AUTONUM 
+GROUP BY
+    C.AUTONUM, 
+    A.REFERENCE,
+    C.QUANTIDADE,
+    E.DESCR,
+    A.MARCA,
+    A.MODELO,
+    A.POD,
+    G.NOME,
+    I.NOME,
+    H.VIAGEM,
+    J.RAZAO,
+    A.LINE,
+    E.DESCR,
+    C.AUTONUM_CLIENTE,
+    C.CANCELADO,
+    C.DATA_CANCELAMENTO,
+    C.DT_PREVISTA,
+    C.ID_STATUS_AGENDAMENTO,
+    C.PROTOCOLO_UNIFICADO ;
+
+CREATE OR REPLACE VIEW OPERADOR.VW_POSICIONA_CS
+AS
+SELECT
+    A.AUTONUM_CS_BOOKING_ITEM As BookingCsItemId,
+    A.REFERENCE As Reserva,    
+    A.QUANTIDADE,
+    D.DESCR AS EMBALAGEM,
+    A.MARCA,
+    A.MODELO,
+    A.POD,
+    E.NOME AS PORTO,
+    G.NOME As Navio,
+    F.VIAGEM AS Viagem,
+    H.RAZAO AS EXPORTADOR,
+    NVL(C.FLAG_CHASSIS_AGENDAMENTO, 0) AS FLAG_CHASSIS_AGENDAMENTO
+FROM
+    OPERADOR.TB_CS_PATIO A
+INNER JOIN 
+    OPERADOR.TB_CS_BOOKING_ITEM B ON A.AUTONUM_CS_BOOKING_ITEM = B.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_CLASS_CARGO C ON B.AUTONUM_CARGO_CLASS = C.AUTONUM
+LEFT JOIN 
+    OPERADOR.DTE_TB_EMBALAGENS D ON A.AUTONUM_CS_EMBALAGEM = D.CODE
+LEFT JOIN 
+    OPERADOR.TB_CAD_PORTOS E ON A.POD = E.CODIGO
+LEFT JOIN 
+    OPERADOR.TB_VIAGENS F ON A.AUTONUMVIAGEM = F.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_NAVIOS G ON F.NAVIO = G.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_CLIENTES H ON A.SHIPPER = H.AUTONUM
+WHERE
+    NVL(C.FLAG_CHASSIS_AGENDAMENTO, 0) = 0;
+	
+ALTER TABLE SGIPA.TB_AGENDAMENTO_POSICAO ADD AUTONUM_BOOKING_ID INT;	
+	
+CREATE OR REPLACE VIEW SGIPA.VW_AGENDA_POSICAO_WEB_VEICULOS
+AS
+SELECT
+    A.AUTONUM AS Id,
+    D.REFERENCE AS RESERVA,
+    E.VIAGEM AS VIAGEM,
+    D.LINE,
+    G.RAZAO AS EXPORTADOR,    
+    EMB.DESCR AS EMBALAGEM,
+    D.MARCA,
+    D.MODELO,
+    BID.CHASSIS,         
+    C.DESCR AS MOTIVO,    
+    F.NOME AS NAVIO,    
+    D.POD,    
+    A.CANCELADO,
+	A.DT_PREVISTA As DataPrevista,
+    A.DATA_CANCELAMENTO As DataCancelamento,
+    A.ID_STATUS_AGENDAMENTO AS STATUS,
+	A.AUTONUM_CLIENTE,
+    A.PROTOCOLO_UNIFICADO
+FROM
+    SGIPA.TB_AGENDAMENTO_POSICAO A
+INNER JOIN 
+    SGIPA.TB_AGENDA_POSICAO_MOTIVO B ON A.AUTONUM = B.AUTONUM_AGENDA_POSICAO
+INNER JOIN 
+    SGIPA.TB_MOTIVO_POSICAO C ON B.MOTIVO_POSICAO = C.CODE
+INNER JOIN 
+    OPERADOR.TB_CS_BOOKING_ITEM_ID BID ON A.AUTONUM_ITEM_ID = BID.AUTONUM
+INNER JOIN 
+    OPERADOR.TB_CS_PATIO D ON BID.AUTONUM_CS_PATIO = D.AUTONUM
+LEFT JOIN 
+    OPERADOR.DTE_TB_EMBALAGENS EMB ON D.AUTONUM_CS_EMBALAGEM = EMB.CODE
+LEFT JOIN 
+    OPERADOR.TB_VIAGENS E ON D.AUTONUMVIAGEM = E.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_NAVIOS F ON E.NAVIO = F.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_CLIENTES G ON D.SHIPPER = G.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_CLIENTES H ON A.AUTONUM_FATURA = H.AUTONUM
+ORDER BY
+    A.DT_PREVISTA,
+    D.MARCA,
+    D.MODELO;     	   	
+	
+CREATE OR REPLACE VIEW OPERADOR.VW_POSICIONA_VEICULOS
+AS
+SELECT 
+    BID.AUTONUM As BookingCsItemChassi,
+	CC.AUTONUM_CS_BOOKING_ITEM As BookingCsItemId,
+    CC.REFERENCE As Reserva, 
+    CC.MARCA, 
+    CC.MODELO, 
+    EMB.DESCR AS EMBALAGEM,
+    BID.CHASSIS,     
+    CC.POD, 
+    POR.NOME AS PORTO,
+    N.NOME AS NAVIO, 
+    V.VIAGEM, 
+    G.RAZAO AS EXPORTADOR,
+    NVL(GL.FLAG_CHASSIS_AGENDAMENTO,0) AS FLAG_CHASSIS_AGENDAMENTO
+FROM  
+    OPERADOR.TB_CS_PATIO CC
+INNER JOIN  
+    OPERADOR.TB_CS_BOOKING_ITEM BI ON CC.AUTONUM_CS_BOOKING_ITEM = BI.AUTONUM
+LEFT JOIN  
+    OPERADOR.TB_CS_BOOKING_ITEM_ID BID ON BI.AUTONUM = BID.AUTONUM_CS_BOOKING_ITEM
+LEFT JOIN  
+    OPERADOR.TB_CAD_CLASS_CARGO GL ON BI.AUTONUM_CARGO_CLASS = GL.AUTONUM
+LEFT JOIN 
+    OPERADOR.DTE_TB_EMBALAGENS EMB ON CC.AUTONUM_CS_EMBALAGEM = EMB.CODE
+LEFT JOIN  
+    OPERADOR.TB_CAD_PORTOS POR ON CC.POD = POR.CODIGO
+LEFT JOIN 
+    OPERADOR.TB_VIAGENS V ON CC.AUTONUMVIAGEM = V.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_NAVIOS N ON V.NAVIO = N.AUTONUM
+LEFT JOIN 
+    OPERADOR.TB_CAD_CLIENTES G ON CC.SHIPPER = G.AUTONUM
+WHERE
+    NVL(GL.FLAG_CHASSIS_AGENDAMENTO, 0) = 1;	

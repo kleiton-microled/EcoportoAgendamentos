@@ -1,0 +1,71 @@
+﻿@using Ecoporto.AgendamentoCS.Extensions
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ecoporto Santos :: Agendamento Carga Solta OP</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="icon" href="@Url.Content("~/Content/img/favicon.ico")" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+    @Styles.Render("~/bundles/css")
+    @RenderSection("Css", required: false)
+</head>
+
+<body>
+
+    <div id="header-top">
+        <div id="header-logo">
+            <img src="@Url.Content("~/Content/img/logo-header.png")">
+        </div>
+        <div id="header-box-menu">
+            <ul>
+                <li><i class="fas fa-user"></i> </li>
+                <li>
+                    <span style="padding-top:2px; line-height:normal; width: 200px; position: absolute; margin-right:6px;">
+                        <strong>@User.ObterTransportadoraDescricao()</strong> <br /><small>CNPJ: @User.ObterTransportadoraCnpj()</small>
+                    </span>
+                </li>
+                <li class="right"><i class="fas fa-power-off"></i><a href="@Url.Action("Logout","Home")">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+
+    @Html.Partial("_Menu")
+
+    <main role="main" class="container-fluid">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="float-right text-white">
+                Agendamento Carga Solta Operador - Versão 1.0.0
+            </div>
+            <span class="text-white">
+                Copyright &copy; @DateTime.Now.Year
+                <a class="text-white" href="http://www.ecoportosantos.com.br">Ecoporto Santos</a>
+            </span>
+        </div>
+
+    </footer>
+
+    <script>
+        var urlBase = '@Url.Content("~")';
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-mask")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

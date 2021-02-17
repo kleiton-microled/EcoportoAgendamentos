@@ -1,0 +1,31 @@
+﻿<header>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-arrow-down"></i> Cadastros
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="@Url.Action("Index","Motoristas")">Motoristas</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Index","Veiculos")">Veículos</a></li>
+                        </ul>
+                    </li>
+
+                    @*@Html.Partial("Index", "Menu")*@
+                    @{Html.RenderAction("Index", "Menu");}
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>

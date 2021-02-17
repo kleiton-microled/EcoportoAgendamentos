@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://eprofesseonal.com/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://eprofesseonal.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://eprofesseonal.com/">
+      <s:element name="RetornaTabela">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornaTabelaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetornaTabelaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Excluir">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExcluirResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExcluirResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Executar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecutarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecutarResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecutarScalar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecutarScalarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecutarScalarResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Apontador">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sql" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApontadorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ApontadorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornaDadosReserva">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="reserva" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strusuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strsenha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="clsDadosIntegracao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_ReservaNr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_ClienteFanta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_Cliente_CNPJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_RefCliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_SCli_Fanta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_SCli_CNPJ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_DtReserva" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_TpCarga2" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ex_Quantidade" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_TipoVolume" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ex_Peso" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ex_Cubagem" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_Navio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_Descricao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_Identificador" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_Destino" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_Via" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_IMO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_ONU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ex_DeadLine" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensagemRetorno" type="tns:clsMensagemRetorno" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsMensagemRetorno">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CodigoRetorno" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mensagem" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RetornaDadosReservaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetornaDadosReservaResult" type="tns:clsDadosIntegracao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Routing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ceMercante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RaizCnpj" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strusuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strsenha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="clsDadosIntegracaoImp">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Container" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusBloqueado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Routing" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensagemRetorno" type="tns:clsMensagemRetorno" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RoutingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RoutingResult" type="tns:clsDadosIntegracaoImp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BloqueadoSN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ceMercante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RaizCnpj" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strusuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strsenha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BloqueadoSNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BloqueadoSNResult" type="tns:clsDadosIntegracaoImp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Container">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ceMercante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RaizCnpj" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strusuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strsenha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ContainerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ContainerResult" type="tns:clsDadosIntegracaoImp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RetornaTabelaSoapIn">
+    <wsdl:part name="parameters" element="tns:RetornaTabela" />
+  </wsdl:message>
+  <wsdl:message name="RetornaTabelaSoapOut">
+    <wsdl:part name="parameters" element="tns:RetornaTabelaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirSoapIn">
+    <wsdl:part name="parameters" element="tns:Excluir" />
+  </wsdl:message>
+  <wsdl:message name="ExcluirSoapOut">
+    <wsdl:part name="parameters" element="tns:ExcluirResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecutarSoapIn">
+    <wsdl:part name="parameters" element="tns:Executar" />
+  </wsdl:message>
+  <wsdl:message name="ExecutarSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecutarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecutarScalarSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecutarScalar" />
+  </wsdl:message>
+  <wsdl:message name="ExecutarScalarSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecutarScalarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApontadorSoapIn">
+    <wsdl:part name="parameters" element="tns:Apontador" />
+  </wsdl:message>
+  <wsdl:message name="ApontadorSoapOut">
+    <wsdl:part name="parameters" element="tns:ApontadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetornaDadosReservaSoapIn">
+    <wsdl:part name="parameters" element="tns:RetornaDadosReserva" />
+  </wsdl:message>
+  <wsdl:message name="RetornaDadosReservaSoapOut">
+    <wsdl:part name="parameters" element="tns:RetornaDadosReservaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RoutingSoapIn">
+    <wsdl:part name="parameters" element="tns:Routing" />
+  </wsdl:message>
+  <wsdl:message name="RoutingSoapOut">
+    <wsdl:part name="parameters" element="tns:RoutingResponse" />
+  </wsdl:message>
+  <wsdl:message name="BloqueadoSNSoapIn">
+    <wsdl:part name="parameters" element="tns:BloqueadoSN" />
+  </wsdl:message>
+  <wsdl:message name="BloqueadoSNSoapOut">
+    <wsdl:part name="parameters" element="tns:BloqueadoSNResponse" />
+  </wsdl:message>
+  <wsdl:message name="ContainerSoapIn">
+    <wsdl:part name="parameters" element="tns:Container" />
+  </wsdl:message>
+  <wsdl:message name="ContainerSoapOut">
+    <wsdl:part name="parameters" element="tns:ContainerResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConexaoMBSoap">
+    <wsdl:operation name="RetornaTabela">
+      <wsdl:input message="tns:RetornaTabelaSoapIn" />
+      <wsdl:output message="tns:RetornaTabelaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Excluir">
+      <wsdl:input message="tns:ExcluirSoapIn" />
+      <wsdl:output message="tns:ExcluirSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Executar">
+      <wsdl:input message="tns:ExecutarSoapIn" />
+      <wsdl:output message="tns:ExecutarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecutarScalar">
+      <wsdl:input message="tns:ExecutarScalarSoapIn" />
+      <wsdl:output message="tns:ExecutarScalarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Apontador">
+      <wsdl:input message="tns:ApontadorSoapIn" />
+      <wsdl:output message="tns:ApontadorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetornaDadosReserva">
+      <wsdl:input message="tns:RetornaDadosReservaSoapIn" />
+      <wsdl:output message="tns:RetornaDadosReservaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Routing">
+      <wsdl:input message="tns:RoutingSoapIn" />
+      <wsdl:output message="tns:RoutingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BloqueadoSN">
+      <wsdl:input message="tns:BloqueadoSNSoapIn" />
+      <wsdl:output message="tns:BloqueadoSNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Container">
+      <wsdl:input message="tns:ContainerSoapIn" />
+      <wsdl:output message="tns:ContainerSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConexaoMBSoap" type="tns:ConexaoMBSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetornaTabela">
+      <soap:operation soapAction="http://eprofesseonal.com/RetornaTabela" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Excluir">
+      <soap:operation soapAction="http://eprofesseonal.com/Excluir" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Executar">
+      <soap:operation soapAction="http://eprofesseonal.com/Executar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecutarScalar">
+      <soap:operation soapAction="http://eprofesseonal.com/ExecutarScalar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Apontador">
+      <soap:operation soapAction="http://eprofesseonal.com/Apontador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornaDadosReserva">
+      <soap:operation soapAction="http://eprofesseonal.com/RetornaDadosReserva" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Routing">
+      <soap:operation soapAction="http://eprofesseonal.com/Routing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BloqueadoSN">
+      <soap:operation soapAction="http://eprofesseonal.com/BloqueadoSN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Container">
+      <soap:operation soapAction="http://eprofesseonal.com/Container" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConexaoMBSoap12" type="tns:ConexaoMBSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RetornaTabela">
+      <soap12:operation soapAction="http://eprofesseonal.com/RetornaTabela" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Excluir">
+      <soap12:operation soapAction="http://eprofesseonal.com/Excluir" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Executar">
+      <soap12:operation soapAction="http://eprofesseonal.com/Executar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecutarScalar">
+      <soap12:operation soapAction="http://eprofesseonal.com/ExecutarScalar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Apontador">
+      <soap12:operation soapAction="http://eprofesseonal.com/Apontador" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornaDadosReserva">
+      <soap12:operation soapAction="http://eprofesseonal.com/RetornaDadosReserva" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Routing">
+      <soap12:operation soapAction="http://eprofesseonal.com/Routing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BloqueadoSN">
+      <soap12:operation soapAction="http://eprofesseonal.com/BloqueadoSN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Container">
+      <soap12:operation soapAction="http://eprofesseonal.com/Container" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConexaoMB">
+    <wsdl:port name="ConexaoMBSoap" binding="tns:ConexaoMBSoap">
+      <soap:address location="http://187.84.232.171/integracao/ConexaoMB.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConexaoMBSoap12" binding="tns:ConexaoMBSoap12">
+      <soap12:address location="http://187.84.232.171/integracao/ConexaoMB.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

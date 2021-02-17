@@ -1,0 +1,158 @@
+﻿@model Ecoporto.Posicionamento.Models.ViewModels.AgendamentoConteinerViewModel
+
+@{
+    ViewBag.Title = "Visualizar Programação";
+}
+
+<div class="row">
+    <div class="col-xl-12">
+
+        <section class="content-header">
+            <h1>
+                Programação de Contêiner
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Visualizar Agendamento</a>
+                </li>
+            </ol>
+        </section>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-search fa-lg"></i>
+                Detalhes da Programação
+                <div class="float-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-body pt-4">
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.NavioViagem)
+                        @Html.EditorFor(model => model.NavioViagem, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+                    </div>
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.Exportador)
+                        @Html.EditorFor(model => model.Exportador, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+                    </div>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(model => model.Porto)
+                        @Html.EditorFor(model => model.Porto, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.Reserva)
+                        @Html.EditorFor(model => model.Reserva, new { htmlAttributes = new { @class = "form-control-plaintext detalhes-reserva" } })
+                    </div>
+                </div>
+
+                <label>Contêineres Agendados</label>
+
+                <div class="row mt-2">
+
+                    @foreach (var conteiner in Model.ConteineresAgendados)
+                    {
+                        var icone = conteiner.Tamanho == 20 ? "icone-conteiner-20.png" : "icone-conteiner-40.png";
+
+                        <div class="form-group col-md-3 mb-0">
+                            <div class="chk-image-container">
+                                <img src="@Url.Content("~/Content/img/" + icone)" />
+                            </div>
+                            <div class="sem-quebra">
+                                @conteiner.Sigla
+                            </div>
+                            <small class="sem-quebra" style="position: relative; top: -7px; color: #778899;">
+                                @conteiner.TipoDescricao / @conteiner.Tamanho
+                            </small>
+
+                        </div>
+                    }
+
+                </div>
+
+                <div class="row mt-2">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.DataPrevista)
+                        @Html.EditorFor(model => model.DataPrevista, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                    @if (Model.MotivoId == 29)
+                    {
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.MotivoDescricao)
+                            @Html.EditorFor(model => model.MotivoDescricao, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.NovaViagemDescricao)
+                            @Html.EditorFor(model => model.NovaViagemDescricao, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group col-md-9">
+                            @Html.LabelFor(model => model.MotivoDescricao)
+                            @Html.EditorFor(model => model.MotivoDescricao, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                        <div id="pnlViagem" class="form-group col-md-2 invisivel">
+                            @Html.LabelFor(model => model.NovaViagemDescricao)
+                            @Html.EditorFor(model => model.NovaViagemDescricao, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    }
+                </div>
+
+                <div class="row mt-2">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.CpfCnpj)
+                        @Html.EditorFor(model => model.CpfCnpj, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                    <div class="form-group col-md-9">
+                        @Html.LabelFor(model => model.RazaoSocial)
+                        @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="alert alert-warning text-justify" role="alert">
+                            Aviso: Os pedidos de posicionamento serão aceitos de Segunda a Sexta-Feira, até as 19 horas do dia útil anterior a execução do serviço e aos Sábados até as 11 horas. Após este horário, a programação será válida somente para o dia útil subsequente.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <div class="float-left">
+                            <p>
+                                <a href="@Url.Action("Consultar", "AgendamentoConteiner")" class="btn btn-secondary">Retornar</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<br />
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            $('main')
+                .addClass('container')
+                .removeClass('container-fluid');
+        });
+    </script>
+}

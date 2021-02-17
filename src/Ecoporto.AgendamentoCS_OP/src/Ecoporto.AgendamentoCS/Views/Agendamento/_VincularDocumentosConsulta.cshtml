@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Ecoporto.AgendamentoCS.Models.Upload>
+@using Ecoporto.AgendamentoCS.Extensions
+
+<div id="_VincularDocumentosConsulta" class="table-responsive">
+    <table id="tblDocumentos" class="table table-hover table-sm" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col">Tipo Documento</th>
+                <th scope="col">Arquivo</th>
+                <th scope="col">Data Envio</th>
+                <th class="campo-acao">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var linha in Model)
+            {
+                <tr id="linha-documento-@linha.Id">
+                    <td>@linha.TipoDocumento</td>
+                    <td>
+                        @if (linha.Sharepoint)
+                        {
+                            <a href="@Url.Action("Download","Arquivos")?bookingCsItemId=@linha.BookingCsItemId&arquivoId=@linha.Id" target="_blank">@linha.Arquivo</a>
+                        }
+                        else
+                        {
+                            @linha.Arquivo
+                        }
+                    </td>
+                    <td>@linha.DataEnvio.DataHoraFormatada()</td>
+                    <td class="campo-acao">
+                        @if (linha.Liberado == false)
+                        {
+                            <a href="#" onclick="excluirUpload(@linha.Id)" class="btn btn-danger btn-sm btn-acao"><i class="fa fa-trash"></i></a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-secondary btn-sm btn-acao disabled"><i class="fa fa-trash"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

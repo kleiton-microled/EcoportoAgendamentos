@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Ecoporto.AgendamentoDEPOT.Models.Motorista>
+@using Ecoporto.AgendamentoDEPOT.Extensions
+
+<div class="table-responsive">
+    <table class="table table-sm" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="td-icone">&nbsp;</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CNH</th>
+                <th scope="col">Validade CNH</th>
+                <th scope="col">Observações</th>
+                <th class="campo-acao">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var cnhVencida = item.CNHVencida;
+                var cnhInativa = item.Inativo;
+                var classeLinha = cnhVencida ? "class=linha-invalida" : "";
+
+            <tr id="linha-@item.Id" @classeLinha>
+
+                <td class="td-icone">
+                    @if (cnhVencida)
+                    {
+                        <img src="@Url.Content("~/Content/img/usuario-invalido.png")" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Content/img/usuario-valido.png")" />
+                    }
+                </td>
+
+                <td>@item.Nome</td>
+                <td>@item.CNH</td>
+
+                @if (cnhVencida)
+                {
+                    <td class="text-danger negrito">@item.ValidadeCNH.DataFormatada()</td>
+                }
+                else
+                {
+                    <td>@item.ValidadeCNH.DataFormatada()</td>
+                }
+
+                @if (cnhVencida && !cnhInativa)
+                {
+                    <td>CNH vencida</td>
+                }
+                else if (!cnhVencida && cnhInativa)
+                {
+                    <td class="text-danger">CNH bloqueada no Terminal</td>
+                }
+                else if (cnhVencida && cnhInativa)
+                {
+                    <td class="text-danger">CNH vencida e bloqueada no Terminal</td>
+                }
+                else
+                {
+                    <td>&nbsp;</td>
+                }
+
+
+                @if (cnhVencida || cnhInativa)
+                {
+                    <td><a href="#" class="btn btn-link disabled"><i class="far fa-check-circle disabled"></i></a></td>
+                }
+                else
+                {
+                    <td><a href="#" onclick="selecionarMotorista(@item.Id, '@item.Nome.Replace("'","")')"><i class="far fa-check-circle"></i></a></td>
+                }
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

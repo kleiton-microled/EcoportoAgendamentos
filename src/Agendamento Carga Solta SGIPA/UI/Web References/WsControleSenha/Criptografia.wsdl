@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="EncriptarTabela">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nomeSistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EncriptarTabelaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EncriptarTabelaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DescriptarTabela">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nomeSistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DescriptarTabelaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DescriptarTabelaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterVersao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nomeSistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterVersaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterVersaoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterTabelaLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nomeSistema" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterTabelaLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterTabelaLoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="usuLogOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tabela" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="usuLogOutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuLogOutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tabela" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidarUsuarioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuarioCPF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tabela" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cpf" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarUsuarioCPFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidarUsuarioCPFResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alterarSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="novaSenha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tabela" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alterarSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="alterarSenhaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornaSenhaBD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="schema" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="baseHomologacao" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RetornaSenhaBDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RetornaSenhaBDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EncriptarTabelaSoapIn">
+    <wsdl:part name="parameters" element="tns:EncriptarTabela" />
+  </wsdl:message>
+  <wsdl:message name="EncriptarTabelaSoapOut">
+    <wsdl:part name="parameters" element="tns:EncriptarTabelaResponse" />
+  </wsdl:message>
+  <wsdl:message name="DescriptarTabelaSoapIn">
+    <wsdl:part name="parameters" element="tns:DescriptarTabela" />
+  </wsdl:message>
+  <wsdl:message name="DescriptarTabelaSoapOut">
+    <wsdl:part name="parameters" element="tns:DescriptarTabelaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterVersaoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterVersao" />
+  </wsdl:message>
+  <wsdl:message name="ObterVersaoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterVersaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObterTabelaLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterTabelaLogin" />
+  </wsdl:message>
+  <wsdl:message name="ObterTabelaLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterTabelaLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="usuLogOutSoapIn">
+    <wsdl:part name="parameters" element="tns:usuLogOut" />
+  </wsdl:message>
+  <wsdl:message name="usuLogOutSoapOut">
+    <wsdl:part name="parameters" element="tns:usuLogOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioCPFSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioCPF" />
+  </wsdl:message>
+  <wsdl:message name="ValidarUsuarioCPFSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarUsuarioCPFResponse" />
+  </wsdl:message>
+  <wsdl:message name="alterarSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:alterarSenha" />
+  </wsdl:message>
+  <wsdl:message name="alterarSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:alterarSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="RetornaSenhaBDSoapIn">
+    <wsdl:part name="parameters" element="tns:RetornaSenhaBD" />
+  </wsdl:message>
+  <wsdl:message name="RetornaSenhaBDSoapOut">
+    <wsdl:part name="parameters" element="tns:RetornaSenhaBDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CriptografiaSoap">
+    <wsdl:operation name="EncriptarTabela">
+      <wsdl:input message="tns:EncriptarTabelaSoapIn" />
+      <wsdl:output message="tns:EncriptarTabelaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DescriptarTabela">
+      <wsdl:input message="tns:DescriptarTabelaSoapIn" />
+      <wsdl:output message="tns:DescriptarTabelaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterVersao">
+      <wsdl:input message="tns:ObterVersaoSoapIn" />
+      <wsdl:output message="tns:ObterVersaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObterTabelaLogin">
+      <wsdl:input message="tns:ObterTabelaLoginSoapIn" />
+      <wsdl:output message="tns:ObterTabelaLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="usuLogOut">
+      <wsdl:input message="tns:usuLogOutSoapIn" />
+      <wsdl:output message="tns:usuLogOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuario">
+      <wsdl:input message="tns:ValidarUsuarioSoapIn" />
+      <wsdl:output message="tns:ValidarUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioCPF">
+      <wsdl:input message="tns:ValidarUsuarioCPFSoapIn" />
+      <wsdl:output message="tns:ValidarUsuarioCPFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alterarSenha">
+      <wsdl:input message="tns:alterarSenhaSoapIn" />
+      <wsdl:output message="tns:alterarSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RetornaSenhaBD">
+      <wsdl:input message="tns:RetornaSenhaBDSoapIn" />
+      <wsdl:output message="tns:RetornaSenhaBDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CriptografiaSoap" type="tns:CriptografiaSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EncriptarTabela">
+      <soap:operation soapAction="http://tempuri.org/EncriptarTabela" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DescriptarTabela">
+      <soap:operation soapAction="http://tempuri.org/DescriptarTabela" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterVersao">
+      <soap:operation soapAction="http://tempuri.org/ObterVersao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterTabelaLogin">
+      <soap:operation soapAction="http://tempuri.org/ObterTabelaLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="usuLogOut">
+      <soap:operation soapAction="http://tempuri.org/usuLogOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuario">
+      <soap:operation soapAction="http://tempuri.org/ValidarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioCPF">
+      <soap:operation soapAction="http://tempuri.org/ValidarUsuarioCPF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarSenha">
+      <soap:operation soapAction="http://tempuri.org/alterarSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornaSenhaBD">
+      <soap:operation soapAction="http://tempuri.org/RetornaSenhaBD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CriptografiaSoap12" type="tns:CriptografiaSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EncriptarTabela">
+      <soap12:operation soapAction="http://tempuri.org/EncriptarTabela" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DescriptarTabela">
+      <soap12:operation soapAction="http://tempuri.org/DescriptarTabela" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterVersao">
+      <soap12:operation soapAction="http://tempuri.org/ObterVersao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObterTabelaLogin">
+      <soap12:operation soapAction="http://tempuri.org/ObterTabelaLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="usuLogOut">
+      <soap12:operation soapAction="http://tempuri.org/usuLogOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ValidarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidarUsuarioCPF">
+      <soap12:operation soapAction="http://tempuri.org/ValidarUsuarioCPF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alterarSenha">
+      <soap12:operation soapAction="http://tempuri.org/alterarSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetornaSenhaBD">
+      <soap12:operation soapAction="http://tempuri.org/RetornaSenhaBD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Criptografia">
+    <wsdl:port name="CriptografiaSoap" binding="tns:CriptografiaSoap">
+      <soap:address location="http://localhost:12650/Criptografia.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CriptografiaSoap12" binding="tns:CriptografiaSoap12">
+      <soap12:address location="http://localhost:12650/Criptografia.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

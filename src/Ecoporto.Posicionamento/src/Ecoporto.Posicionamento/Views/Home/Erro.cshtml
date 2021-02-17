@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Ecoporto :: Agendamento - Erro";
+}
+
+<div class="container">
+    <div class="jumbotron mt-3">
+
+        <h1>Ocorreu um erro!</h1>
+
+        <p class="lead"></p>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <strong>Data / Hora:</strong>
+            </div>
+            <div class="col-md-10">
+                <span class="text-danger">@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <strong>Mensagem:</strong>
+            </div>
+            <div class="col-md-10">
+                <span class="text-danger">
+                    @HttpContext.Current.Session["LastException"]
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>

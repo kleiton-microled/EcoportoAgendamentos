@@ -1,0 +1,275 @@
+﻿@model Ecoporto.Portal.Models.ViewModels.MotoristaViewModel
+@using Ecoporto.Portal.Helpers
+
+@{
+    ViewBag.Title = "Cadastrar Motoristas";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <section class="content-header">
+            <h1>
+                Gerenciamento de Motoristas
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Motoristas</a>
+                </li>
+                <li class="active">Cadastrar Motoristas</li>
+            </ol>
+        </section>
+
+        @using (Ajax.BeginForm("Cadastrar", "Motoristas", null, new AjaxOptions
+        {
+            OnSuccess = "mensagemSucesso",
+            OnFailure = "mensagemErro",
+            HttpMethod = "POST"
+        }, new { id = "frmCadastroAgendamento" }))
+        {
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit fa-lg"></i>
+                    Detalhes do Motorista
+                    <div class="float-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                @Html.ValidarFormulario(ViewContext.ViewData.ModelState, false)
+
+                                <div id="pnlMotoristaChronos" class="alert alert-info alert-dismissible fade show invisivel" role="alert">
+                                    <strong>Motorista encontrado!</strong> Atualize somente os campos necessários
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div id="msgSucesso" class="invisivel alert alert-success" role="alert">
+                                    Motorista cadastrado com sucesso!
+                                </div>
+
+                                <div class="form-group">
+                                    <div id="msgErro" class="invisivel alert alert-danger" role="alert"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.CNH)
+                            @Html.EditorFor(model => model.CNH, new { htmlAttributes = new { @class = "form-control", maxlength = "15", autofocus = "autofocus" } })
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="btnPesquisarCNH">&nbsp;</label>
+                            <a id="btnPesquisarCNH" href="#" class="btn btn-outline-info btn-block btn-as-block" onclick="PesquisarCNH(this)"><i class="fas fa-search"></i>&nbsp;&nbsp;Pesquisar</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            @Html.LabelFor(model => model.Nome)
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.ValidadeCNH)
+                            @Html.EditorFor(model => model.ValidadeCNH, new { htmlAttributes = new { @class = "form-control data", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.RG)
+                            @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @class = "form-control", maxlength = "15", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.CPF)
+                            @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control cpf", maxlength = "14", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.Celular)
+                            @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control celular", maxlength = "15", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.Nextel)
+                            @Html.EditorFor(model => model.Nextel, new { htmlAttributes = new { @class = "form-control", maxlength = "20", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-2">
+                            @Html.LabelFor(model => model.MOP)
+                            @Html.EditorFor(model => model.MOP, new { htmlAttributes = new { @class = "form-control", maxlength = "15", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.UltimaAlteracao)
+                            @Html.EditorFor(model => model.UltimaAlteracao, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <a href="@Url.Action("Index", "Motoristas")" class="btn btn-secondary btn-block">Retornar</a>
+                        </div>
+                        <div class="form-group col-md-2 offset-md-8">
+                            <button id="btnSalvarMotorista" type="submit" class="btn btn-info btn-block">Salvar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('main')
+                .addClass('container')
+                .removeClass('container-fluid');
+        });
+
+        function PesquisarCNH(target) {
+
+            event.preventDefault();
+
+            $('#' + target.id)
+                .html('<i class="fa fa-spinner fa-spin"></i> aguarde...')
+                .addClass('disabled');
+
+            $.get('@Url.Action("PesquisarCNH", "Motoristas")' + '?cnh=' + $('#CNH').val(), function (resultado) {
+
+                if (resultado) {
+
+                    $('#Nome').empty().val(resultado.Nome).prop('readonly', true);
+                    $('#RG').empty().val(resultado.RG).prop('readonly', true);
+                    $('#CPF').empty().val(resultado.CPF).prop('readonly', true);
+
+                    $('#ValidadeCNH').empty().val(resultado.ValidadeCNH);
+                    $('#Celular').empty().val(resultado.Celular);
+
+                    $('#UltimaAlteracao').empty().val(resultado.UltimaAlteracao).prop('readonly', true);
+
+                    $('#msgErro')
+                        .html('').addClass('invisivel');
+
+                    $('#pnlMotoristaChronos').removeClass('invisivel');
+
+                } else {
+
+                    $('#Nome').empty().prop('readonly', false);
+                    $('#RG').empty().prop('readonly', false);
+                    $('#CPF').empty().prop('readonly', false);
+
+                    $('#pnlMotoristaChronos').addClass('invisivel');
+                }
+
+                $('#ValidadeCNH').prop('readonly', false);
+                $('#Celular').prop('readonly', false);
+                $('#Nextel').prop('readonly', false);
+                $('#MOP').prop('readonly', false);
+
+            }).fail(function (data) {
+                toastr.error(data.statusText, 'Motoristas');
+            }).always(function () {
+                $('#' + target.id)
+                    .html('<i class="fas fa-search"></i>  Pesquisar')
+                    .removeClass('disabled');
+            });
+        }
+
+        $('#btnSalvarMotorista').click(function () {
+
+            $(this)
+                .html('<i class="fa fa-spinner fa-spin"></i> aguarde...')
+                .addClass('disabled');
+
+            $('#msgErro')
+                .html('').addClass('invisivel');
+        });
+
+        var mensagemSucesso = function (xhr, status) {
+
+            $('#msgErro')
+                .html('').addClass('invisivel');
+
+            $('#pnlMotoristaChronos').addClass('invisivel');
+
+            $('#msgSucesso')
+                .removeClass('invisivel');
+
+            $('#btnSalvarMotorista')
+                .html('Salvar')
+                .removeClass('disabled');
+        };
+
+        var mensagemErro = function (xhr, status) {
+
+            $('#msgSucesso')
+                .addClass('invisivel');
+
+            $('#btnSalvarMotorista')
+                .html('Salvar')
+                .removeClass('disabled');
+
+            mostrarErrosResponse(xhr);
+        };
+
+        function mostrarErrosResponse(data) {
+
+            var retorno = data.responseJSON;
+
+            if (retorno.erros != null) {
+
+                $('#msgErro')
+                    .html('');
+
+                if (retorno.erros.length === 1) {
+
+                    var erro = retorno.erros[0];
+
+                    $('#msgErro')
+                        .removeClass('invisivel')
+                        .html(erro.ErrorMessage);
+                }
+
+                if (retorno.erros.length > 1) {
+
+                    retorno.erros.map(function (erro) {
+                        $('#msgErro').append('<li>' + erro.ErrorMessage + '</li>');
+                    });
+                }
+
+                $('#msgErro')
+                    .removeClass('invisivel');
+
+                $(window).scrollTop(0);
+            }
+        }
+
+    </script>
+}

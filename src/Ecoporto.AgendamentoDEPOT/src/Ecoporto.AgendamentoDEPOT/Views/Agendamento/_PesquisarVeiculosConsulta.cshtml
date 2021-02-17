@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Ecoporto.AgendamentoDEPOT.Models.Veiculo>
+@using Ecoporto.AgendamentoDEPOT.Extensions
+
+<div class="table-responsive">
+    <table class="table table-sm" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="td-icone">&nbsp;</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Cavalo</th>
+                <th scope="col">Carreta</th>
+                <th class="campo-acao">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="linha-@item.Id">
+
+                    <td class="td-icone">
+                        <img src="@Url.Content("~/Content/img/icone-veiculo.png")" />
+                    </td>
+
+                    <td>@item.TipoCaminhaoDescricao</td>
+                    <td>@item.Cavalo</td>
+                    <td>@item.Carreta</td>                   
+                    <td><a href="#" onclick="selecionarVeiculo(@item.Id, '@item.TipoCaminhaoDescricao / @item.Cavalo / @item.Carreta')"><i class="far fa-check-circle"></i></a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

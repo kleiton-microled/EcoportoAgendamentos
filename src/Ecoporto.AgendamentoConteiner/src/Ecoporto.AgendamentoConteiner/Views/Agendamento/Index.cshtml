@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Ecoporto.AgendamentoConteiner.Models.DTO.AgendamentoDTO>
+@using Ecoporto.AgendamentoConteiner.Enums
+@using Ecoporto.AgendamentoConteiner.Extensions
+
+@{
+    ViewBag.Title = "Consultar Agendamentos";
+}
+
+<section class="content-header">
+    <h1>
+        Meus Agendamentos
+            </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>Home
+            </a>
+        </li>
+        <li>
+            <a href="#">Consultar Agendamentos</a>
+        </li>
+    </ol>
+</section>
+
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-table fa-lg"></i>
+        Agendamentos
+        <div class="float-right">
+            <a href="@Url.Action("Cadastrar", "Agendamento")" class="btn btn-info btn-sm btn-novo"><i class="fa fa-edit"></i>&nbsp;Novo Agendamento</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="datatables" class="table table-hover table-sm" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="td-icone">&nbsp;</th>
+                        <th scope="col">Motorista</th>
+                        <th scope="col">Veículo</th>
+                        <th scope="col">Período</th>
+                        <th scope="col">Reserva</th>
+                        <th scope="col">Contêiner</th>
+                        <th scope="col">Protocolo</th>
+                        <th scope="col">Impresso</th>
+                        <th scope="col">Data Entrada</th>
+                        <th scope="col">Status</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.PossuiEntrada == false)
+                        {
+                            <tr id="item-@item.Id">
+                                <td class="td-icone">
+                                    <img src="@Url.Content("~/Content/img/icone-conteiner-20.png")" />
+                                </td>
+                                <td class="sem-quebra">@item.MotoristaDescricao</td>
+                                <td class="sem-quebra">@item.VeiculoDescricao</td>
+                                <td class="sem-quebra">@item.PeriodoDescricao</td>
+                                <td>@Html.Raw(item.Reserva?.Replace(",", "<br />"))</td>
+                                <td>@Html.Raw(item.Conteineres?.Replace(",", "<br />"))</td>
+                                <td>
+                                    @if (item.StatusAgendamento == StatusAgendamento.Concluido)
+                                    {
+                                        <a href="@Url.Action("Protocolo","Agendamento")/@item.Id" target="_blank">@(string.Concat(@item.Protocolo?.PadLeft(6, '0'), "/", @item.AnoProtocolo))</a>
+                                    }
+                                </td>
+                                <td class="text-center">@Html.Raw(item.Impresso ? "<i class='far fa-check-square'></i>" : "<i class='far fa-square'></i>") </td>
+                                <td>@item.DataEntrada</td>
+                                <td>@Html.Raw(item.StatusAgendamento == StatusAgendamento.Pendente ? "<span class='badge badge-warning'>Pendente</span>" : "<span class='badge badge-success'>Concluído</span>") </td>
+                                <td class="campo-acao">
+                                    <a href="@Url.Action("Atualizar","Agendamento")/@item.Id" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a href="#" onclick="Excluir(@item.Id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="linha-desabilitada" id="item-@item.Id">
+                                <td class="td-icone">
+                                    <img src="@Url.Content("~/Content/img/icone-conteiner-20.png")" />
+                                </td>
+                                <td class="sem-quebra">@item.MotoristaDescricao</td>
+                                <td class="sem-quebra">@item.VeiculoDescricao</td>
+                                <td class="sem-quebra">@item.PeriodoDescricao</td>
+                                <td>@Html.Raw(item.Reserva?.Replace(",", "<br />"))</td>
+                                <td>@Html.Raw(item.Conteineres?.Replace(",", "<br />"))</td>
+                                <td>                                    
+                                    @if (item.StatusAgendamento == StatusAgendamento.Concluido)
+                                    {
+                                    <a href="@Url.Action("Protocolo","Agendamento")/@item.Id" target="_blank" class="lnk-desabilitado">@(string.Concat(@item.Protocolo.PadLeft(6, '0'), "/", @item.AnoProtocolo))</a>
+                                    }
+                                </td>
+                                <td class="text-center">@Html.Raw(item.Impresso ? "<i class='far fa-check-square'></i>" : "<i class='far fa-square'></i>") </td>
+                                <td>@item.DataEntrada</td>
+                                <td>@Html.Raw(item.StatusAgendamento == StatusAgendamento.Pendente ? "<span class='badge badge-warning'>Pendente</span>" : "<span class='badge badge-success'>Concluído</span>") </td>
+                                <td class="campo-acao">
+                                    <a href="@Url.Action("Visualizar","Agendamento")/@item.Id" class="btn btn-secondary btn-sm"><i class="fa fa-search"></i></a>
+                                    <a href="#" class="btn btn-secondary btn-sm disabled"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("_ModalExclusao")
+
+@section Css{
+    @Styles.Render("~/bundles/datatablesCSS")
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+
+         $(document).ready(function () {
+
+            var langUrl = "@Url.Content("~/Content/plugins/datatables/language/pt-br.json")";
+
+             $('#datatables').DataTable({
+                "language": {
+                    "url": langUrl
+                }
+            });
+         });
+
+        function Excluir(id) {
+
+            $('#modal-mensagem').text('Confirma a exclusão do Agendamento?');
+            $('#del-modal').data('id', id).modal('show');
+        }
+
+        function ConfirmarExclusao() {
+
+            var _url = '@Url.Action("Excluir")';
+
+            var _id = $('#del-modal')
+                .data('id');
+
+            $.post(_url, { id: _id })
+                .done(function (data, statusText, xhr) {
+                    toastr.success('Agendamento excluído com sucesso!', 'Agendamento');
+                    $('#item-' + _id).remove();
+                }).fail(function (data) {
+
+                    if (data.statusText !== '') {
+                        toastr.error(data.statusText, 'Agendamento');
+                    } else {
+                        toastr.error('O registro não pode ser excluído', 'Agendamento');
+                    }
+                }).always(function () {
+                    $('#del-modal')
+                        .data('id', '0')
+                        .modal('hide');
+                });
+        }
+
+    </script>
+}

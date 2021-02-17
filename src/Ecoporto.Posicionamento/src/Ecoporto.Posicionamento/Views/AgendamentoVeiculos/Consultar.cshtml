@@ -1,0 +1,267 @@
+﻿@model Ecoporto.Posicionamento.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.Posicionamento.Extensions
+
+@{
+    ViewBag.Title = "Consultar Agendamentos";
+}
+
+<section class="content-header">
+    <h1>
+        Programações de Veículos
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>Home
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Consultar","AgendamentoVeiculos")">Consultar Agendamentos</a>
+        </li>
+    </ol>
+</section>
+
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-table fa-lg"></i>
+        Meus Agendamentos
+        <div class="float-right">
+            <a href="@Url.Action("Agendar", "AgendamentoVeiculos")" class="btn btn-info btn-sm btn-novo"><i class="fa fa-edit"></i>&nbsp;Nova Programação</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="msgErro" class="invisivel alert alert-danger mt-2" role="alert"></div>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="ativos-tab" data-toggle="tab" href="#ativos" role="tab" aria-controls="ativos" aria-selected="true">Agendados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="cancelados-tab" data-toggle="tab" href="#cancelados" role="tab" aria-controls="cancelados" aria-selected="false">Cancelados</a>
+            </li>            
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="ativos" role="tabpanel" aria-labelledby="ativos-tab">
+
+                <div class="table-responsive mt-3">
+                    <table id="tblAgendados" class="table table-hover table-sm" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="td-icone">&nbsp;</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Reserva</th>
+                                <th scope="col">Navio / Viagem</th>
+                                <th scope="col">Line</th>
+                                <th scope="col">Exportador</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col">Data Prev.</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Agendados)
+                            {
+                                <tr id="linha-@item.Id">
+                                    <td class="td-icone">
+                                        <img src="@Url.Content("~/Content/img/icone-carro.png")" />
+                                    </td>
+                                    <td>@item.Chassis</td>
+                                    <td>@item.Reserva</td>
+                                    <td>@item.Viagem</td>
+                                    <td>@item.Line</td>
+                                    <td>@item.Exportador</td>
+                                    <td>@item.Motivo</td>
+                                    <td>@item.DataPrevista.DataFormatada()</td>
+
+                                    <td class="text-right sem-quebra">
+                                        <a id="btnProtocolo-@item.Id" href="@Url.Action("Protocolo","AgendamentoVeiculos", new { id = item.Id  })" target="_blank" class="mr-2">
+                                            <img src="@Url.Content("~/Content/img/icone-impressora.png")" alt="imprimir" title="imprimir" />
+                                        </a>
+                                        <a id="btnVisualizar-@item.Id" href="@Url.Action("Visualizar","AgendamentoVeiculos", new { id = item.Id })" class="mr-2">
+                                            <img src="@Url.Content("~/Content/img/icone-visualizar.png")" alt="visualizar" title="visualizar" />
+                                        </a>
+                                        <a id="btnCancelar-@item.Id" href="#" onclick="Cancelar(@item.Id)">
+                                            <img src="@Url.Content("~/Content/img/icone-cancelar.png")" alt="cancelar" title="cancelar" />
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="cancelados" role="tabpanel" aria-labelledby="cancelados-tab">
+
+                <div class="table-responsive mt-3">
+                    <table id="tblCancelados" class="table table-hover table-sm" cellspacing="0">
+
+                        <thead>
+                            <tr>
+                                <th class="td-icone">&nbsp;</th>
+                                <th scope="col">Chassi</th>
+                                <th scope="col">Reserva</th>
+                                <th scope="col">Navio / Viagem</th>
+                                <th scope="col">Line</th>
+                                <th scope="col">Exportador</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col">Data Prev.</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Cancelados)
+                            {
+                                <tr id="linha-@item.Id">
+                                    <td class="td-icone">
+                                        <img src="@Url.Content("~/Content/img/icone-carro.png")" />
+                                    </td>
+                                    <td>@item.Chassis</td>
+                                    <td>@item.Reserva</td>
+                                    <td>@item.Viagem</td>
+                                    <td>@item.Line</td>
+                                    <td>@item.Exportador</td>
+                                    <td>@item.Motivo</td>
+                                    <td>@item.DataPrevista.DataFormatada()</td>
+
+                                    <td class="text-right sem-quebra">
+                                        <a href="@Url.Action("ProtocoloCancelamento","AgendamentoVeiculos", new { id = item.Id  })" target="_blank" class="mr-2">
+                                            <img src="@Url.Content("~/Content/img/icone-impressora.png")" alt="imprimir" title="imprimir" />
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+<div data-id="0" class="modal" tabindex="-1" role="dialog" id="cancelar-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancelar Programação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Confirma o Cancelamento da Programação selecionada? Esta operação não pode ser desfeita!</p>
+
+                <div class="form-group">
+                    <label for="lblMotivoCancelamento">Informe o Motivo:</label>
+                    <textarea class="form-control" id="txtMotivoCancelamento" rows="3" maxlength="250"></textarea>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="ConfirmarCancelamento()">Estou ciente e confirmo o cancelamento</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Css{
+    @Styles.Render("~/bundles/datatablesCSS")
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+
+         $(document).ready(function () {
+
+            var langUrl = "@Url.Content("~/Content/plugins/datatables/language/pt-br.json")";
+
+             $('#tblAgendados, #tblCancelados').DataTable({
+                 "aoColumnDefs": [
+                   {
+                      "bSortable": false,
+                      "aTargets": [ 0 ]
+                     }
+                 ],
+                 "order": [
+                     [1, "desc"]
+                 ],
+                "language": {
+                    "url": langUrl
+                }
+            });
+         });
+
+        function Cancelar(id) {
+
+            $('#cancelar-modal')
+                .data('id', id).modal('show');
+        }
+
+        function ConfirmarCancelamento() {
+
+            var _url = '@Url.Action("Cancelar")';
+
+            var _id = $('#cancelar-modal')
+                .data('id');
+
+            var _motivo = $('#txtMotivoCancelamento').val();
+
+            $.post(_url, { id: _id, motivo: _motivo })
+                .done(function (data, statusText, xhr) {
+
+                    toastr.success('Programação cancelada com sucesso!', 'Agendamento');
+
+                    var $linhaCancelamento = $('#linha-' + _id);
+
+                    $linhaCancelamento.find('#btnVisualizar-' + _id).remove();
+                    $linhaCancelamento.find('#btnCancelar-' + _id).remove();
+
+                    $linhaCancelamento.find('#btnProtocolo-' + _id).attr('href', 'ProtocoloCancelamento/' + _id);
+                    
+                    var $primeiraLinhaGridCancelados = $("#tblCancelados tbody tr:first-child");
+
+                    if ($primeiraLinhaGridCancelados.text() === 'Nenhum registro encontrado')
+                        $primeiraLinhaGridCancelados.remove();
+
+                    $('#tblCancelados tbody').append('<tr>' + $linhaCancelamento.html() + '</tr>');
+
+                    $linhaCancelamento.remove();
+
+                    $('#txtMotivoCancelamento').val('');
+
+                }).fail(function (data) {
+
+                    var response = data.responseJSON;
+                    var erro = response.erros[0];
+
+                    $('#msgErro')
+                        .removeClass('invisivel')
+                        .html(erro.ErrorMessage);
+
+                }).always(function () {
+                    $('#cancelar-modal')
+                        .data('id', '0')
+                        .modal('hide');
+                });
+        }
+
+    </script>
+}

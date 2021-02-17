@@ -1,0 +1,33 @@
+﻿@model  IEnumerable<Ecoporto.AgendamentoConteiner.Models.NotaFiscal>
+
+@{
+    var classe = Model.Any() ? "" : "invisivel";
+}
+
+<div id="pnlDanfes" class="table-responsive">
+    <table id="tblDanfes" class="table table-sm @classe">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="td-icone">&nbsp;</th>
+                <th scope="col">Contêiner</th>
+                <th scope="col">DANFE</th>
+                @*<th scope="col">CFOP</th>*@
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="td-icone">
+                        <img src="@Url.Content("~/Content/img/icone-nf.png")" />
+                    </td>
+                    <td>@item.SiglaConteiner</td>
+                    <td>@item.Danfe</td>
+                    @*<td>@item.CFOP</td>*@
+                    <td class="campo-acao"><a href="#" onclick="excluirDanfe(@item.Id, '@item.SiglaConteiner')" class="btn btn-danger btn-sm btn-excluir-danfe"><i class="fa fa-trash"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

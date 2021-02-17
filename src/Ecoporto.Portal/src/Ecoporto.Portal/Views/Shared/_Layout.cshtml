@@ -1,0 +1,89 @@
+﻿@using Ecoporto.Portal.Extensions
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ecoporto Santos :: Agendamento Carga Solta OP</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="icon" href="@Url.Content("~/Content/img/favicon.ico")" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+    @Styles.Render("~/bundles/css")
+    @RenderSection("Css", required: false)
+</head>
+
+<body>
+
+    <div id="header-top">
+        <a href="@Url.Action("Index","Home")">
+            <div id="header-logo"></div>
+        </a>
+
+        <div id="header-box-menu">
+            <ul>
+                <li><i class="fas fa-user"></i> </li>
+                <li>
+                    <span style="padding-top:2px; line-height:normal; width: 200px; position: absolute; margin-right:6px;">
+                        <strong>@User.ObterEmpresaDescricaoCurta()</strong> <br /><small>CNPJ: @User.ObterEmpresaCNPJ()</small>
+                    </span>
+                </li>
+                <li class="right"><i class="fas fa-power-off"></i><a href="@Url.Action("Logout","Home")">Sair</a></li>
+            </ul>
+        </div>
+    </div>
+
+    @Html.Partial("_Menus")
+
+    <main role="main" class="container">
+
+        <div id="pnlModalCarregando" class="modal fade bd-example-modal-lg" aria-modal="true" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 48px">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid">
+
+            <div class="float-right text-white">
+                <div class="redes-sociais">
+                    <a href="https://www.facebook.com/ecoportosantosoficial?ref=hl" class="icon fb-icone" target="_blank">
+                    </a>
+                    <a href="http://www.linkedin.com/company/tecondi?trk=company_name" class="icon linkedin-icone" target="_blank">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCMDp4ygaIQ9Z1DgqKeLxYXw/feed" target="_blank" class="icon youtube-icone">
+                    </a>
+                </div>
+            </div>
+            <span class="text-white">
+                Copyright &copy; @DateTime.Now.Year
+                <a class="text-white" href="http://www.ecoportosantos.com.br">Ecoporto Santos</a>
+            </span>
+        </div>
+
+    </footer>
+
+    <script>
+        var urlBase = '@Url.Content("~")';
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-mask")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

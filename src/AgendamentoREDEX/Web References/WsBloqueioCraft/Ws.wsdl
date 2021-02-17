@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BloqueioCRAFT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LotePesquisa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CPF" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BloqueioCRAFTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BloqueioCRAFTResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ler_EDI_Craft">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pARQUIVO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="XMLDOC_B" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ler_EDI_CraftResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Ler_EDI_CraftResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BloqueioCRAFTSoapIn">
+    <wsdl:part name="parameters" element="tns:BloqueioCRAFT" />
+  </wsdl:message>
+  <wsdl:message name="BloqueioCRAFTSoapOut">
+    <wsdl:part name="parameters" element="tns:BloqueioCRAFTResponse" />
+  </wsdl:message>
+  <wsdl:message name="Ler_EDI_CraftSoapIn">
+    <wsdl:part name="parameters" element="tns:Ler_EDI_Craft" />
+  </wsdl:message>
+  <wsdl:message name="Ler_EDI_CraftSoapOut">
+    <wsdl:part name="parameters" element="tns:Ler_EDI_CraftResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WsSoap">
+    <wsdl:operation name="BloqueioCRAFT">
+      <wsdl:input message="tns:BloqueioCRAFTSoapIn" />
+      <wsdl:output message="tns:BloqueioCRAFTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Ler_EDI_Craft">
+      <wsdl:input message="tns:Ler_EDI_CraftSoapIn" />
+      <wsdl:output message="tns:Ler_EDI_CraftSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsSoap" type="tns:WsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BloqueioCRAFT">
+      <soap:operation soapAction="http://tempuri.org/BloqueioCRAFT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ler_EDI_Craft">
+      <soap:operation soapAction="http://tempuri.org/Ler_EDI_Craft" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsSoap12" type="tns:WsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BloqueioCRAFT">
+      <soap12:operation soapAction="http://tempuri.org/BloqueioCRAFT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ler_EDI_Craft">
+      <soap12:operation soapAction="http://tempuri.org/Ler_EDI_Craft" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Ws">
+    <wsdl:port name="WsSoap" binding="tns:WsSoap">
+      <soap:address location="http://localhost:18771/Ws.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WsSoap12" binding="tns:WsSoap12">
+      <soap12:address location="http://localhost:18771/Ws.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

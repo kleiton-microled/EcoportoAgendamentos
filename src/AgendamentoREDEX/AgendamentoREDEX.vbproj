@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{EC86F485-8D43-4DB4-B059-1E246349BFC2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AgendamentoREDEX</RootNamespace>
+    <AssemblyName>AgendamentoREDEX</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>AgendamentoREDEX.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>AgendamentoREDEX.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.60501.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AgendarCS.aspx" />
+    <Content Include="AlterarMotoristas.aspx" />
+    <Content Include="AlterarVeiculos.aspx" />
+    <Content Include="CadastrarMotoristas.aspx" />
+    <Content Include="CadastrarVeiculos.aspx" />
+    <Content Include="CodigoBarra.aspx" />
+    <Content Include="AgendarCNTR.aspx" />
+    <Content Include="ConsultarAgendamentosCNTR.aspx" />
+    <Content Include="ConsultarAgendamentosCargaSolta.aspx" />
+    <Content Include="CadastroReservas.aspx" />
+    <Content Include="AgendarCSCarregamento.aspx" />
+    <Content Include="ConsultarAgendamentosCargaSoltaCarregamento.aspx" />
+    <Content Include="ConsultarAgendamentosCNTRCarregamento.aspx" />
+    <Content Include="AgendarCNTRCarregamento.aspx" />
+    <Content Include="ConsultarMotoristas.aspx" />
+    <Content Include="ConsultarVeiculos.aspx" />
+    <Content Include="EscolheReserva.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="imagens\favicon.ico" />
+    <Content Include="imagens\LogoTop.png" />
+    <Content Include="imagens\nfe.jpg" />
+    <Content Include="Index.aspx" />
+    <Content Include="js\jquery.confirm.js" />
+    <Content Include="js\jquery.confirm.min.js" />
+    <Content Include="js\jquery.mask.js" />
+    <Content Include="ProtocoloCNTRCarregamento.aspx" />
+    <Content Include="ProtocoloCSCarregamento.aspx" />
+    <Content Include="ProtocoloCS.aspx" />
+    <Content Include="css\botoes.css" />
+    <Content Include="css\Default.Master.css" />
+    <Content Include="css\ecoporto.css" />
+    <Content Include="css\img\bd-top.png" />
+    <Content Include="css\img\Bg.jpg" />
+    <Content Include="css\img\BgFooter.gif" />
+    <Content Include="css\img\bgMenuVertical.png" />
+    <Content Include="css\img\BgSite.png" />
+    <Content Include="css\img\bgTitle.png" />
+    <Content Include="css\img\BtAgendar.png" />
+    <Content Include="css\img\BtCancelar.png" />
+    <Content Include="css\img\BtConsulta.png" />
+    <Content Include="css\img\BtFechar.png" />
+    <Content Include="css\img\BtFile_pdf.png" />
+    <Content Include="css\img\BtFile_xls.png" />
+    <Content Include="css\img\BtFile_xml.png" />
+    <Content Include="css\img\BtIncluir.png" />
+    <Content Include="css\img\BtLimpar.png" />
+    <Content Include="css\img\BtPrint.png" />
+    <Content Include="css\img\BtProtocolar.png" />
+    <Content Include="css\img\BulletBoxTitle.gif" />
+    <Content Include="css\img\favicon.ico" />
+    <Content Include="css\img\lg-ecoporto.png" />
+    <Content Include="css\img\LinhaMenuUp.gif" />
+    <Content Include="css\img\LogoTop.png" />
+    <Content Include="css\img\nav-sub-bg-b.png" />
+    <Content Include="css\img\nav-sub-bg-t.png" />
+    <Content Include="css\img\nav-sub-bg.png" />
+    <Content Include="css\img\_bgBoxBottom.png" />
+    <Content Include="css\img\_bgBoxMiddle.png" />
+    <Content Include="css\img\_bgBoxUp.png" />
+    <Content Include="css\_CssReset.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="imagens\check.png" />
+    <Content Include="imagens\editar.gif" />
+    <Content Include="imagens\excluir.png" />
+    <Content Include="jqueryUI\external\jquery\jquery.js" />
+    <Content Include="jqueryUI\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="jqueryUI\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="jqueryUI\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="jqueryUI\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="jqueryUI\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="jqueryUI\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="jqueryUI\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="jqueryUI\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="jqueryUI\images\ui-icons_222222_256x240.png" />
+    <Content Include="jqueryUI\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="jqueryUI\images\ui-icons_454545_256x240.png" />
+    <Content Include="jqueryUI\images\ui-icons_888888_256x240.png" />
+    <Content Include="jqueryUI\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="jqueryUI\jquery-ui.css" />
+    <Content Include="jqueryUI\jquery-ui.js" />
+    <Content Include="jqueryUI\jquery-ui.min.css" />
+    <Content Include="jqueryUI\jquery-ui.min.js" />
+    <Content Include="jqueryUI\jquery-ui.structure.css" />
+    <Content Include="jqueryUI\jquery-ui.structure.min.css" />
+    <Content Include="jqueryUI\jquery-ui.theme.css" />
+    <Content Include="jqueryUI\jquery-ui.theme.min.css" />
+    <Content Include="js\Master.js" />
+    <Content Include="ProtocoloCNTR.aspx" />
+    <Content Include="Sair.aspx" />
+    <Content Include="My Project\DataSources\System.Data.DataSet.datasource" />
+    <Content Include="SQL.txt" />
+    <Content Include="VisualizaDanfe.aspx" />
+    <Content Include="Web References\WsBloqueioCraft\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+    <None Include="Web References\WsBloqueioCraft\Ws.wsdl" />
+    <None Include="Web References\WsControleSenha\Criptografia.disco" />
+    <None Include="Web References\WsControleSenha\Criptografia.wsdl" />
+    <None Include="Web References\WsBloqueioCraft\Ws.disco" />
+    <None Include="Web References\WsControleSenha\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <Content Include="Web References\WsCraft\clsDadosIntegracao.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\WsCraft\clsDadosIntegracaoImp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\WsCraft\ConexaoMB.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <None Include="Web References\WsCraft\ConexaoMB.wsdl" />
+    <Content Include="Web References\WsCraft\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AgendarCS.aspx.designer.vb">
+      <DependentUpon>AgendarCS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgendarCS.aspx.vb">
+      <DependentUpon>AgendarCS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlterarMotoristas.aspx.designer.vb">
+      <DependentUpon>AlterarMotoristas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlterarMotoristas.aspx.vb">
+      <DependentUpon>AlterarMotoristas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlterarVeiculos.aspx.designer.vb">
+      <DependentUpon>AlterarVeiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AlterarVeiculos.aspx.vb">
+      <DependentUpon>AlterarVeiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastrarMotoristas.aspx.designer.vb">
+      <DependentUpon>CadastrarMotoristas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarMotoristas.aspx.vb">
+      <DependentUpon>CadastrarMotoristas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastrarVeiculos.aspx.designer.vb">
+      <DependentUpon>CadastrarVeiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarVeiculos.aspx.vb">
+      <DependentUpon>CadastrarVeiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="classes\ArquivoUpload.vb" />
+    <Compile Include="classes\Banco.vb" />
+    <Compile Include="classes\DadosDanfe.vb" />
+    <Compile Include="classes\DocumentoDto.vb" />
+    <Compile Include="classes\EnderecoProtocolo.vb" />
+    <Compile Include="classes\FileValidation.vb" />
+    <Compile Include="classes\GerenciadorDeUploads.vb" />
+    <Compile Include="classes\Motorista.vb" />
+    <Compile Include="classes\Transportadora.vb" />
+    <Compile Include="classes\Veiculo.vb" />
+    <Compile Include="CodigoBarra.aspx.designer.vb">
+      <DependentUpon>CodigoBarra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CodigoBarra.aspx.vb">
+      <DependentUpon>CodigoBarra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgendarCNTR.aspx.designer.vb">
+      <DependentUpon>AgendarCNTR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgendarCNTR.aspx.vb">
+      <DependentUpon>AgendarCNTR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCNTR.aspx.designer.vb">
+      <DependentUpon>ConsultarAgendamentosCNTR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCNTR.aspx.vb">
+      <DependentUpon>ConsultarAgendamentosCNTR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCargaSolta.aspx.designer.vb">
+      <DependentUpon>ConsultarAgendamentosCargaSolta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCargaSolta.aspx.vb">
+      <DependentUpon>ConsultarAgendamentosCargaSolta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastroReservas.aspx.designer.vb">
+      <DependentUpon>CadastroReservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastroReservas.aspx.vb">
+      <DependentUpon>CadastroReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgendarCSCarregamento.aspx.designer.vb">
+      <DependentUpon>AgendarCSCarregamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgendarCSCarregamento.aspx.vb">
+      <DependentUpon>AgendarCSCarregamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCargaSoltaCarregamento.aspx.designer.vb">
+      <DependentUpon>ConsultarAgendamentosCargaSoltaCarregamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCargaSoltaCarregamento.aspx.vb">
+      <DependentUpon>ConsultarAgendamentosCargaSoltaCarregamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCNTRCarregamento.aspx.designer.vb">
+      <DependentUpon>ConsultarAgendamentosCNTRCarregamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarAgendamentosCNTRCarregamento.aspx.vb">
+      <DependentUpon>ConsultarAgendamentosCNTRCarregamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgendarCNTRCarregamento.aspx.designer.vb">
+      <DependentUpon>AgendarCNTRCarregamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgendarCNTRCarregamento.aspx.vb">
+      <DependentUpon>AgendarCNTRCarregamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarMotoristas.aspx.designer.vb">
+      <DependentUpon>ConsultarMotoristas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarMotoristas.aspx.vb">
+      <DependentUpon>ConsultarMotoristas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultarVeiculos.aspx.designer.vb">
+      <DependentUpon>ConsultarVeiculos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultarVeiculos.aspx.vb">
+      <DependentUpon>ConsultarVeiculos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modulos\Agendamento.vb" />
+    <Compile Include="modulos\Craft.vb" />
+    <Compile Include="EscolheReserva.aspx.designer.vb">
+      <DependentUpon>EscolheReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EscolheReserva.aspx.vb">
+      <DependentUpon>EscolheReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.vb">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.vb">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProtocoloCNTRCarregamento.aspx.designer.vb">
+      <DependentUpon>ProtocoloCNTRCarregamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocoloCNTRCarregamento.aspx.vb">
+      <DependentUpon>ProtocoloCNTRCarregamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProtocoloCSCarregamento.aspx.designer.vb">
+      <DependentUpon>ProtocoloCSCarregamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocoloCSCarregamento.aspx.vb">
+      <DependentUpon>ProtocoloCSCarregamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProtocoloCS.aspx.designer.vb">
+      <DependentUpon>ProtocoloCS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocoloCS.aspx.vb">
+      <DependentUpon>ProtocoloCS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="classes\Geral.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ProtocoloCNTR.aspx.designer.vb">
+      <DependentUpon>ProtocoloCNTR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProtocoloCNTR.aspx.vb">
+      <DependentUpon>ProtocoloCNTR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sair.aspx.designer.vb">
+      <DependentUpon>Sair.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sair.aspx.vb">
+      <DependentUpon>Sair.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisualizaDanfe.aspx.designer.vb">
+      <DependentUpon>VisualizaDanfe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VisualizaDanfe.aspx.vb">
+      <DependentUpon>VisualizaDanfe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web References\WsBloqueioCraft\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WsControleSenha\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WsCraft\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://187.84.232.171/integracao/ConexaoMB.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsCraft\</RelPath>
+      <UpdateFromURL>http://187.84.232.171/integracao/ConexaoMB.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoREDEX_WsCraft_ConexaoMB</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:12650/Criptografia.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsControleSenha\</RelPath>
+      <UpdateFromURL>http://localhost:12650/Criptografia.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoREDEX_WsControleSenha_Criptografia</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:18771/Ws.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WsBloqueioCraft\</RelPath>
+      <UpdateFromURL>http://localhost:18771/Ws.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AgendamentoREDEX_WsBloqueioCraft_Ws</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\PublishProfiles\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>7160</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:32593/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

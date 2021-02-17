@@ -1,0 +1,308 @@
+﻿@model  Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoViewModel
+
+<div id="pnlDadosConteiner" data-aberto="0" class="invisivel">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div id="msgErro" class="alert alert-warning" role="alert">
+                    Somente será aceito Contêiner com lacre na 3ª haste (Porta Direita)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-2 pr-0">
+            <div class="linha-titulo">Sigla</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">ISO</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Tara</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Peso Liq.</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">P. Bruto</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Volumes</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Reefer</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Temp</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Umidade</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Vent</div>
+        </div>
+        <div class="col-md-1">
+            <div class="linha-titulo">Escala</div>
+        </div>
+        @*<div class="col-md-5">
+            <div class="linha-titulo">Refrigeração</div>
+        </div>*@
+        @*<div class="col-md-1 pr-0">
+            <div class="linha-titulo sem-quebra">Bagagem</div>
+        </div>*@
+
+    </div>
+
+    <div class="row">
+
+        <input type="hidden" id="BookingId" name="BookingId" />
+        <input type="hidden" id="ConteinerId" name="ConteinerId" />
+
+        <div class="form-group col-md-2 mb-1 pr-0">
+            @*<label for="Sigla">Sigla</label>*@
+            <input type="text" id="Sigla" name="Sigla" class="form-control form-control-sm cntr" maxlength="12" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="ISO" class="label-block">ISO</label>*@
+            <input type="text" id="ISO" name="ISO" class="form-control form-control-sm" maxlength="4" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Tara">Tara</label>*@
+            <input type="text" id="Tara" name="Tara" class="form-control form-control-sm inteiro" maxlength="4" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Tara">Peso Liq.</label>*@
+            <input type="text" id="PesoLiquido" name="PesoLiquido" class="form-control form-control-sm inteiro" maxlength="5" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Bruto">Peso Bruto</label>*@
+            <input type="text" id="Bruto" name="Bruto" class="form-control form-control-sm inteiro" maxlength="5" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Volumes">Volumes</label>*@
+            <input type="text" id="Volumes" name="Volumes" class="form-control form-control-sm inteiro" maxlength="8" />
+        </div>
+
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="ReeferLigado" class="label-block">Reefer</label>*@
+            <input type="checkbox"
+                   id="ReeferLigado"
+                   onchange="ValidarCamposReefer()"
+                   data-style="label-toggle"
+                   name="ReeferLigado"
+                   data-toggle="toggle"
+                   data-onstyle="info"
+                   data-on="Ligado"
+                   data-off="Desligado"
+                   data-offstyle="danger">
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Temp" class="label-block">Temp</label>*@
+            <input type="text" id="Temp" name="Temp" class="form-control form-control-sm inteiro-negativo" maxlength="3" disabled />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Umidade" class="label-block">Umidade</label>*@
+            <input type="text" id="Umidade" name="Umidade" class="form-control form-control-sm inteiro" maxlength="8" disabled />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            @*<label for="Ventilacao" class="label-block">Ventilacao</label>*@
+            <input type="text" id="Ventilacao" name="Ventilacao" class="form-control form-control-sm inteiro" maxlength="8" disabled />
+        </div>
+        <div class="form-group col-md-1 mb-1">
+            @*<label for="Escala" class="label-block">Escala</label>*@
+            <select id="Escala" name="Escala" class="form-control form-control-sm" disabled>
+                <option value="C">Cº</option>
+                <option value="F">Fº</option>
+            </select>
+        </div>
+
+        @*<div class="form-group col-md-1 mb-1 pr-0">
+            <label for="Bagagem" class="label-block">&nbsp;</label>
+            <input type="text" id="Bagagem" name="Bagagem" class="form-control form-control-sm campo-bagagem text-center" disabled />
+        </div>*@
+
+
+
+    </div>
+
+    <div class="row mb-2">
+
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">IMO 1</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">IMO 2</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">IMO 3</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">IMO 4</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">ONU 1</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">ONU 2</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">ONU 3</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">ONU 4</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">OH</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">OL</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">OW</div>
+        </div>
+        <div class="col-md-1">
+            <div class="linha-titulo">OWL</div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="IMO1" name="IMO1" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="IMO2" name="IMO2" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="IMO3" name="IMO3" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="IMO4" name="IMO4" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="ONU1" name="ONU1" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="ONU2" name="ONU2" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="ONU3" name="ONU3" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="ONU4" name="ONU4" class="form-control form-control-sm text-center" maxlength="5" />
+        </div>
+
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="Altura" name="Altura" class="form-control form-control-sm inteiro text-center" maxlength="5" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="Comprimento" name="Comprimento" class="form-control form-control-sm inteiro text-center" maxlength="5" />
+        </div>
+        <div class="form-group col-md-1 mb-1 pr-0">
+            <input type="text" id="LateralDireita" name="LateralDireita" class="form-control form-control-sm inteiro text-center" maxlength="5" />
+        </div>
+        <div class="form-group col-md-1 mb-1">
+            <input type="text" id="LateralEsquerda" name="LateralEsquerda" class="form-control form-control-sm inteiro text-center" maxlength="5" />
+        </div>
+        
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-md-2 pr-0">
+            <div class="linha-titulo">Lacre Exportador</div>
+        </div>
+        <div class="col-md-2 pr-0">
+            <div class="linha-titulo">Lacre Armador 1</div>
+        </div>
+
+        <div class="col-md-2 pr-0">
+            <div class="linha-titulo">Lacre Armador 2</div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="linha-titulo">Outros Lacres</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-2 pr-0">
+            <input type="text" id="LacreExportador" name="LacreExportador" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-2 mb-0 pr-0">
+            <input type="text" id="LacreArmador1" name="LacreArmador1" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-2 mb-0 pr-0">
+            <input type="text" id="LacreArmador2" name="LacreArmador2" class="form-control form-control-sm" maxlength="15" />
+        </div>
+
+        <div class="form-group col-md-1 mb-0 pr-0">
+            <input type="text" id="OutrosLacres1" name="OutrosLacres1" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-1 mb-0 pr-0">
+            <input type="text" id="OutrosLacres2" name="OutrosLacres2" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-1 mb-0 pr-0">
+            <input type="text" id="OutrosLacres3" name="OutrosLacres3" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-1 mb-0 pr-0">
+            <input type="text" id="OutrosLacres4" name="OutrosLacres4" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-1 pr-0">
+            <input type="text" id="LacreSIF" name="LacreSIF" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-1">
+            <input type="text" id="LacreSIF2" name="LacreSIF2" class="form-control form-control-sm" maxlength="15" />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+
+        <div class="col-md-6 pr-0">
+            <div class="linha-titulo">Observações</div>
+        </div>
+        <div class="col-md-1 pr-0">
+            <div class="linha-titulo">Trânsito</div>
+        </div>
+        <div class="col-md-2 pr-0">
+            <div class="linha-titulo">Nº Doc Trânsito</div>
+        </div>
+        <div class="col-md-2 pr-0">
+            <div class="linha-titulo">Data Doc</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6 pr-0">
+            @Html.EditorFor(model => model.Observacoes, new { htmlAttributes = new { @class = "form-control form-control-sm", maxlength = "250" } })
+        </div>
+        <div class="form-group col-md-1 pr-0">
+            <select id="TipoDocTransitoId" name="TipoDocTransitoId" class="form-control form-control-sm">
+            </select>
+        </div>
+        <div class="form-group col-md-2 pr-0">
+            <input type="text" id="NumDocTransitoDUE" name="NumDocTransitoDUE" class="form-control form-control-sm" maxlength="15" />
+        </div>
+        <div class="form-group col-md-2 pr-0">
+            <input type="text" id="DataDocTransitoDUE" name="DataDocTransitoDUE" class="form-control form-control-sm data" />
+        </div>
+        <div class="form-group col-md-1">
+            <a id="btnAdicionarConteiner" onclick="CadastrarConteinerCheio()" href="#" class="btn btn-sm btn-outline-info btn-block btn-as-block"><i class="fas fa-save"></i>&nbsp;</a>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("_ConteineresConsulta", Model.Conteineres)

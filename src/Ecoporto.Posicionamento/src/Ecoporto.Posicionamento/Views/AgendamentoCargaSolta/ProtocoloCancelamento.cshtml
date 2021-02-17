@@ -1,0 +1,161 @@
+﻿@model Ecoporto.Posicionamento.Models.ViewModels.ProtocoloAgendamentoViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    var imagePath = Server.MapPath("~/Content/img");
+    var dataAtual = DateTime.Now;
+}
+
+<style>
+    #tbl-protocolo-header {
+        width: 100%;
+    }
+
+    #tbl-protocolo-header-logo {
+        width: 110px;
+    }
+
+    #tbl-protocolo-header-empresa {
+        text-align: right;
+        margin-bottom: 30px;
+    }
+
+        #tbl-protocolo-header-empresa h1 {
+            margin-bottom: 50px;
+        }
+
+        #tbl-protocolo-header-empresa h3 {
+            margin-bottom: 10px;
+        }
+
+    .tbl-dados-protocolo {
+        width: 100%;
+        font-size: 13px;
+        margin-top: 30px;
+        background-color: #696969;
+    }
+
+        .tbl-dados-protocolo thead tr {
+            height: 24px;
+            background-color: #DCDCDC;
+            border-bottom: 1px solid black;
+        }
+
+        .tbl-dados-protocolo tbody tr {
+            height: 30px;
+            background-color: #FFFFFF;
+        }
+
+    .col-15-perc {
+        width: 15%;
+    }
+
+    .col-20-perc {
+        width: 20%;
+    }
+
+    .col-25-perc {
+        width: 25%;
+    }
+
+    .col-30-perc {
+        width: 30%;
+    }
+
+    .col-35-perc {
+        width: 35%;
+    }
+
+    .col-50-perc {
+        width: 50%;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    h1, h3 {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+</style>
+
+<table id="tbl-protocolo-header">
+    <tr>
+        <td id="tbl-protocolo-header-logo">
+            <img src="@imagePath\logo-header.png" />
+        </td>
+        <td id="tbl-protocolo-header-empresa">
+            <h1>ECOPORTO SANTOS</h1>
+            <h3>PROTOCOLO DE CANCELAMENTO</h3>
+            <p>Data Impressão: @DateTime.Now</p>
+        </td>
+    </tr>
+</table>
+
+<p>
+    <strong>Data Cancelamento:&nbsp;</strong>@Model.DataCancelamento.ToString("dd/MM/yyyy")
+</p>
+
+<table class="tbl-dados-protocolo">
+    <thead>
+        <tr>
+            <th class="col-15-perc">Reserva</th>
+            <th class="col-35-perc">Navio</th>
+            <th class="col-30-perc">Viagem</th>
+            <th class="col-20-perc text-center">Porto Destino</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Reserva</td>
+            <td>@Model.Navio</td>
+            <td>@Model.Viagem</td>
+            <td class="text-center">@Model.Porto</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="tbl-dados-protocolo">
+    <thead>
+        <tr>
+            <th class="col-50-perc">Exportador</th>
+            <th class="col-50-perc">Cliente</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Exportador - @Model.ExportadorCnpj</td>
+            <td>@Model.Cliente - @Model.ClienteCpfCnpj</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="tbl-dados-protocolo">
+    <thead>
+        <tr>
+            <th colspan="3">Itens Carga Solta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cargaSolta in Model.ItensCargaSolta)
+        {
+            <tr>
+                <td colspan="3">@cargaSolta.Quantidade @cargaSolta.Embalagem @cargaSolta.Marca</td>
+            </tr>
+        }
+        <tr>
+            <td style="font-weight:bold;width: 50%; background-color: silver;text-align: right;">MOTIVO:</td>
+            <td colspan="2" class="col-50-perc">@Model.MotivoCancelamento</td>
+        </tr>
+    </tbody>
+</table>

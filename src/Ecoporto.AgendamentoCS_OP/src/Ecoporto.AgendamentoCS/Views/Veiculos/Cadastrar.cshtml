@@ -1,0 +1,120 @@
+﻿@model Ecoporto.AgendamentoCS.Models.ViewModels.VeiculoViewModel
+@using Ecoporto.AgendamentoCS.Helpers
+
+@{
+    ViewBag.Title = "Cadastrar Veículos";
+}
+
+<div class="row">
+  
+    <div class="col-md-8 offset-md-2">
+
+        <section class="content-header">
+            <h1>
+                Gerenciamento de Veículos
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Veículos</a>
+                </li>
+                <li class="active">Cadastrar Veículos</li>
+            </ol>
+        </section>
+
+        @using (Html.BeginForm())
+        {
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit fa-lg"></i>
+                    Detalhes do Veículo
+                    <div class="float-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.ValidarFormulario(ViewContext.ViewData.ModelState, false)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(model => model.TipoCaminhaoId)
+                            @Html.DropDownListFor(c => c.TipoCaminhaoId, new MultiSelectList(Model.TiposVeiculos, "Id", "Descricao"), string.Empty, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Cavalo)
+                            @Html.EditorFor(model => model.Cavalo, new { htmlAttributes = new { @class = "form-control placa", autofocus = "autofocus", maxlength = "8" } })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Carreta)
+                            @Html.EditorFor(model => model.Carreta, new { htmlAttributes = new { @class = "form-control placa", maxlength = "8" } })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Chassi)
+                            @Html.EditorFor(model => model.Chassi, new { htmlAttributes = new { @class = "form-control", maxlength = "20" } })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Renavam)
+                            @Html.EditorFor(model => model.Renavam, new { htmlAttributes = new { @class = "form-control", maxlength = "18" } })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Tara)
+                            @Html.EditorFor(model => model.Tara, new { htmlAttributes = new { @class = "form-control", maxlength="6" } })
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Modelo)
+                            @Html.EditorFor(model => model.Modelo, new { htmlAttributes = new { @class = "form-control", maxlength = "25"  } })
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.Cor)
+                            @Html.EditorFor(model => model.Cor, new { htmlAttributes = new { @class = "form-control", maxlength = "20" } })
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.UltimaAlteracao)
+                            @Html.EditorFor(model => model.UltimaAlteracao, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <a href="@Url.Action("Index", "Veiculos")" class="btn btn-secondary btn-block">Retornar</a>
+                        </div>
+                        <div class="form-group col-md-3 offset-md-6">
+                            <button type="submit" class="btn btn-info btn-block">Salvar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+
+</div>

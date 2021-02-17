@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="Usuario" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">REDEX</Value>
+    </Setting>
+    <Setting Name="Senha" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">REDEX</Value>
+    </Setting>
+    <Setting Name="Schema" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">REDEX</Value>
+    </Setting>
+    <Setting Name="LerXmlCraft" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="WsCraftUsuario" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ecoporto</Value>
+    </Setting>
+    <Setting Name="WsCraftSenha" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">por7o$@n7o$</Value>
+    </Setting>
+    <Setting Name="AgendamentoREDEX_WsControleSenha_Criptografia" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:12650/Criptografia.asmx</Value>
+    </Setting>
+    <Setting Name="AgendamentoREDEX_WsCraft_ConexaoMB" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.84.232.171/integracao/ConexaoMB.asmx</Value>
+    </Setting>
+    <Setting Name="AgendamentoREDEX_WsBloqueioCraft_Ws" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:18771/Ws.asmx</Value>
+    </Setting>
+    <Setting Name="BaseHomologacao" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="SenhaEncriptada" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Servidor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ECOPORTO_SRV0315_PATIODEV</Value>
+    </Setting>
+    <Setting Name="DiretorioUploads" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

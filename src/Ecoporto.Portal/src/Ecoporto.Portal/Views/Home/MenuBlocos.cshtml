@@ -1,0 +1,73 @@
+﻿@model Ecoporto.Portal.Models.ViewModels.MenuViewModel
+
+<div class="row card-box-wrapper">
+
+    <div class="col-lg-4 col-sm-12 mb-4">
+        <div class="card-box" style="background-color: #C5B695;">
+            <div class="inner">
+                <h3> Motoristas </h3>
+                <p> Gerenciar Motoristas </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <a href="@Url.Action("Index","Motoristas")" class="card-box-footer">Acessar <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-4">
+        <div class="card-box" style="background-color: #7E9C90;">
+            <div class="inner">
+                <h3> Veículos </h3>
+                <p> Gerenciar Veículos </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-truck" aria-hidden="true"></i>
+            </div>
+            <a href="@Url.Action("Index","Veiculos")" class="card-box-footer">Acessar <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-12 mb-4">
+        <div class="card-box" style="background-color: #AEB6B7;">
+            <div class="inner">
+                <h3> Avisos </h3>
+                <p> Avisos do site </p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-info" aria-hidden="true"></i>
+            </div>
+            <a href="@Url.Action("Index","Veiculos")" class="card-box-footer">Acessar <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+
+    @foreach (var menu in Model.Menus)
+    {
+        <div class="col-lg-4 col-sm-12 mb-4">
+            <div class="card-box" style="background-color: @menu.Cor;">
+                <div class="inner">
+                    <h3> @menu.Descricao.ToUpper() </h3>
+                    <p> @menu.Detalhes </p>
+
+                    @if (menu.SubMenus.Any())
+                    {
+                        <ul>
+                            @foreach (var subMenu in menu.SubMenus)
+                            {
+                                <li>
+                                    <i class="fa fa-arrow-circle-right"></i><a href="@Url.Action("Navegar","Menu", new { menuId = subMenu.MenuId, subMenuId = subMenu.Id })">@subMenu.Descricao</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="icon">
+                    <i class="@menu.Icone" aria-hidden="true"></i>
+                </div>
+                <a href="@Url.Action("Navegar","Motoristas")" class="card-box-footer">Acessar <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    }
+
+</div>
+

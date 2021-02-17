@@ -1,0 +1,245 @@
+﻿@model Ecoporto.AgendamentoDEPOT.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoDEPOT.Helpers
+
+@{
+    ViewBag.Title = "Cadastrar Agendamento";
+}
+
+<div class="row">
+
+    <div class="col-xl-12">
+
+        <section class="content-header">
+            <h1>
+                Agendar Contêiner <span id="lblTituloAgendamento">TRA</span>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Agendamentos</a>
+                </li>
+                <li class="active">Cadastrar Agendamento</li>
+            </ol>
+        </section>
+
+        @using (Ajax.BeginForm("Cadastrar", "Agendamento", null, new AjaxOptions
+        {
+            OnSuccess = "agendamentoMensagemSucesso",
+            OnFailure = "agendamentoMensagemErro",
+            HttpMethod = "POST"
+        }, new { id = "frmCadastroAgendamento" }))
+        {
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-calendar-alt fa-lg"></i>
+                    Detalhes do Agendamento
+                    <div class="float-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.ValidarFormulario(ViewContext.ViewData.ModelState, false)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div id="msgErro" class="invisivel alert alert-danger" role="alert"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tipo-agendamento-container">
+                        <div class="tipo-agendamento-titulo">
+                            Carregamento
+                        </div>
+                        <div class="tipo-agendamento-opcoes">
+                            <div class="form-check form-check-inline">
+                                @Html.RadioButton("TipoAgendamento", "1", true, new { @class = "form-check-input", onchange = "ValidaTipoAgendamento()" })
+                                <label class="form-check-label" for="inlineRadio1">TRA</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                @Html.RadioButton("TipoAgendamento", "2", false, new { @class = "form-check-input", onchange = "ValidaTipoAgendamento()" })
+                                <label class="form-check-label" for="inlineRadio2">DEPOT</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="smartwizard">
+
+                        <ul>
+                            <li><a href="#motorista">Passo 1<br /><small>Escolha do Motorista</small></a></li>
+                            <li><a href="#veiculo">Passo 2<br /><small>Escolha do Veículo</small></a></li>
+                            <li><a href="#carregamento">Passo 3<br /><small>Informações da Carga</small></a></li>
+                            <li><a href="#periodo">Passo 4<br /><small>Escolha do Período</small></a></li>
+                        </ul>
+
+                        <div class="mt-3">
+                            <div id="motorista" class="">
+
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        @Html.LabelFor(model => model.MotoristaId)
+                                        @Html.DropDownListFor(c => c.MotoristaId, new MultiSelectList(Model.Motoristas, "Id", "Descricao"), string.Empty, new { @class = "form-control" })
+                                        <small id="validaMotorista" class="text-danger invisivel">* Selecione o Motorista</small>
+                                    </div>
+                                    <div class="form-group col-md-2 pl-0">
+                                        <label for="btnPesquisarMotorista">&nbsp;</label>
+                                        <a id="btnPesquisarMotorista" href="#" class="btn btn-outline-info btn-block btn-as-block"><i class="fas fa-search"></i>&nbsp;&nbsp;Pesquisar</a>
+                                    </div>
+                                </div>
+
+                                <div id="pnlDetalhesMotorista"></div>
+
+                            </div>
+                            <div id="veiculo" class="">
+
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        @Html.LabelFor(model => model.VeiculoId)
+                                        @Html.DropDownListFor(c => c.VeiculoId, new MultiSelectList(Model.Veiculos, "Id", "Descricao"), string.Empty, new { @class = "form-control" })
+                                        <small id="validaVeiculo" class="text-danger invisivel">* Selecione o Veículo</small>
+                                    </div>
+                                    <div class="form-group col-md-2 pl-0">
+                                        <label for="btnPesquisarVeiculo">&nbsp;</label>
+                                        <a id="btnPesquisarVeiculo" href="#" class="btn btn-outline-info btn-block btn-as-block"><i class="fas fa-search"></i>&nbsp;&nbsp;Pesquisar</a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div id="pnlDetalhesVeiculo"></div>
+                                    </div>
+                                </div>
+
+                                <div id="pnlCTE" class="row invisivel">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.CTE)
+                                        @Html.EditorFor(model => model.CTE, new { htmlAttributes = new { @class = "form-control", maxlength = "35", onkeypress = "return apenasNumeros();" } })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="carregamento">
+
+                                <div class="row">
+
+                                    <div id="pnlRecintoTRA" class="form-group col-md-10">
+                                        @Html.LabelFor(model => model.RecintoSelecionadoTRA)
+                                        @Html.DropDownListFor(c => c.RecintoSelecionadoTRA, new MultiSelectList(Model.RecintosTRA, "Id", "Descricao"), string.Empty, new { @class = "form-control", onchange = "ExibirTotais()" })
+                                        <small id="validaRecinto" class="text-danger invisivel">* Selecione o Motorista</small>
+                                    </div>
+
+                                    <div id="pnlRecintoDEPOT" class="form-group col-md-10 invisivel">
+                                        @Html.LabelFor(model => model.RecintoSelecionadoDEPOT)
+                                        @Html.DropDownListFor(c => c.RecintoSelecionadoDEPOT, new MultiSelectList(Model.RecintosDEPOT, "Codigo", "Descricao"), string.Empty, new { @class = "form-control", onchange = "ExibirTotais()" })
+                                        <small id="validaRecinto" class="text-danger invisivel">* Selecione o Motorista</small>
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        @Html.LabelFor(model => model.Quantidade)
+                                        @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control", maxlength = "2", onkeypress = "return apenasNumeros();" } })
+                                    </div>
+                                </div>
+
+                                <div id="pnlTipoConteiner" class="row mt-2">
+
+                                    <div class="col-md-12">
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(model => model.IMO, new { @class = "form-check-input" })
+                                            <label class="form-check-label" for="inlineRadio1">É Contêiner IMO?</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(model => model.Excesso, new { @class = "form-check-input" })
+                                            <label class="form-check-label" for="inlineRadio2">É Contêiner Excesso?</label>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="form-group col-md-10">
+
+                                        <table class="table table-sm table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:33.3%;text-align:center;">Total</th>
+                                                    <th style="width:33.3%;text-align:center;">Contêineres Agendados</th>
+                                                    <th style="width:33.3%;text-align:center;">Contêineres Disponíveis</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center;"><label id="lblTotal">0</label></td>
+                                                    <td style="text-align:center;"><label id="lblAgendados">0</label></td>
+                                                    <td style="text-align:center;"><label id="lblDisponiveis">0</label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="periodo" class="">
+
+                                @Html.HiddenFor(model => model.PeriodoId)
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+
+                                        <div id="pnlPeriodos">
+                                            @Html.Partial("_Periodos", Model.Periodos)
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+
+</div>
+
+<br />
+
+@Html.Partial("_PesquisarMotoristas")
+@Html.Partial("_PesquisarVeiculos")
+
+@section Css{
+    @Styles.Render("~/bundles/smartWizardCSS")
+    @Styles.Render("~/bundles/select2CSS")
+    <link href="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/smartWizard")
+    @Scripts.Render("~/bundles/select2")
+    @Scripts.Render("~/bundles/agendamento")
+
+    <script src="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js"></script>
+
+}

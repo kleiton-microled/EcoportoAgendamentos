@@ -1,0 +1,103 @@
+﻿@model  IEnumerable<Ecoporto.AgendamentoConteiner.Models.Conteiner>
+@using Ecoporto.AgendamentoConteiner.Enums;
+
+@{ 
+    var classe = Model.Any() ? "" : "invisivel";
+}
+
+@if (Model.Any(c => c.Reserva.EF == TipoAgendamentoConteiner.Cheio))
+{    
+    <div id="pnlConteineres" class="table-responsive">
+        <table id="tblConteineres" class="table table-sm @classe">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Contêiner</th>
+                    <th scope="col">Tamanho</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Tara</th>
+                    <th scope="col">Bruto</th>
+                    <th scope="col">ONU</th>
+                    <th scope="col">IMO</th>
+                    <th scope="col">Reserva</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                <tr id="linha-conteiner-@item.Id">
+                    <td class="td-w-5">
+                        @if (item.Reserva.Tamanho == 20)
+                        {
+                            <img src="@Url.Content("~/Content/img/icone-conteiner-20.png")" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/icone-conteiner-40.png")" />
+                        }
+                    </td>
+                    <td class="td-w-10 sem-quebra">@item.Sigla</td>
+                    <td class="td-w-10">@item.Reserva.Tamanho</td>
+                    <td class="td-w-10">@item.Reserva.Tipo</td>
+                    <td class="td-w-10">@item.Tara</td>
+                    <td class="td-w-10">@item.Bruto</td>
+                    <td class="td-w-5">@Html.Raw(item.IsONU ? "<i class='far fa-check-square'></i>" : "<i class='far fa-square'></i>") </td>
+                    <td class="td-w-5">@Html.Raw(item.IsIMO ? "<i class='far fa-check-square'></i>" : "<i class='far fa-square'></i>") </td>
+                    <td class="td-w-25">@item.Reserva.Descricao</td>
+                    <td class="td-w-10 col-acoes-conteiner text-right pr-1">
+                        <a href="#" onclick="vincularDanfes(@item.Reserva.BookingId, '@item.Sigla', @item.Id)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Documentação"><i class="fa fa-list"></i></a>
+                        <a href="#" onclick="visualizarConteiner(@item.Id)" class="btn btn-info btn-sm"  data-toggle="tooltip" data-placement="top" title="Editar / Visualizar"><i class="fa fa-edit"></i></a>
+                        <a href="#" onclick="excluirConteiner(@item.Id, '@item.Sigla', @item.Reserva.BookingId)" class="btn btn-danger btn-sm btn-excluir-conteiner"  data-toggle="tooltip" data-placement="top" title="Excluir Contêiner"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div id="pnlConteineres" class="table-responsive">
+        <table id="tblConteineres" class="table table-sm @classe">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Qtde</th>
+                    <th scope="col">Tamanho</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Reserva</th>
+                    <th scope="col"></th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                <tr id="linha-conteiner-@item.Id">
+                    <td class="td-w-5">
+                        @if (item.Reserva.Tamanho == 20)
+                        {
+                            <img src="@Url.Content("~/Content/img/icone-conteiner-20.png")" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/icone-conteiner-40.png")" />
+                        }
+                    </td>
+                    <td class="td-w-10">@item.QuantidadeVazios</td>
+                    <td class="td-w-10">@item.Reserva.Tamanho</td>
+                    <td class="td-w-10">@item.Reserva.Tipo</td>
+                    <td class="td-w-20">@item.Reserva.Descricao</td>
+                    <td class="td-w-40">&nbsp;</td>
+                    <td class="td-w-5 text-right pr-1">
+                        <a href="#" onclick="excluirConteiner(@item.Id, '@item.Sigla', @item.Reserva.BookingId)" class="btn btn-sm btn-danger btn-block btn-as-block"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

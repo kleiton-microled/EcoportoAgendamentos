@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Ecoporto.AgendamentoDEPOT.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Ecoporto_AgendamentoConteiner_WsSharepoint_WsIccSharepoint" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://homop.ecoportosantos.com.br:5055/wsiccsharepoint.asmx</Value>
+    </Setting>
+    <Setting Name="Ecoporto_AgendamentoConteiner_WsBDCC_WsSincrono" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://srv0019:134/TecondiBdccWs.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,56 @@
+﻿@model  Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoViewModel
+
+<div id="pnlDadosDanfes" class="row invisivel">
+    @*<div>
+            <input type="file" name="UploadFile" id="txtUploadFile" class="makethispretty" />
+        </div>*@
+    
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="fileinput">
+            <label class="custom-file-label" for="inputGroupFile02">Enviar Arquivo</label>
+        </div>
+        <div class="input-group-append">
+            <span class="input-group-text" id="btnLoad" onclick="loadFile()">Upload</span>
+        </div>
+    </div>
+   
+    <div class="form-group col-md-10 mb-0 pr-0">
+        @Html.LabelFor(model => model.Danfe)
+        @*<a href="#" id="select_logo">Upload Danfe</a> <input type="file" id="logo">*@
+        <input type="file" style="display: none" />
+        <textarea id="xml"></textarea>
+        <input class="form-control form-control-sm" id="danfe" />
+        @Html.EditorFor(model => model.Danfe, new
+        {
+            htmlAttributes = new
+            {
+        @class = "form-control form-control-sm",
+                maxlength = "44",
+                onkeypress = "return apenasNumeros();",
+                @disabled = "disabled",
+            }
+        })
+    </div>
+    @Html.HiddenFor(model => model.CFOP)
+    @*<div class="form-group col-md-2 pr-0">
+            @Html.LabelFor(model => model.CFOP)
+            @Html.DropDownListFor(c => c.CFOP, new MultiSelectList(Model.CFOPS, "Id", "Id"), string.Empty, new { @class = "form-control form-control-sm", @disabled="disabled" })
+        </div>*@
+    <!--INCLUINDO O UPLOAD DO XML E MOSTRANDO OS DADOS NA TABELA-->
+    @*<div class="form-group col-md-1">
+            <label for="btnUploadDanfe">&nbsp;</label>
+            <a id="btnUploadDanfe" href="#" class="btn btn-sm btn-outline-info btn-block btn-as-block"><i class="fas fa-upload"></i></a>
+        </div>*@
+
+    @*<form action='#' onsubmit="return false;">
+            <input type='file' id='fileinput'>
+            <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
+        </form>*@
+    <div class="form-group col-md-1">
+        <label for="btnAdicionarDanfe">&nbsp;</label>
+        <a id="btnAdicionarDanfe" href="#" class="btn btn-sm btn-outline-info btn-block btn-as-block disabled"><i class="fas fa-save"></i></a>
+    </div>
+
+</div>
+@Html.Partial("_DanfesConsulta", Model.NotasFiscais)

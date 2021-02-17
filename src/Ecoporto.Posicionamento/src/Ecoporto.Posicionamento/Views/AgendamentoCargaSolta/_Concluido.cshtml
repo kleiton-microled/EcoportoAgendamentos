@@ -1,0 +1,46 @@
+﻿@model Ecoporto.Posicionamento.Models.ViewModels.AgendamentoCargaSoltaViewModel
+
+@{
+    var agendamentoId = Model.ItensCargaSoltaAgendados.Select(c => c.AgendamentoId).First();
+}
+
+<div id="pnlConcluido" class="row">
+    <div class="col-lg-12">
+        <h3><img src="@Url.Content("~/Content/img/icone-ok.png")" class="mr-4" />Programação realizada com sucesso!</h3>
+
+        <br />
+
+        @if (Model.ItensCargaSoltaAgendados.Any())
+        {
+            <p>Clique nos itens abaixo para imprimir o(s) protocolo(s):</p>
+
+            <ul>
+                @foreach (var itemCs in Model.ItensCargaSoltaAgendados)
+                {
+                    <li>
+                        <a href="@Url.Action("Protocolo", "AgendamentoCargaSolta", new { id = itemCs.AgendamentoId, unificado = false })" target="_blank">
+
+                            @if (itemCs.QuantidadeAgendada > 0)
+                            {
+                                @itemCs.QuantidadeAgendada
+                            }
+                            else
+                            {
+                                @itemCs.Quantidade
+                            }
+
+                            @itemCs.Embalagem @itemCs.Marca @itemCs.Modelo
+                        </a>
+                    </li>
+                }
+            </ul>
+
+            <a href="@Url.Action("Protocolo", "AgendamentoCargaSolta", new { id = agendamentoId, unificado = true })" target="_blank"><img src="~/Content/img/icone-impressora.png" /> Imprimir Todos</a>
+
+            <p class="lead">
+                <a class="btn btn-info btn-lg mt-4" href="@Url.Action("Consultar","AgendamentoCargaSolta")" role="button">Consultar Agendados</a>
+            </p>
+        }
+
+    </div>
+</div>

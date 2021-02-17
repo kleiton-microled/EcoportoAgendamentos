@@ -1,0 +1,40 @@
+﻿.panel-primary {
+    border-color: #5D7B9D;
+}
+
+    .panel-primary > .panel-heading {
+        border-color: #5D7B9D;
+        background-color: #5D7B9D;
+    }
+
+
+ .grid-cabecalho.table-hover > tbody > tr:hover > th {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+
+
+.table-hover > tbody > tr:hover > th {
+    background-color: #507CD1;
+    font-weight: bold;
+    color: #fff;
+}
+
+.invisivel {
+    display: none;
+}
+
+.mb-5{
+    margin-bottom: 5px;
+}
+
+.navbar-default.footer-bgcolor {
+    background-color: #5D7B9D;
+}
+
+.footer-text-color {
+    color: white !important;
+}

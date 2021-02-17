@@ -1,0 +1,160 @@
+﻿@model Ecoporto.Posicionamento.Models.ViewModels.AgendamentoCargaSoltaViewModel
+@using Ecoporto.Posicionamento.Helpers
+
+@{
+    ViewBag.Title = "Nova Programação";
+}
+
+<section class="content-header">
+    <h1>
+        Programação  Carga Solta
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>Home
+            </a>
+        </li>
+        <li>
+            <a href="#">Agendamentos</a>
+        </li>
+        <li class="active">Cadastrar Posicionamento Carga Solta</li>
+    </ol>
+</section>
+
+<div class="row">
+
+    <div id="pnlMenuLateral" class="col-xl-3 invisivel">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="@Url.Action("Agendar")"><i class="fa fa-edit mr-2"></i>Novo Agendamento</a></li>
+            <li class="list-group-item"><a href="@Url.Action("Consultar")"><i class="fa fa-search mr-2"></i>Consultar Agendados</a></li>
+            <li class="list-group-item"><a href="@Url.Action("Consultar")"><i class="fa fa-arrow-circle-left mr-2"></i>Retornar</a></li>
+        </ul>
+    </div>
+
+    <div id="pnlFormAgendamento" class="col-xl-12">
+
+        <div id="pnlCard" class="card">
+            <div class="card-header">
+                <i class="fa fa-calendar-alt fa-lg"></i>
+                Informe a Reserva:
+                <div class="float-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-body pt-0">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="msgErro" class="invisivel alert alert-danger mt-2" role="alert"></div>
+                        <div class="form-group">
+                            @Html.ValidarFormulario(ViewContext.ViewData.ModelState, "Agendamento", false)
+                        </div>
+                    </div>
+                </div>
+
+                @using (Ajax.BeginForm("Agendar", "AgendamentoCargaSolta", null, new AjaxOptions
+                {
+                    UpdateTargetId = "pnlCard",
+                    InsertionMode = InsertionMode.Replace,
+                    OnSuccess = "agendamentoMensagemSucesso",
+                    OnFailure = "agendamentoMensagemErro",
+                    HttpMethod = "POST"
+                }, new { id = "frmAgendamentoCs" }))
+                {
+                    <div class="row">                        
+                        <div class="form-group col-md-3">
+                            @Html.EditorFor(model => model.Reserva, new { htmlAttributes = new { @class = "form-control pulse" } })
+                        </div>
+                        <div class="form-group">
+                            <button id="btnPesquisarItensCargaSolta" type="button" onclick="PesquisarDetalhesCargaSolta()" class="btn btn-outline-info btn-block btn-as-block"><i class="fa fa-search"></i>&nbsp;&nbsp;Pesquisar</button>
+                        </div>
+                    </div>
+
+                    <div id="pnlDetalhesReserva"></div>
+
+                    <div id="pnlConteudo" class="invisivel">
+
+                        <div class="row mt-2">
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.DataPrevista)
+                                @Html.DropDownListFor(model => model.DataPrevista, new MultiSelectList(Model.Periodos, "Inicio", "Inicio"), new { @class = "form-control" })
+                            </div>
+                            <div id="pnlMotivo" class="form-group col-md-9">
+                                @Html.LabelFor(model => model.MotivoId)
+                                @Html.DropDownListFor(model => model.MotivoId, new MultiSelectList(Model.Motivos, "Id", "Descricao"), string.Empty, new { @class = "form-control", onChange = "VerificaExigenciaViagem()" })
+                            </div>
+                            <div id="pnlViagem" class="form-group col-md-3 invisivel">
+                                @Html.LabelFor(model => model.Viagem)
+                                <select id="NovaViagemId" name="NovaViagemId" class="form-control combo-viagens">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.CpfCnpj)
+                                @Html.EditorFor(model => model.CpfCnpj, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <div class="form-group col-md-9">
+                                @Html.LabelFor(model => model.RazaoSocial)
+                                @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <div class="alert alert-warning text-justify" role="alert">
+                                    Aviso: Os pedidos de posicionamento serão aceitos de Segunda a Sexta-Feira, até as 19 horas do dia útil anterior a execução do serviço e aos Sábados até as 11 horas. Após este horário, a programação será válida somente para o dia útil subsequente.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="float-left">
+                                    <p>
+                                        <a href="@Url.Action("Consultar", "AgendamentoCargaSolta")" class="btn btn-secondary">Retornar</a>
+                                    </p>
+                                </div>
+                                <div class="float-right">
+                                    <p>
+                                        @if (Model.Id == 0)
+                                        {
+                                            <button id="btnConcluir" type="submit" class="btn btn-info">Concluir</button>
+                                        }
+                                        else
+                                        {
+                                            <button id="btnConcluir" type="submit" class="btn btn-info" disabled>Concluir</button>
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<br />
+
+@section Css{
+    @Styles.Render("~/bundles/select2CSS")
+}
+
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/select2")
+    @Scripts.Render("~/bundles/agendamentoCargaSolta")
+}

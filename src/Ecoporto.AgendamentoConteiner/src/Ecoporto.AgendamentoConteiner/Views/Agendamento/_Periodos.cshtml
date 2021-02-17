@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Ecoporto.AgendamentoConteiner.Models.Janela>
+@using Ecoporto.AgendamentoConteiner.Extensions
+
+<div class="table-responsive">
+    <table id="tblPeriodos" class="table table-sm header-fixed" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col" class="td-icone">&nbsp;</th>
+                <th scope="col">Período Inicial</th>
+                <th scope="col">Período Final</th>
+                <th scope="col" class="campo-acao text-center">Saldo</th>
+                <th scope="col" class="campo-acao text-center">Escolha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.PeriodoAgendado)
+                {
+                    <tr class="linha-selecionada">
+                        <td class="td-icone">
+                            <img src="@Url.Content("~/Content/img/icone-calendario.png")" />
+                        </td>
+                        <td>@item.PeriodoInicial.DataHoraFormatada()</td>
+                        <td>@item.PeriodoFinal.DataHoraFormatada()</td>
+                        <td class="campo-acao text-center">@item.Saldo</td>
+                        <td class="campo-acao text-center">
+                            <img src="@Url.Content("~/Content/img/checked.png")" />
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td class="td-icone">
+                            <img src="@Url.Content("~/Content/img/icone-calendario.png")" />
+                        </td>
+                        <td>@item.PeriodoInicial.DataHoraFormatada()</td>
+                        <td>@item.PeriodoFinal.DataHoraFormatada()</td>
+                        <td class="campo-acao text-center">@item.Saldo</td>
+                        <td class="campo-acao text-center">
+                            <input type="radio" name="rbPeriodo" value="@item.Id" onclick="SelecionarPeriodo(@item.Id)" />
+                        </td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>

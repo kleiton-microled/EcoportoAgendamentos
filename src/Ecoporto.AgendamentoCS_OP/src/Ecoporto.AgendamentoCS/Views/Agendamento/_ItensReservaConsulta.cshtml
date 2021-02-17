@@ -1,0 +1,38 @@
+﻿@model  IEnumerable<Ecoporto.AgendamentoCS.Models.ReservaItem>
+
+<div class="table-responsive">
+    <table id="tblItensReserva" class="table table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="td-icone">&nbsp;</th>
+                <th scope="col">Reserva</th>
+                <th scope="col">Embalagem</th>
+                <th scope="col">Marca</th>
+                <th scope="col" class="campo-acao text-center">Qtde</th>
+                <th scope="col" class="campo-acao text-center">Peso Unit.</th>
+                <th scope="col" class="text-center">Class.</th>
+                <th scope="col" class="campo-acao text-center">&nbsp;</th>
+                <th scope="col" class="campo-acao text-center">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr id="linha-item-reserva-@item.Id">
+                <td class="td-icone">
+                    <img src="@Url.Content("~/Content/img/icone-cs.png")" />
+                </td>
+                <td>@item.Reserva</td>
+                <td>@item.Embalagem</td>
+                <td>@item.Marca</td>
+                <td class="campo-acao text-center">@item.Qtde</td>
+                <td class="campo-acao text-center">@item.PesoUnitario</td>
+                <td class="text-center carga-projeto">@item.Classificacao</td>
+                <td class="campo-acao"><a href="#" onclick="selecionarItem(@item.BookingCsItemId, @item.Qtde, '@item.Chassis')" class="btn btn-info btn-sm btn-acao"><i class="fa fa-list"></i>&nbsp;&nbsp;Vincular Danfes</a></td>
+                <td class="campo-acao"><a href="#" onclick="excluirItemReserva(@item.Id, @item.BookingCsItemId)" class="btn btn-danger btn-sm btn-acao"><i class="fa fa-trash"></i></a></td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

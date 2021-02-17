@@ -1,0 +1,172 @@
+﻿@model Ecoporto.AgendamentoDEPOT.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoDEPOT.Enums
+@using Ecoporto.AgendamentoDEPOT.Extensions
+
+@{
+    ViewBag.Title = "Cadastrar Agendamento";
+}
+
+<div class="row">
+
+    <div class="col-xl-12">
+
+        <section class="content-header">
+            <h1>
+                Agendar Contêiner @Model.TipoAgendamento.ToName()
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Agendamentos</a>
+                </li>
+                <li class="active">Cadastrar Agendamento</li>
+            </ol>
+        </section>
+
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-calendar-alt fa-lg"></i>
+                Detalhes do Agendamento
+                <div class="float-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div>
+                    <div id="motorista" class="">
+
+                        @Html.HiddenFor(c => c.Id)
+
+                        <div id="pnlDetalhesMotorista">
+                            @Html.Partial("_DetalhesMotorista", Model.DetalhesMotorista)
+                        </div>
+
+                    </div>
+                    <div id="veiculo" class="">
+
+                        <div id="pnlDetalhesVeiculo">
+                            @Html.Partial("_DetalhesVeiculo", Model.DetalhesVeiculo)
+                        </div>
+
+                    </div>
+
+                    <div id="carregamento">
+
+                        <div class="row">
+
+                            @if (Model.TipoAgendamento == TipoAgendamento.TRA)
+                            {
+                                <div class="form-group col-md-10">
+                                    <label>Recinto</label>
+                                    @Html.DropDownListFor(c => c.RecintoSelecionadoTRA, new MultiSelectList(Model.RecintosTRA, "Id", "Descricao"), string.Empty, new { @class = "form-control select-readonly" })
+                                    <small id="validaRecinto" class="text-danger invisivel">* Selecione o Motorista</small>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group col-md-10">
+                                    <label>Recinto</label>
+                                    @Html.DropDownListFor(c => c.RecintoSelecionadoDEPOT, new MultiSelectList(Model.RecintosDEPOT, "Codigo", "Descricao"), string.Empty, new { @class = "form-control select-readonly" })
+                                    <small id="validaRecinto" class="text-danger invisivel">* Selecione o Motorista</small>
+                                </div>
+                            }
+
+                            <div class="form-group col-md-2">
+                                @Html.LabelFor(model => model.Quantidade)
+                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                        </div>
+
+                        <div id="pnlTipoConteiner" class="row mt-2">
+
+                            @if (Model.TipoAgendamento == TipoAgendamento.TRA)
+                            {
+                                <div class="col-md-12">
+                                    <div class="form-check form-check-inline">
+                                        @Html.CheckBoxFor(model => model.IMO, new { @class = "form-check-input", @disabled = "disabled" })
+                                        <label class="form-check-label" for="inlineRadio1">É Contêiner IMO?</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.CheckBoxFor(model => model.Excesso, new { @class = "form-check-input", @disabled = "disabled" })
+                                        <label class="form-check-label" for="inlineRadio2">É Contêiner Excesso?</label>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="form-group col-md-12">
+
+                                <table class="table table-sm table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:33.3%;text-align:center;">Total</th>
+                                            <th style="width:33.3%;text-align:center;">Contêineres Agendados</th>
+                                            <th style="width:33.3%;text-align:center;">Contêineres Disponíveis</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:center;">@Html.DisplayFor(model => model.Total, new { id = "lblTotal" })</td>
+                                            <td style="text-align:center;">@Html.DisplayFor(model => model.Agendados, new { id = "lblAgendados" })</td>
+                                            <td style="text-align:center;">@Html.DisplayFor(model => model.Disponiveis, new { id = "lblDisponiveis" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @Html.HiddenFor(model => model.PeriodoId)
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+
+                            @Html.Partial("_Periodos", Model.Periodos.Where(c => c.Id == Model.PeriodoId))
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br />
+
+@section Css{
+
+    @Styles.Render("~/bundles/select2CSS")
+}
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('main')
+                .addClass('container')
+                .removeClass('container-fluid');
+
+            $('#tblPeriodos').removeClass('header-fixed');
+        });
+    </script>
+
+}

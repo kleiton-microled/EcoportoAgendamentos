@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Ecoporto.Portal.Models.Veiculo>
+
+@{
+    ViewBag.Title = "Consultar Veículos";
+}
+
+<section class="content-header">
+    <h1>
+        Consultar Veículos
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>Home
+            </a>
+        </li>
+        <li>
+            <a href="#">Consultar Veículos</a>
+        </li>
+    </ol>
+</section>
+
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-table fa-lg"></i>
+        Veículos
+
+        <div class="float-right">
+            <a href="@Url.Action("Cadastrar", "Veiculos")" class="btn btn-info btn-sm btn-novo"><i class="fa fa-edit"></i>&nbsp;Cadastrar Veículo</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="datatables" class="table table-hover table-sm" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="td-icone">&nbsp;</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Placa Cavalo</th>
+                        <th scope="col">Placa Carreta</th>
+                        <th scope="col">Tara</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Cor</th>
+                        <th scope="col">Renavam</th>
+                        <th class="campo-acao">&nbsp;</th>
+                        <th class="campo-acao">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="linha-@item.Id">
+
+                            <td class="td-icone">
+                                <img src="@Url.Content("~/Content/img/icone-veiculo.png")" />
+                            </td>
+
+                            <td>@item.TipoCaminhaoDescricao</td>
+                            <td>@item.Cavalo</td>
+                            <td>@item.Carreta</td>
+                            <td>@item.Tara</td>
+                            <td>@item.Modelo</td>
+                            <td>@item.Cor</td>
+                            <td>@item.Renavam</td>
+                            <td class="campo-acao"><a href="@Url.Action("Atualizar","Veiculos")/@item.Id" class="btn btn-info btn-sm btn-acao"><i class="fa fa-edit"></i>&nbsp;Atualizar</a></td>
+                            <td class="campo-acao"><a href="#" onclick="Excluir(@item.Id)" class="btn btn-danger btn-sm btn-acao"><i class="fa fa-trash"></i>&nbsp;Excluir</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@Html.Partial("_ModalExclusao")
+
+@section Css{
+    @Styles.Render("~/bundles/datatablesCSS")
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+
+         $(document).ready(function () {
+
+            var langUrl = "@Url.Content("~/Content/plugins/datatables/language/pt-br.json")";
+
+             $('#datatables').DataTable({
+                "language": {
+                    "url": langUrl
+                }
+            });
+         });
+
+        function Excluir(id) {
+            $('#modal-mensagem').text('Confirma a exclusão do Veículo?');
+            $('#del-modal').data('id', id).modal('show');
+        }
+
+        function ConfirmarExclusao() {
+
+            var _url = '@Url.Action("Excluir")';
+
+            var _id = $('#del-modal')
+                .data('id');
+
+            $.post(_url, { id: _id })
+                .done(function (data, statusText, xhr) {
+                    toastr.success('Veículo excluído com sucesso!', 'Agendamento');
+                    $('#linha-' + _id).remove();
+                }).fail(function () {
+                    toastr.error('O veículo não pode ser excluído', 'Agendamento');
+                }).always(function () {
+                    $('#del-modal')
+                        .data('id', '0')
+                        .modal('hide');
+                });
+        }
+
+    </script>
+}

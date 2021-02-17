@@ -1,0 +1,68 @@
+﻿@media print
+{
+    body{background: #FFF; color: #000; font: 12pt serif;}
+
+    .NoPrint {display: none;}
+    .BoxTitle label{font-size:20px;}
+    .ContentPlaceHolder { margin:0;}
+}
+
+body
+{
+    background:url("img/Bg.jpg") repeat-x  scroll 0 0 #fdffef;
+    color:#002342;
+    font:normal 11px Verdana;
+}
+
+/* INÍCIO MODAL POPUP */
+#ModalPopUpMask
+{
+  position:absolute;
+  left:0;
+  top:0;
+  background-color:#000;
+  display:none;
+  z-index:2;
+}
+.ModalPopUp
+{
+    background-color: #FFF;
+    position:fixed !important;
+    left:0;
+    top:0;
+    display:none;
+    z-index:10 !important;
+}
+.CloseModalPopUp{}
+/* FIM MODAL POPUP */
+
+
+/* INICIO BOX LOADING */
+#BoxLoading
+{
+    background-color: #FFF;
+    border: 2px solid #b3d800;
+    display: none;
+    height: 182px;
+    left: 50%;
+    margin-left: -155px;
+    margin-top: -91px;
+    position: fixed;
+    top: 50%;
+    width: 309px;
+    z-index: 999;
+    
+    box-shadow: 0 0 15px #999;
+    -moz-box-shadow: 0 0 15px #999;
+    -webkit-box-shadow: 0 0 15px #999;
+}
+    #BoxLoading span
+    {
+        background:url("images/BgLoading.gif") no-repeat scroll 0 0 transparent;
+        display:block;
+        height:95px;
+        line-height:130px;
+        margin:50px auto 0;
+        width:50px;
+    }
+/* FIM BOX LOADING */

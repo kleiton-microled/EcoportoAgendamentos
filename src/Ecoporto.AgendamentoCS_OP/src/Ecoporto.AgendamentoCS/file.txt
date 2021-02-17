@@ -1,0 +1,1 @@
+2018-05-06 12:16:13.7060|INFO|Ecoporto.CRM.Site.MvcApplication|Hello World

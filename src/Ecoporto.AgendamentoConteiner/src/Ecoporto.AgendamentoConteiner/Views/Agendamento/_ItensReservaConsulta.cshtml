@@ -1,0 +1,70 @@
+﻿@model  IEnumerable<Ecoporto.AgendamentoConteiner.Models.Reserva>
+@using Ecoporto.AgendamentoConteiner.Enums
+
+@{ 
+    var tipo = Model.Select(c => c.EF).FirstOrDefault();
+}
+
+<div class="table-responsive">
+    <table id="tblItensReserva" class="table table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Qtde</th>
+                <th scope="col">Tamanho</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Reserva</th>
+                <th scope="col">POD</th>
+                <th scope="col">EF</th>
+                <th scope="col">Saldo</th>
+                @if (tipo == TipoAgendamentoConteiner.Cheio)
+                {
+                    <th scope="col" class="text-center">&nbsp;</th>
+                }
+                else
+                {
+                    <th scope="col" class="text-center">Qtde</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr id="linha-item-reserva-@item.Hash" class="linha-item-reserva">
+                <td class="td-w-5">
+                    <img src="@Url.Content("~/Content/img/icone-reserva.png")" />
+                </td>
+                <td class="td-w-10">@item.Qtde</td>
+                <td class="td-w-10">@item.Tamanho</td>
+                <td class="td-w-10">@item.Tipo</td>
+                <td class="td-w-20">@item.Descricao</td>
+                <td class="td-w-10">@item.POD</td>
+                <td class="td-w-15">@item.EF</td>
+                <td class="td-w-10">
+                    <span id="txtSaldoBooking_@item.BookingId">
+                        @item.Saldo
+                    </span>
+                </td>
+                @if (tipo == TipoAgendamentoConteiner.Cheio)
+                {
+                    <td class="td-w-10 col-acoes-reserva pr-1">
+                        <a href="#" onclick="selecionarItemReserva(@item.BookingId, @item.Tamanho, '@item.Bagagem.ToString()', '@item.Hash')" class="btn btn-info btn-sm btn-acao btn-item-reserva"><i class="fa fa-truck"></i>&nbsp;Contêineres</a>
+                    </td>
+                }
+                else
+                {
+                    <td class="td-w-10 pr-1">
+                        <input type="text" class="form-control form-control-sm inteiro" id="QuantidadeVazios" name="QuantidadeVazios" value="" maxlength="2" />
+                    </td>
+                    <td class="td-w-5 pr-1">
+                        <a href="#" onclick="cadastrarConteinerVazio(@item.BookingId, '@item.Tipo', @item.Tamanho)" class="btn btn-info btn-sm btn-acao"><i class="fa fa-save"></i>&nbsp;Salvar</a>                        
+                    </td>
+                }
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,133 @@
+﻿@model Ecoporto.AgendamentoDEPOT.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoDEPOT.Extensions
+@using Ecoporto.AgendamentoDEPOT.Enums
+
+@{
+    ViewBag.Title = "Protocolo Agendamento";
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    var imagePath = Server.MapPath("~/Content/img");
+
+    var titulo = Model.TipoAgendamento == TipoAgendamento.TRA
+        ? "PROTOCOLO DE AGENDAMENTO DE RETIRADA DE CONTÊINER – TRA"
+        : "PROTOCOLO DE AGENDAMENTO DE RETIRADA DE CONTÊINER – DEPOT";
+}
+
+<img src="@imagePath\header-pdf.png" />
+
+<div style="text-align: center;">
+    <h2>@titulo <br /><br />Nº @Model.Protocolo </h2>
+    <h3>Período: @Model.PeriodoDescricao</h3>
+</div>
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:25px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5; height:26px;">
+            <th scope="col" align="center">TRANSPORTADORA</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:24px;">
+            <td align="center">@Model.TransportadoraDescricao - @Model.TransportadoraDocumento</td>
+        </tr>
+    </tbody>
+</table>
+
+@if (Model.TipoAgendamento == TipoAgendamento.TRA)
+{
+    <table cellspacing="0" width="100%" border="1" style="margin-top:25px;font-size:12px;">
+        <thead>
+            <tr style="background-color: #F5F5F5; height:26px;">
+                <th scope="col" style="width: 40%;" align="center">RECINTO</th>
+                <th scope="col" style="width: 20%;" align="center">QUANTIDADE</th>
+                <th scope="col" style="width: 20%;" align="center">IMO?</th>
+                <th scope="col" style="width: 20%;" align="center">EXCESSO?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height:24px;">
+                <td align="center">@Model.RecintoDescricao</td>
+                <td align="center">@Model.Quantidade</td>
+                <td align="center">@(Model.IMO ? "X" : "")</td>
+                <td align="center">@(Model.Excesso ? "X" : "")</td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <table cellspacing="0" width="100%" border="1" style="margin-top:25px;font-size:12px;">
+        <thead>
+            <tr style="background-color: #F5F5F5; height:26px;">
+                <th scope="col" style="width: 40%;" align="center">RECINTO</th>
+                <th scope="col" style="width: 60%;" align="center">QUANTIDADE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height:24px;">
+                <td align="center">@Model.RecintoDescricao</td>
+                <td align="center">@Model.Quantidade</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+<table cellspacing="0" width="100%" border="1" style="margin-top:15px;font-size:12px;">
+    <thead>
+        <tr style="background-color: #F5F5F5;height:26px;">
+            <th scope="col" style="width: 40%;" align="center">Veículo</th>
+            <th scope="col" style="width: 60%;" align="center">Motorista</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height:36px;">
+            <td align="center" valign="middle">@Model.VeiculoDescricao</td>
+            <td align="center" valign="middle">@Model.MotoristaDescricao <br />CPF: @Model.MotoristaCPF - CNH: @Model.MotoristaCNH</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Recintos vinculados a Transportadora:</h3>
+
+
+<table id="tblConteineres" cellspacing="0" width="100%" border="1" style="font-size:14px;">
+    <thead>
+        <tr style="background-color: #F5F5F5;">
+            <th scope="col" align="center">Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.TipoAgendamento == TipoAgendamento.TRA)
+        {
+            <tr>
+                <td align="center">
+                    <p>&nbsp;</p>
+                    @foreach (var recinto in Model.RecintosTRA)
+                    {
+                        <p>@recinto.Descricao</p>
+                    }
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td align="center">
+                    <p>&nbsp;</p>
+                    @foreach (var recinto in Model.RecintosDEPOT)
+                    {
+                        <p>@recinto.Descricao</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<p style="text-align: center; font-style:italic;">Agendamento realizado em: @Model.DataCadastro.ToString("dd/MM/yyyy HH:mm")</p>
+<br />
+
+<div style="text-align: center; font-size:14px;">
+    FAVOR DIRIGIR-SE A <strong>@Model.Empresa.Endereco, @Model.Empresa.Bairro - @Model.Empresa.Cidade/@Model.Empresa.Estado</strong>
+</div>

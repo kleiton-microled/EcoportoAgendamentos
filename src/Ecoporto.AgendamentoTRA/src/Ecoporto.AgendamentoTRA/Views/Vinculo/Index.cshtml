@@ -1,0 +1,304 @@
+﻿@model Ecoporto.AgendamentoTRA.Models.TransportadoraRecintoDTO
+@using Ecoporto.AgendamentoTRA.Extensions
+
+@{
+    ViewBag.Title = "Minhas Transportadoras";
+}
+
+<section class="content-header">
+    <h1>
+        Minhas Transportadoras
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>Home
+            </a>
+        </li>
+        <li>
+            <a href="#">Minhas Transportadoras</a>
+        </li>
+    </ol>
+</section>
+
+<div class="card">
+
+    @Html.HiddenFor(model => model.TipoVinculo)
+
+    <div class="card-header">
+        <i class="fa fa-table fa-lg"></i>
+        @(User.RecintoDEPOT() ? "Recintos DEPOT" : "Recintos TRA")
+        <div class="float-right">
+            <a id="btnVincularTransportadora" href="#" class="btn btn-info btn-sm btn-novo"><i class="fa fa-edit"></i>&nbsp;Vincular Transportadora</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        @Html.Partial("_CadastroVinculo")
+        @Html.Partial("_ConsultaVinculos")
+
+    </div>
+
+</div>
+
+@Html.Partial("_ModalExclusao")
+
+@section Css{
+    @Styles.Render("~/bundles/datatablesCSS")
+
+    <link href="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/datatables")
+
+    <script src="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js"></script>
+
+    <script>
+
+        autoComplete();
+
+        $(document).ready(function () {
+
+            carregarTransportadoras();
+        });
+
+        function carregarTransportadoras() {
+
+            var langUrl = "@Url.Content("~/Content/plugins/datatables/language/pt-br.json")";
+
+            $('#tblVinculos').DataTable({
+                    destroy: true,
+                    "bLengthChange": true,
+                    "bServerSide": true,
+                    "sAjaxSource": "@Url.Action("ConsultaVinculos")",
+                    "bProcessing": true,
+                    "pagingType": "full_numbers",
+                    "searchDelay": 1000,
+                    "pageLength": 10,
+                    "createdRow": function (row, data, dataIndex) {
+                        $(row).attr('id', 'item-' + data.Id);
+                    },
+                    "aoColumns":
+                        [
+                            {
+                                "render": function (data, type, row) {
+                                    return '<img src="@Url.Content("~/Content/img/icone-veiculo.png")" />';
+                                },
+                                "className": "text-center"
+                            },
+                            {
+                                "sName": "RazaoSocial",
+                                "mData": "RazaoSocial"
+                            },
+                            {
+                                "sName": "CNPJ",
+                                "mData": "CNPJ"
+                            },
+                            {
+                                "render": function (data, type, row) {
+
+                                    if (row.Ativo) {
+                                        return '<input class="chkToggle" type="checkbox" checked onchange="Bloquear('+ row.Id +')" data-style="label-toggle" data-toggle="toggle" data-onstyle="info" data-offstyle="danger" data-size="sm" data-on="Ativo" data-off="Inativo">';
+                                    } else {
+                                        return '<input class="chkToggle" type="checkbox" onchange="Habilitar(' + row.Id +')" data-style="label-toggle" data-toggle="toggle" data-onstyle="info" data-offstyle="danger" data-size="sm" data-on="Ativo" data-off="Inativo">';
+                                    }
+                                },
+                                "className": "text-center"
+                            },
+                            {
+                                "render": function (data, type, row) {
+
+                                    return '<a href="#" onclick="Excluir(' + row.Id + ')" class="btn btn-secondary btn-sm btn-acao"><i class="fa fa-trash"></i>&nbsp;&nbsp;Excluir</a>';
+                                },
+                                "className": "text-center"
+                            }
+                    ],
+                    "drawCallback": function () {
+                        $('.chkToggle').bootstrapToggle();
+                    },
+                    "language": {
+                        "url": langUrl
+                    }
+                });
+
+            }
+
+        $('#btnVincularTransportadora').click(function () {
+
+            $('#btnVincularTransportadora').addClass('invisivel');
+
+            $('#tblVinculos_wrapper').children(":first").addClass('invisivel');
+
+            $('#pnlFrmVinculo').show('slow');
+        });
+
+        function validarInclusao(transportadoraId) {
+
+            $('#msgErro').addClass('invisivel');
+
+            if (!isNumero(transportadoraId)) {
+                $('#msgErro').removeClass('invisivel');
+                return false;
+            } else {
+                if (!parseInt(transportadoraId) > 0) {
+                    $('#msgErro').removeClass('invisivel');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        $('#btnCancelar').click(function () {
+
+            $('#pnlFrmVinculo').hide('slow', function () {
+                $('#tblVinculos_wrapper').children(":first").removeClass('invisivel');
+                $('#btnVincularTransportadora').removeClass('invisivel');
+            });
+        });
+
+        $('#btnSalvar').click(function () {
+
+            var transportadoraId = sessionStorage.getItem('transportadoraId');
+
+            if (!validarInclusao(transportadoraId))
+                return;
+
+            $('#btnSalvar')
+                .html('<i class="fa fa-spinner fa-spin"></i>')
+                .addClass('disabled');
+
+            var obj = {
+                transportadoraId: transportadoraId
+            };
+
+            $.post('@Url.Action("Index")', obj, function (resultado) {
+
+                $('#pnlFrmVinculo').hide('slow', function () {
+                    $('#tblVinculos_wrapper').children(":first").removeClass('invisivel');
+                });
+
+                $('#btnVincularTransportadora').removeClass('invisivel');
+
+                carregarTransportadoras();
+
+                toastr.success('Transportadora Vinculada com Sucesso!');
+
+            }).fail(function (response) {
+
+                mostrarErro(response);
+            }).always(function () {
+
+                $('#TransportadoraSelecionadaId').val('');
+                sessionStorage.setItem('transportadoraId', '');
+
+                $('#btnSalvar')
+                    .html('<i class="fas fa-save"></i>&nbsp;&nbsp;Salvar')
+                    .removeClass('disabled');
+            });
+        });
+
+        function Excluir(id) {
+
+            $('#modal-mensagem').text('Confirma a exclusão do Vínculo?');
+            $('#del-modal').data('id', id).modal('show');
+        }
+
+        function ConfirmarExclusao() {
+
+            var _url = '@Url.Action("Excluir")';
+
+            var _id = $('#del-modal')
+                .data('id');
+
+            $.post(_url, { id: _id })
+                .done(function () {
+                    toastr.success('Vínculo excluído com sucesso!', 'Vínculo');
+                    $('#item-' + _id).remove();
+                }).fail(function (response) {
+
+                    mostrarErro(response);
+                }).always(function () {
+                    $('#del-modal')
+                        .data('id', '0')
+                        .modal('hide');
+                });
+        }
+
+        function Habilitar(id) {
+
+            var _url = '@Url.Action("Habilitar")';
+
+            $.post(_url, { id: id })
+                .done(function () {
+
+                    carregarTransportadoras();
+
+                }).fail(function (response) {
+
+                    mostrarErro(response);
+                });
+        }
+
+        function Bloquear(id) {
+
+            var _url = '@Url.Action("Bloquear")';
+
+            $.post(_url, { id: id })
+                .done(function () {
+
+                    carregarTransportadoras();
+
+                }).fail(function (response) {
+
+                    mostrarErro(response);
+                });
+        }
+
+        function autoComplete() {
+
+            var pesquisar = function () {
+
+                var valor = $("#TransportadoraSelecionadaId").getSelectedItemData();
+                sessionStorage.setItem('transportadoraId', valor.TransportadoraId);
+            }
+
+            var options = {
+                url: function (phrase) {
+                    return "@Url.Action("ListarTransportadoras", "Transportadora")?criterio=" + phrase;
+                },
+                getValue: "RazaoSocial",
+                listLocation: "resultados",
+                requestDelay: 500,
+                template: {
+                    type: "description",
+                    fields: {
+                        description: "CNPJ"
+                    }
+                },
+                list: {
+                    onClickEvent: function () {
+                        pesquisar();
+                    },
+                    onKeyEnterEvent: function () {
+                        pesquisar();
+                    }
+                }
+            };
+
+            $("#TransportadoraSelecionadaId").easyAutocomplete(options);
+        }
+
+        function mostrarErro(data) {
+            if (data.statusText !== '') {
+                toastr.error(data.statusText, 'Vínculo');
+            } else {
+                toastr.error('Erro', 'Vínculo');
+            }
+        }
+
+    </script>
+}

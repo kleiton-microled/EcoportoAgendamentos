@@ -1,0 +1,18 @@
+﻿@model  Ecoporto.AgendamentoCS.Models.ViewModels.AgendamentoViewModel
+
+<div class="row">
+    <div class="form-group col-md-9 mb-0">
+        @Html.LabelFor(model => model.Danfe)
+        @Html.EditorFor(model => model.Danfe, new { htmlAttributes = new { @class = "form-control form-control-sm", maxlength="44", onkeypress="return apenasNumeros();", @disabled="disabled" } })
+    </div>
+    <div class="form-group col-md-2">
+        @Html.LabelFor(model => model.CFOP)
+        @Html.DropDownListFor(c => c.CFOP, new MultiSelectList(Model.CFOPS, "Id", "Id"), string.Empty, new { @class = "form-control form-control-sm", @disabled="disabled" })
+    </div>    
+    <div class="form-group col-md-1">
+        <label for="btnAdicionarDanfe">&nbsp;</label>
+        <a id="btnAdicionarDanfe" href="#" class="btn btn-sm btn-outline-info btn-block btn-as-block disabled"><i class="fas fa-save"></i></a>
+    </div>
+</div>
+
+@Html.Partial("_DanfesConsulta", Model.NotasFiscais)

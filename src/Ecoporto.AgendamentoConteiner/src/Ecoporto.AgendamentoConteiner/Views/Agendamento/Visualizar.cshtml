@@ -1,0 +1,175 @@
+﻿@model Ecoporto.AgendamentoConteiner.Models.ViewModels.AgendamentoViewModel
+@using Ecoporto.AgendamentoConteiner.Extensions
+
+@{
+    ViewBag.Title = "Visualizar Agendamento";
+}
+
+<div class="row">
+
+    <div class="col-xl-12">
+
+        <section class="content-header">
+            <h1>
+                Agendamento #@Model.Protocolo
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Agendamentos</a>
+                </li>
+                <li class="active">Visualizar Agendamento</li>
+            </ol>
+        </section>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-calendar-alt fa-lg"></i>
+                Detalhes do Agendamento
+                <div class="float-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+
+                @Html.HiddenFor(c => c.Id)
+
+                <div class="textoComLinhaContainer">
+                    <div class="textoComLinhaTitulo">
+                        <strong>Detalhes do Motorista</strong>
+                    </div>
+                    <div class="textoComLinhaDivisor"></div>
+                </div>
+
+                @Html.Partial("_DetalhesMotorista", Model.DetalhesMotorista)
+
+                <div class="textoComLinhaContainer">
+                    <div class="textoComLinhaTitulo">
+                        <strong>Detalhes do Veículo</strong>
+                    </div>
+                    <div class="textoComLinhaDivisor"></div>
+                </div>
+
+                @Html.Partial("_DetalhesVeiculo", Model.DetalhesVeiculo)
+
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="table-responsive">
+                            <table id="tblItensReserva" class="table table-sm">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">Qtde</th>
+                                        <th scope="col">Tamanho</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Reserva</th>
+                                        <th scope="col">POD</th>
+                                        <th scope="col">EF</th>
+                                        <th scope="col">Saldo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ItensReserva)
+                                    {
+                                        <tr id="linha-item-reserva-@item.Hash" class="linha-item-reserva">
+                                            <td class="td-w-5">
+                                                <img src="@Url.Content("~/Content/img/icone-reserva.png")" />
+                                            </td>
+                                            <td class="td-w-10">@item.Qtde</td>
+                                            <td class="td-w-10">@item.Tamanho</td>
+                                            <td class="td-w-10">@item.Tipo</td>
+                                            <td class="td-w-20">@item.Descricao</td>
+                                            <td class="td-w-10">@item.POD</td>
+                                            <td class="td-w-15">@item.EF</td>
+                                            <td class="td-w-10">
+                                                <span id="txtSaldoBooking_@item.BookingId">
+                                                    @item.Saldo
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                @Html.Partial("_DetalhesConteiner")
+                @Html.Partial("_DanfesConsulta",  Model.NotasFiscais)
+               
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.EmailRegistro)
+                        @Html.EditorFor(model => model.EmailRegistro, new { htmlAttributes = new { @class = "form-control", maxlength = "400" } })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+
+                        <div class="table-responsive">
+                            <table id="tblPeriodos" class="table table-sm" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="td-icone">&nbsp;</th>
+                                        <th scope="col">Período Inicial</th>
+                                        <th scope="col">Período Final</th>
+                                        <th scope="col" class="campo-acao text-center">Saldo</th>
+                                        <th scope="col" class="campo-acao text-center">Escolha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Periodos)
+                                    {
+                                        if (item.PeriodoAgendado)
+                                        {
+                                            <tr>
+                                                <td class="td-icone">
+                                                    <img src="@Url.Content("~/Content/img/icone-calendario.png")" />
+                                                </td>
+                                                <td>@item.PeriodoInicial.DataHoraFormatada()</td>
+                                                <td>@item.PeriodoFinal.DataHoraFormatada()</td>
+                                                <td class="campo-acao text-center">@item.Saldo</td>
+                                                <td class="campo-acao text-center">
+                                                    <img src="@Url.Content("~/Content/img/checked.png")" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+@section Css{
+    <link href="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.css" rel="stylesheet" />
+}
+
+@section Scripts{
+
+    <script src="~/Content/js/visualizarAgendamento.js"></script>
+    <script src="~/Content/plugins/bootstrap4-toggle/bootstrap4-toggle.min.js"></script>
+}
