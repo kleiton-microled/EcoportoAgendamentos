@@ -5,32 +5,71 @@
             <input type="file" name="UploadFile" id="txtUploadFile" class="makethispretty" />
         </div>*@
     
-    <div class="input-group mb-3">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="fileinput">
-            <label class="custom-file-label" for="inputGroupFile02">Enviar Arquivo</label>
-        </div>
-        <div class="input-group-append">
-            <span class="input-group-text" id="btnLoad" onclick="loadFile()">Upload</span>
-        </div>
-    </div>
+    
    
-    <div class="form-group col-md-10 mb-0 pr-0">
+    <div class="form-group col-md-11 mb-0 pr-0">
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="fileinput">
+                <label class="custom-file-label" for="inputGroupFile02">Enviar Arquivo</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text" id="btnLoad" onclick="loadFile()">Upload</span>
+            </div>
+        </div>
         @Html.LabelFor(model => model.Danfe)
         @*<a href="#" id="select_logo">Upload Danfe</a> <input type="file" id="logo">*@
         <input type="file" style="display: none" />
-        <textarea id="xml"></textarea>
-        <input class="form-control form-control-sm" id="danfe" />
-        @Html.EditorFor(model => model.Danfe, new
+        <textarea id="xml" style="display:none"></textarea>
+        @*<input class="form-control form-control-sm" id="danfe" />*@
+        @*@Html.HiddenFor(model => model.Danfe)*@
+        <p id="Danfe2"></p>
+        <div class="table-responsive" style="display: none">
+            <table id="tblItensReserva" class="table table-sm">
+                <thead class="">
+                    <tr>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Serie</th>
+                        <th scope="col">Emissor</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Qtd</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Peso Bruto</th>
+                        <th scope="col">Mt.Cubico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr id="" class="linha-item-reserva">
+
+                        <td class="td-w-10" id="numero"></td>
+                        <td class="td-w-10" id="serie"></td>
+                        <td class="td-w-10" id="emisso"></td>
+                        <td class="td-w-20" id="data"></td>
+                        <td class="td-w-10" id="qtd"></td>
+                        <td class="td-w-15" id="valor"></td>
+                        <td class="td-w-10" id="pesobruto"></td>
+                        <td class="td-w-10" id="mtcubico"></td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        
+        @Html.TextAreaFor(model => model.Danfe, new
         {
             htmlAttributes = new
             {
-        @class = "form-control form-control-sm",
+        @class = "form-control",    
                 maxlength = "44",
                 onkeypress = "return apenasNumeros();",
-                @disabled = "disabled",
+                @disabled = "disabled"
+
             }
         })
+
     </div>
     @Html.HiddenFor(model => model.CFOP)
     @*<div class="form-group col-md-2 pr-0">
@@ -48,8 +87,8 @@
             <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
         </form>*@
     <div class="form-group col-md-1">
-        <label for="btnAdicionarDanfe">&nbsp;</label>
-        <a id="btnAdicionarDanfe" href="#" class="btn btn-sm btn-outline-info btn-block btn-as-block disabled"><i class="fas fa-save"></i></a>
+        @*<label for="btnAdicionarDanfe">&nbsp;</label>*@
+        <a id="btnAdicionarDanfe" href="#" class="btn btn-md btn-outline-info btn-block btn-as-block disabled"><i class="fas fa-save"></i></a>
     </div>
 
 </div>

@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $('#Danfe').hide();
 
     $('main')
         .addClass('container')
@@ -556,6 +557,7 @@ function limpar() {
     limparCamposItem();
 
     $('#pnlDadosConteiner').hide();
+
 }
 
 function limparCamposDanfe() {
@@ -763,7 +765,7 @@ function obterUploadsPorConteiner(sigla) {
 }
 
 $('#btnAdicionarDanfe').click(function () {
-    alert("teste");
+    //alert("teste");
     event.preventDefault();
 
     limpaErros();
@@ -774,14 +776,16 @@ $('#btnAdicionarDanfe').click(function () {
 
         return;
     }
-
-    var retorno = validarDanfe($('#Danfe').val());
-
+    var danfe = $('#Danfe').val();
+    console.log(danfe);
+    var retorno = validarDanfe(danfe);
+    console.log(retorno);
     if (retorno !== '') {
 
         mostrarErro(retorno);
+        
 
-        $('#Danfe').focus();
+        $('#Danfe').css({ color:"red"});
 
         return;
     }
@@ -856,7 +860,19 @@ function shownode(node) {
     console.log(chidren.childNodes[0]);
     console.log(chidren.childNodes[0].childNodes[2]);
     var nfe = chidren.childNodes[0].childNodes[2].innerHTML;
-    document.getElementById("Danfe").innerText = nfe;
+    //var numero = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var serie = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var emissor = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var data = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var qtd = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var valor = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var pesobruto = chidren.childNodes[0].childNodes[2].innerHTML;
+    //var mtcubico = chidren.childNodes[0].childNodes[2].innerHTML;
+    //$('#Danfe').val(nfe);
+    $('#Danfe2').html(nfe);
+    $('#Danfe').hide();
+    $('#Danfe').html(nfe);
+    //document.getElementById("Danfe").innerText = nfe;
     console.log("nfe:" + nfe)
     console.log(typeof chidren);
     
