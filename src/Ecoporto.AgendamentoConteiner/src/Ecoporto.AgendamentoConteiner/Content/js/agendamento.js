@@ -822,6 +822,7 @@ $('#btnAdicionarDanfe').click(function () {
     });
 });
 function loadFile() {
+    
     var input, file, fr;
 
     if (typeof window.FileReader !== 'function') {
@@ -856,22 +857,29 @@ function loadFile() {
 }
 
 function shownode(node) {
-    var chidren = node.childNodes[1];
-    console.log(chidren.childNodes[0]);
-    console.log(chidren.childNodes[0].childNodes[2]);
-    var nfe = chidren.childNodes[0].childNodes[2].innerHTML;
-    //var numero = chidren.childNodes[0].childNodes[2].innerHTML;
-    //var serie = chidren.childNodes[0].childNodes[2].innerHTML;
+    
+    var protNfe = node.childNodes[1];
+    var ide = node.childNodes[0].childNodes[0];
+    var pag = node.childNodes[0].childNodes[0].childNodes[4].childNodes[0].childNodes[18];
+    //console.log(chidren.childNodes[0]);
+    //console.log(chidren.childNodes[0].childNodes[2]);
+    var nfe = protNfe.childNodes[0].childNodes[2].innerHTML;
+    var numero = ide.childNodes[0].childNodes[1].innerHTML;
+    var serie = ide.childNodes[0].childNodes[4].innerHTML;
     //var emissor = chidren.childNodes[0].childNodes[2].innerHTML;
-    //var data = chidren.childNodes[0].childNodes[2].innerHTML;
+    var data = ide.childNodes[0].childNodes[6].innerHTML;
     //var qtd = chidren.childNodes[0].childNodes[2].innerHTML;
-    //var valor = chidren.childNodes[0].childNodes[2].innerHTML;
+    var valor = pag;
     //var pesobruto = chidren.childNodes[0].childNodes[2].innerHTML;
     //var mtcubico = chidren.childNodes[0].childNodes[2].innerHTML;
     //$('#Danfe').val(nfe);
     $('#Danfe2').html(nfe);
     $('#Danfe').hide();
     $('#Danfe').html(nfe);
+    $('#numero').html(numero);
+    $('#serie').html(serie);
+    $('#data').html(data);
+    $('#valor').html(valor);
     //document.getElementById("Danfe").innerText = nfe;
     console.log("nfe:" + nfe)
     console.log(typeof chidren);

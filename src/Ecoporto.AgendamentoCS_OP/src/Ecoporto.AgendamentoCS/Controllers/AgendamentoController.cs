@@ -1173,7 +1173,7 @@ namespace Ecoporto.AgendamentoCS.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarDanfes([Bind(Include = "Danfe, Reserva, CFOP, BookingCsItemId")] NotaFiscal nf)
+        public ActionResult CadastrarDanfes([Bind(Include = "Danfe, Reserva, CFOP, BookingCsItemId, xmlDanfeCompleta")] NotaFiscal nf)
         {
             var danfeBusca = _agendamentoRepositorio.ObterNotasFiscaisPorDanfe(nf.Danfe);
 
@@ -1190,7 +1190,8 @@ namespace Ecoporto.AgendamentoCS.Controllers
                 Reserva = nf.Reserva,
                 Danfe = nf.Danfe,
                 CFOP = nf.CFOP,
-                BookingCsItemId = nf.BookingCsItemId
+                BookingCsItemId = nf.BookingCsItemId,
+                XmlDanfeCompleta = nf.XmlDanfeCompleta
             });
 
             var danfes = GerenciadorDeEstado<NotaFiscal>.RetornarTodos()

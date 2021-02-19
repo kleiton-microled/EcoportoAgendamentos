@@ -20,16 +20,16 @@
         @Html.LabelFor(model => model.Danfe)
         @*<a href="#" id="select_logo">Upload Danfe</a> <input type="file" id="logo">*@
         <input type="file" style="display: none" />
-        <textarea id="xml" style="display:none"></textarea>
+        <textarea id="xml" style="display:initial"></textarea>
         @*<input class="form-control form-control-sm" id="danfe" />*@
         @*@Html.HiddenFor(model => model.Danfe)*@
         <p id="Danfe2"></p>
-        <div class="table-responsive" style="display: none">
+        <div class="table-responsive" style="display: initial" id="tabelaDanfeXml">
             <table id="tblItensReserva" class="table table-sm">
                 <thead class="">
                     <tr>
-                        <th scope="col">&nbsp;</th>
-                        <th scope="col">Numero</th>
+                        
+                        <th scope="col">Numero NF</th>
                         <th scope="col">Serie</th>
                         <th scope="col">Emissor</th>
                         <th scope="col">Data</th>
@@ -40,9 +40,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    <tr id="" class="linha-item-reserva">
 
+                    <tr id="" class="linha-item-reserva">
+                       
                         <td class="td-w-10" id="numero"></td>
                         <td class="td-w-10" id="serie"></td>
                         <td class="td-w-10" id="emisso"></td>
@@ -52,23 +52,30 @@
                         <td class="td-w-10" id="pesobruto"></td>
                         <td class="td-w-10" id="mtcubico"></td>
                     </tr>
-                    }
+                    
 
                 </tbody>
             </table>
         </div>
-        
+
         @Html.TextAreaFor(model => model.Danfe, new
         {
             htmlAttributes = new
             {
-        @class = "form-control",    
+        @class = "form-control",
                 maxlength = "44",
                 onkeypress = "return apenasNumeros();",
                 @disabled = "disabled"
 
             }
         })
+        @*@Html.TextAreaFor(model => model.Periodos, new
+        {
+            htmlAttributes = new
+            {
+        @class = "form-control",
+            }
+        })*@
 
     </div>
     @Html.HiddenFor(model => model.CFOP)

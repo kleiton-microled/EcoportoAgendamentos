@@ -4,17 +4,7 @@ namespace Ecoporto.AgendamentoCS.Models
 {
     public class NotaFiscal : Entidade<NotaFiscal>
     {
-        public NotaFiscal()
-        {
-
-        }
-
-        public NotaFiscal(string danfe, string numeroNF, string serieNF)
-        {
-            Danfe = danfe;
-            NumeroNF = numeroNF;
-            SerieNF = serieNF;
-        }
+       
 
         public string Danfe { get; set; }
 
@@ -27,7 +17,20 @@ namespace Ecoporto.AgendamentoCS.Models
         public int BookingCsItemId { get; set; }
 
         public string Reserva { get; set; }
+        public string XmlDanfeCompleta { get; set; }
 
+        public NotaFiscal()
+        {
+
+        }
+
+        public NotaFiscal(string danfe, string numeroNF, string serieNF, string xmlDanfeCompleta)
+        {
+            Danfe = danfe;
+            NumeroNF = numeroNF;
+            SerieNF = serieNF;
+            XmlDanfeCompleta = xmlDanfeCompleta;
+        }
         public override void Validar()
         {
             throw new System.NotImplementedException();

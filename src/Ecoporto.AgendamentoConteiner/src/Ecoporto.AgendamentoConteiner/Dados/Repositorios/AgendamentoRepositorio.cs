@@ -572,6 +572,7 @@ namespace Ecoporto.AgendamentoConteiner.Dados.Repositorios
                 parametros.Add(name: "ConteinerId", value: nf.ConteinerId, direction: ParameterDirection.Input);
                 parametros.Add(name: "Danfe", value: nf.Danfe, direction: ParameterDirection.Input);
                 parametros.Add(name: "CFOP", value: nf.CFOP, direction: ParameterDirection.Input);
+                parametros.Add(name: "XmlCompleta", value: nf.XmlDanfeCompleta, direction: ParameterDirection.Input);
 
                 parametros.Add(name: "Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -581,12 +582,15 @@ namespace Ecoporto.AgendamentoConteiner.Dados.Repositorios
                             AUTONUM,
                             AUTONUM_AGENDAMENTO_ITEM_CNTR,
                             DANFE,                                
-                            CFOP
+                            CFOP,
+                            ARQUIVO_DANFE
+                            
                         ) VALUES ( 
                             OPERADOR.SEQ_AG_CNTR_ITENS_DANFES.NEXTVAL, 
                             :ConteinerId,
                             :Danfe,
-                            :CFOP
+                            :CFOP,
+                            :XmlCompleta
                         ) RETURNING AUTONUM INTO :Id", parametros);
 
                 return parametros.Get<int>("Id");

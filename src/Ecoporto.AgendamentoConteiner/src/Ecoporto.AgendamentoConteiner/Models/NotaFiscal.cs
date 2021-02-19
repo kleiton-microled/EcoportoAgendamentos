@@ -7,16 +7,18 @@
 
         }
 
-        public NotaFiscal(string danfe, string numeroNF, string serieNF)
+        public NotaFiscal(string danfe, string numeroNF, string serieNF, string xmlDanfeCompleta)
         {
             Danfe = danfe;
             NumeroNF = numeroNF;
             SerieNF = serieNF;
+            XmlDanfeCompleta = xmlDanfeCompleta;
         }
 
         public int? AgendamentoId { get; set; }
 
         public string Danfe { get; set; }
+        public string XmlDanfeCompleta { get; set; }
 
         public string NumeroNF { get; set; }
 

@@ -91,6 +91,8 @@ namespace Ecoporto.AgendamentoCS.Models.ViewModels
 
         [Display(Name = "Danfe")]
         public string Danfe { get; set; }
+        public string XmlDanfe { get; set; }
+
 
         [Display(Name = "CFOP")]
         public string CFOP { get; set; }
